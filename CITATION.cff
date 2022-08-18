@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it as below.
+authors:
+- family-names: Buche
+  given-names: Michael R.
+  orcid: https://orcid.org/0000-0003-1892-0502
+- family-names: Grutzik
+  given-names: Scott J.
+  orcid: https://orcid.org/0000-0002-6490-3941
+title: "statMechCrack: a Python package for a statistical mechanical model for crack growth."
+doi: 10.5281/zenodo.???????
+url: https://github.com/sandialabs/statmechcrack
