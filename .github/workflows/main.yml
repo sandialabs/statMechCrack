@@ -25,7 +25,7 @@ jobs:
       - name: Lint via pylint
         run: python -m pylint --disable=C0103 --output-format=text ${REPO_NAME}
       - name: Test via pytest
-        run: python -m pytest --cov=./${REPO_NAME}/ --cov-report xml
+        run: python -m pytest --verbose --cov=./${REPO_NAME}/ --cov-report xml
       - name: Coverage via Coveralls
         run: |
           python -m pip install coveralls
