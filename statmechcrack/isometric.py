@@ -130,13 +130,14 @@ class CrackIsometric(CrackMonteCarlo):
             numpy.ndarray: The absolute nondimensional Helmholtz free energy.
 
         """
-        s_hat = self.minimize_beta_U(v)[2]
-        lambda_hat = s_hat[-self.M:]
-        return 0.5*self.M*np.log(
-            self.alpha**2*self.varepsilon/np.pi
-        ) + self.beta_A_0_isometric(v, lambda_hat)
+        if approach == 'asymptotic':
+            s_hat = self.minimize_beta_U(v)[2]
+            lambda_hat = s_hat[-self.M:]
+            return 0.5*self.M*np.log(
+                self.alpha**2*self.varepsilon/np.pi
+            ) + self.beta_A_0_isometric(v, lambda_hat)
 
-    def beta_A_isometric(self, v, approach='asymptotic'):
+    def beta_A_isometric(self, v, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Helmholtz free energy
         as a function of the nondimensional end separation,
 
@@ -147,6 +148,8 @@ class CrackIsometric(CrackMonteCarlo):
             v (array_like): The nondimensional end separation.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.beta_A_isometric_monte_carlo`.
 
         Returns:
             numpy.ndarray: The relative nondimensional Helmholtz free energy.
@@ -180,8 +183,13 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> plt.show()
 
         """
-        return self.beta_A_abs_isometric(v, approach=approach) \
-            - self.beta_A_abs_isometric(1, approach=approach)
+        if approach == 'asymptotic':
+            beta_A_isometric = \
+                self.beta_A_abs_isometric(v, approach=approach) - \
+                self.beta_A_abs_isometric(1, approach=approach)
+        elif approach == 'monte carlo':
+            beta_A_isometric = self.beta_A_isometric_monte_carlo(v, **kwargs)
+        return beta_A_isometric
 
     def p_isometric(self, v, approach='asymptotic', **kwargs):
         r"""The nondimensional end force
@@ -237,7 +245,7 @@ class CrackIsometric(CrackMonteCarlo):
             p_isometric = self.p_isometric_monte_carlo(v, **kwargs)
         return p_isometric
 
-    def k_isometric(self, v, approach='asymptotic'):
+    def k_isometric(self, v, approach='asymptotic', **kwargs):
         r"""The nondimensional forward reaction rate coefficient
         as a function of the nondimensional end separation
         in the isometric ensemble.
@@ -246,6 +254,8 @@ class CrackIsometric(CrackMonteCarlo):
             v (array_like): The nondimensional end separation.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.k_isometric_monte_carlo`.
 
         Returns:
             numpy.ndarray: The nondimensional forward reaction rate.
@@ -277,13 +287,15 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> plt.show()
 
         """
-        return (
-            self.Q_isometric(v, approach=approach, transition_state=True) /
-            self.Q_isometric(v, approach=approach)
-        ) / (
-            self.Q_isometric(1, approach=approach, transition_state=True) /
-            self.Q_isometric(1, approach=approach)
-        )
+        if approach == 'asymptotic':
+            k_isometric = (
+                self.Q_isometric(v, transition_state=True)/self.Q_isometric(v)
+            ) / (
+                self.Q_isometric(1, transition_state=True)/self.Q_isometric(1)
+            )
+        elif approach == 'monte carlo':
+            k_isometric = self.k_isometric_monte_carlo(v, **kwargs)
+        return k_isometric
 
     def Q_0_isometric(self, v, lambda_):
         r"""The nondimensional isometric partition function

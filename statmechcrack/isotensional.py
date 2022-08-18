@@ -125,11 +125,12 @@ class CrackIsotensional(CrackIsometric):
             numpy.ndarray: The absolute nondimensional Gibbs free energy.
 
         """
-        s_hat = self.minimize_beta_Pi(p)[2]
-        lambda_hat = s_hat[-self.M:]
-        return self.beta_G_0_abs_isotensional(p, lambda_hat)
+        if approach == 'asymptotic':
+            s_hat = self.minimize_beta_Pi(p)[2]
+            lambda_hat = s_hat[-self.M:]
+            return self.beta_G_0_abs_isotensional(p, lambda_hat)
 
-    def beta_G_isotensional(self, p, approach='asymptotic'):
+    def beta_G_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Gibbs free energy
         as a function of the nondimensional end force,
 
@@ -140,6 +141,8 @@ class CrackIsotensional(CrackIsometric):
             p (array_like): The nondimensional end force.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.beta_G_isotensional_monte_carlo`.
 
         Returns:
             numpy.ndarray: The relative nondimensional Gibbs free energy.
@@ -174,8 +177,13 @@ class CrackIsotensional(CrackIsometric):
                 >>> plt.show()
 
         """
-        return self.beta_G_abs_isotensional(p, approach=approach) \
-            - self.beta_G_abs_isotensional(0, approach=approach)
+        if approach == 'asymptotic':
+            G_isotensional = \
+                self.beta_G_abs_isotensional(p, approach=approach) - \
+                self.beta_G_abs_isotensional(0, approach=approach)
+        elif approach == 'monte carlo':
+            G_isotensional = self.beta_G_isotensional_monte_carlo(p, **kwargs)
+        return G_isotensional
 
     def v_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The nondimensional end separation
@@ -237,7 +245,7 @@ class CrackIsotensional(CrackIsometric):
         elif approach == 'monte carlo':
             return self.v_isotensional_monte_carlo(p, **kwargs)
 
-    def k_isotensional(self, p, approach='asymptotic'):
+    def k_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The nondimensional forward reaction rate coefficient
         as a function of the nondimensional end force
         in the isotensional ensemble.
@@ -278,13 +286,17 @@ class CrackIsotensional(CrackIsometric):
                 >>> plt.show()
 
         """
-        return (
-            self.Z_isotensional(p, approach=approach, transition_state=True) /
-            self.Z_isotensional(p, approach=approach)
-        ) / (
-            self.Z_isotensional(0, approach=approach, transition_state=True) /
-            self.Z_isotensional(0, approach=approach)
-        )
+        if approach == 'asymptotic':
+            k_isotensional = (
+                self.Z_isotensional(p, transition_state=True) /
+                self.Z_isotensional(p)
+            ) / (
+                self.Z_isotensional(0, transition_state=True) /
+                self.Z_isotensional(0)
+            )
+        elif approach == 'monte carlo':
+            k_isotensional = self.k_isotensional_monte_carlo(p, **kwargs)
+        return k_isotensional
 
     def Z_0_isotensional(self, p, lambda_):
         r"""The nondimensional isotensional partition function

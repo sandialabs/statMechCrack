@@ -175,60 +175,9 @@ class CrackMonteCarlo(CrackMechanical):
             return np.mean(process_results)
         return serial_fun(burned_in_config, **kwargs)
 
-    def v_isotensional_monte_carlo_serial(self, init_config,
-                                          num_samples=1000000, **kwargs):
-        """
-
-        Args:
-            init_config (np.ndarray):
-                The initial configuration, typically already burned-in.
-            num_samples (int, optional, default=1000000):
-                The number of samples to use.
-            **kwargs: Arbitrary keyword arguments.
-                Passed to :meth:`mh_next_config`.
-
-        Returns:
-            float: The nondimensional end separation.
-
-        """
-        v = 0
-        config = init_config
-        for counter in range(1, 1 + num_samples):
-            v_next = config[0]
-            v += (v_next - v)/counter
-            config = self.mh_next_config(config, **kwargs)
-        return v
-
-    def v_isotensional_monte_carlo(self, p, **kwargs):
-        """The nondimensional end separation
-        as a function of the nondimensional end force
-        in the isotensional ensemble, using a
-        Metropolis-Hastings Markov chain Monte Carlo calculation.
-
-        Args:
-            p (array_like): The nondimensional end force.
-            **kwargs: Arbitrary keyword arguments.
-                Passed to :meth:`parallel_calculation`.
-
-        Returns:
-            float: The nondimensional end separation.
-
-        """
-        p = self.np_array(p)
-        v = np.zeros(p.shape)
-        for i, p_i in enumerate(p):
-            self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
-            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
-            v[i] = self.parallel_calculation(
-                self.v_isotensional_monte_carlo_serial,
-                np.concatenate((v_guess, s_guess[:, 0])),
-                **kwargs
-            )
-        return v
-
     def p_isometric_monte_carlo_serial(self, v, init_config,
                                        num_samples=1000000, **kwargs):
-        """
+        """Serial calculation for :meth:`p_isometric_monte_carlo`.
 
         Args:
             v (array_like):
@@ -253,10 +202,14 @@ class CrackMonteCarlo(CrackMechanical):
         return p
 
     def p_isometric_monte_carlo(self, v, **kwargs):
-        """The nondimensional end force
+        r"""The nondimensional end force
         as a function of the nondimensional end separation
         in the isometric ensemble, using a
-        Metropolis-Hastings Markov chain Monte Carlo calculation.
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            p(v) = \kappa\langle v - 2s_1 + s_2\rangle.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -283,3 +236,281 @@ class CrackMonteCarlo(CrackMechanical):
                 **kwargs
             )
         return p
+
+    def v_isotensional_monte_carlo_serial(self, init_config,
+                                          num_samples=1000000, **kwargs):
+        """Serial calculation for :meth:`v_isotensional_monte_carlo`.
+
+        Args:
+            init_config (np.ndarray):
+                The initial configuration, typically already burned-in.
+            num_samples (int, optional, default=1000000):
+                The number of samples to use.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`mh_next_config`.
+
+        Returns:
+            float: The nondimensional end separation.
+
+        """
+        v = 0
+        config = init_config
+        for counter in range(1, 1 + num_samples):
+            v_next = config[0]
+            v += (v_next - v)/counter
+            config = self.mh_next_config(config, **kwargs)
+        return v
+
+    def v_isotensional_monte_carlo(self, p, **kwargs):
+        r"""The nondimensional end separation
+        as a function of the nondimensional end force
+        in the isotensional ensemble, using a
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            v(p) = \langle s_0\rangle.
+
+        Args:
+            p (array_like): The nondimensional end force.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`parallel_calculation`.
+
+        Returns:
+            float: The nondimensional end separation.
+
+        """
+        p = self.np_array(p)
+        v = np.zeros(p.shape)
+        for i, p_i in enumerate(p):
+            self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
+            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
+            v[i] = self.parallel_calculation(
+                self.v_isotensional_monte_carlo_serial,
+                np.concatenate((v_guess, s_guess[:, 0])),
+                **kwargs
+            )
+        return v
+
+    def beta_A_isometric_monte_carlo_serial(self, v, init_config,
+                                            num_samples=1000000, **kwargs):
+        """Serial calculation for :meth:`beta_A_isometric_monte_carlo`.
+
+        Args:
+            v (array_like):
+                The nondimensional end separation.
+            init_config (np.ndarray):
+                The initial configuration, typically already burned-in.
+            num_samples (int, optional, default=1000000):
+                The number of samples to use.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`mh_next_config`.
+
+        Returns:
+            numpy.ndarray: The relative nondimensional Helmholtz free energy.
+
+        """
+        pass
+
+    def beta_A_isometric_monte_carlo(self, v, **kwargs):
+        r"""The relative nondimensional Helmholtz free energy
+        as a function of the nondimensional end separation
+        in the isometric ensemble, using a
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            \beta\Delta A(v) =
+            -\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},
+
+        where :math:`\Delta U\equiv U(v,s)-U(1,s)`.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`parallel_calculation`.
+
+        Returns:
+            numpy.ndarray: The relative nondimensional Helmholtz free energy.
+
+        """
+        v = self.np_array(v)
+        beta_A = np.zeros(v.shape)
+        for i, v_i in enumerate(v):
+            self.beta_e = lambda config: self.beta_U(v_i, config)
+
+            def serial_fun(init_config, **kwargs):
+                return self.beta_A_isometric_monte_carlo_serial(
+                        v_i, init_config, **kwargs
+                    )
+
+            beta_A[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_U(v_i)[2][:, 0],
+                **kwargs
+            )
+        return beta_A
+
+    def beta_G_isotensional_monte_carlo_serial(self, init_config,
+                                               num_samples=1000000, **kwargs):
+        """Serial calculation for :meth:`beta_G_isotensional_monte_carlo`.
+
+        Args:
+            init_config (np.ndarray):
+                The initial configuration, typically already burned-in.
+            num_samples (int, optional, default=1000000):
+                The number of samples to use.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`mh_next_config`.
+
+        Returns:
+            numpy.ndarray: The relative nondimensional Gibbs free energy.
+
+        """
+        pass
+
+    def beta_G_isotensional_monte_carlo(self, p, **kwargs):
+        r"""The relative nondimensional Gibbs free energy
+        as a function of the nondimensional end force
+        in the isometric ensemble, using a
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            \beta\Delta G(v) =
+            -\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},
+
+        where :math:`\Delta\Pi\equiv\Pi(p,s)-\Pi(0,s)`.
+
+        Args:
+            p (array_like): The nondimensional end force.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`parallel_calculation`.
+
+        Returns:
+            numpy.ndarray: The relative nondimensional Gibbs free energy.
+
+        """
+        p = self.np_array(p)
+        beta_G_isotensional = np.zeros(p.shape)
+        for i, p_i in enumerate(p):
+            self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
+            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
+            beta_G_isotensional[i] = self.parallel_calculation(
+                self.beta_G_isotensional_monte_carlo_serial,
+                np.concatenate((v_guess, s_guess[:, 0])),
+                **kwargs
+            )
+        return beta_G_isotensional
+
+    def k_isometric_monte_carlo_serial(self, v, init_config,
+                                       num_samples=1000000, **kwargs):
+        """Serial calculation for :meth:`k_isometric_monte_carlo`.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+            init_config (np.ndarray):
+                The initial configuration, typically already burned-in.
+            num_samples (int, optional, default=1000000):
+                The number of samples to use.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`mh_next_config`.
+
+        Returns:
+            numpy.ndarray: The nondimensional forward reaction rate.
+
+        """
+        pass
+
+    def k_isometric_monte_carlo(self, v, **kwargs):
+        r"""The nondimensional forward reaction rate coefficient
+        as a function of the nondimensional end force
+        in the isometric ensemble, using a
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            k = \frac{
+                    \left\langle e^{-\beta U}\right\rangle_{v=1}^\ddagger
+                }{
+                    \left\langle e^{-\beta U}\right\rangle_{v=1}
+                }.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`parallel_calculation`.
+
+        Returns:
+            numpy.ndarray: The nondimensional forward reaction rate.
+
+        """
+        v = self.np_array(v)
+        k_isometric = np.zeros(v.shape)
+        for i, v_i in enumerate(v):
+            self.beta_e = lambda config: self.beta_U(v_i, config)
+
+            def serial_fun(init_config, **kwargs):
+                return self.k_isometric_monte_carlo_serial(
+                        v_i, init_config, **kwargs
+                    )
+
+            k_isometric[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_U(v_i)[2][:, 0],
+                **kwargs
+            )
+        return k_isometric
+
+    def k_isotensional_monte_carlo_serial(self, init_config,
+                                          num_samples=1000000, **kwargs):
+        """Serial calculation for :meth:`k_isotensional_monte_carlo`.
+
+        Args:
+            init_config (np.ndarray):
+                The initial configuration, typically already burned-in.
+            num_samples (int, optional, default=1000000):
+                The number of samples to use.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`mh_next_config`.
+
+        Returns:
+            numpy.ndarray: The nondimensional forward reaction rate.
+
+        """
+        pass
+
+    def k_isotensional_monte_carlo(self, p, **kwargs):
+        r"""The nondimensional forward reaction rate coefficient
+        as a function of the nondimensional end force
+        in the isotensional ensemble, using a
+        Metropolis-Hastings Markov chain Monte Carlo calculation
+        of the ensemble average
+
+        .. math::
+            k = \frac{
+                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}^\ddagger
+                }{
+                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}
+                }.
+
+        Args:
+            p (array_like): The nondimensional end force.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`parallel_calculation`.
+
+        Returns:
+            numpy.ndarray: The nondimensional forward reaction rate.
+
+        """
+        p = self.np_array(p)
+        k_isotensional = np.zeros(p.shape)
+        for i, p_i in enumerate(p):
+            self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
+            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
+            k_isotensional[i] = self.parallel_calculation(
+                self.k_isotensional_monte_carlo_serial,
+                np.concatenate((v_guess, s_guess[:, 0])),
+                **kwargs
+            )
+        return k_isotensional
