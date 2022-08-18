@@ -1,0 +1,39 @@
+name: main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
+    steps:
+      - uses: actions/checkout@v2
+      - name: Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install package and testing extras
+        run: pip install .[testing]
+      - name: Lint via pylint
+        run: python -m pylint --disable=C0103 --output-format=text ${REPO_NAME}
+      - name: Test via pytest
+        run: python -m pytest --cov=./${REPO_NAME}/ --cov-report xml
+      - name: Coverage via Coveralls
+        run: |
+          python -m pip install coveralls
+          coveralls --service=github
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Coverage via Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          name: codecov-umbrella
+          verbose: true

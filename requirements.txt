@@ -8,6 +8,7 @@ matplotlib
 nbsphinx
 numpy
 pycodestyle
+pylint
 pytest
 pytest-cov
 scipy

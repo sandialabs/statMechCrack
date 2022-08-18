@@ -40,9 +40,9 @@ setup(
       'docs': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython',
                'jinja2>=3.0', 'nbsphinx', 'pycodestyle',
                'sphinx', 'sphinx-rtd-theme', 'sphinxcontrib-bibtex'],
-      'testing': ['pycodestyle', 'pytest', 'pytest-cov'],
-      'all': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython',
-              'jinja2>=3.0', 'nbsphinx', 'pycodestyle', 'pytest', 'pytest-cov',
+      'testing': ['pycodestyle', 'pylint', 'pytest', 'pytest-cov'],
+      'all': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython', 'jinja2>=3.0',
+              'nbsphinx', 'pycodestyle', 'pylint', 'pytest', 'pytest-cov',
               'sphinx', 'sphinx-rtd-theme', 'sphinxcontrib-bibtex']
     },
     classifiers=[

@@ -1,0 +1,24 @@
+name: pages
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  gh-pages:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install package and docs extras
+        run: pip install .[docs]
+      - name: Build docs
+        run: |
+          source .github/workflows/docs.sh
+          sphinx-build -b html source/ build/html/
+          sed -i -e "s/ module</</g" build/html/*.html
+          sed -i '/Built with/,/Docs<\/a>./d' build/html/*.html
+          mv build/html/ ../public/
+      - name: Deploy docs to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: public/
