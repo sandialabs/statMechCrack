@@ -45,6 +45,7 @@ Information
 - `Examples <https://statmechcrack.readthedocs.io/en/latest/statmechcrack.examples.html>`__
 - `License <https://github.com/sandialabs/statmechcrack/blob/main/LICENSE>`__
 - `Releases <https://github.com/sandialabs/statmechcrack/releases>`__
+- `Repository <https://github.com/sandialabs/statmechcrack>`__
 - `Tutorial <https://statmechcrack.readthedocs.io/en/latest/TUTORIAL.html>`__
 
 ********
