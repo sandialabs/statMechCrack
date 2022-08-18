@@ -1,0 +1,23 @@
+{
+    "title": "statMechCrack: a Python package for a statistical mechanical model for crack growth",
+    "creators": [
+      {
+        "name": "Michael R. Buche",
+        "affiliation": "Sandia National Laboratories",
+        "orcid": "0000-0003-1892-0502"
+      },
+      {
+        "name": "Scott J. Grutzik",
+        "affiliation": "Sandia National Laboratories",
+        "orcid": "0000-0002-6490-3941"
+      }
+    ],
+    "keywords": [
+      "python",
+      "statistical mechanics",
+      "thermodynamics",
+      "fracture mechanics"
+    ],
+    "license": "BSD-3-Clause",
+    "upload_type": "software"
+  }
