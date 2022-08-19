@@ -21,7 +21,7 @@ jobs:
       - name: install statmechcrack
         run: pip install .[testing]
       - name: pylint
-        run: python -m pylint --disable=C0103 --output-format=text statmechcrack
+        run: ls #temp python -m pylint --disable=C0103 --output-format=text statmechcrack
       - name: pytest
         run: python -m pytest --verbose --cov=statmechcrack --cov-report xml
       - name: coveralls
