@@ -111,8 +111,8 @@ jobs:
         with:
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }}:${{ needs.get-version.outputs.VERSION }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/statmechcrack:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/statmechcrack:${{ needs.get-version.outputs.VERSION }}
       - name: Give upload time before downloading
         run: sleep 234s
   test-docker:
