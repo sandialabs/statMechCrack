@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - id: version
         run: |
-          export VERSION=$(grep version setup.py | cut -f2 -d "'")
+          export VERSION=$(grep __version__ statmechcrack/__init__.py | cut -f2 -d '"')
           echo "::set-output name=VERSION::${VERSION}"
     outputs:
       VERSION: ${{ steps.version.outputs.VERSION }}
