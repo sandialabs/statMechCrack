@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statmechcrack.core &mdash; statMechCrack 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> statMechCrack
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.core.html">statmechcrack.core module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.isometric.html">statmechcrack.isometric module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.isotensional.html">statmechcrack.isotensional module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.mechanical.html">statmechcrack.mechanical module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.monte_carlo.html">statmechcrack.monte_carlo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.utility.html">statmechcrack.utility module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example_notebook_1.html">Example Notebook 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_one.html">statmechcrack.tests.test_one module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_many.html">statmechcrack.tests.test_many module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_style.html">statmechcrack.tests.test_style module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">statMechCrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>statmechcrack.core</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for statmechcrack.core</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;The core module for the crack model.</span>
+
+<span class="sd">This module consist of the class :class:`Crack`</span>
+<span class="sd">which, upon instantiation,</span>
+<span class="sd">becomes a crack model instance with methods for computing</span>
+<span class="sd">quantities in either thermodynamic ensemble.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">.isotensional</span> <span class="kn">import</span> <span class="n">CrackIsotensional</span>
+
+
+<div class="viewcode-block" id="Crack"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack">[docs]</a><span class="k">class</span> <span class="nc">Crack</span><span class="p">(</span><span class="n">CrackIsotensional</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The crack model class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the :class:`Crack` class.</span>
+
+<span class="sd">        Initialize and inherit all attributes and methods</span>
+<span class="sd">        from a :class:`.CrackIsotensional` class instance.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">CrackIsotensional</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Crack.beta_A"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_A">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span>
+               <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Helmholtz free energy</span>
+<span class="sd">        as a function of the nondimensional end separation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isometric&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isotensional`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
+<span class="sd">                The calculation approach.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Helmholtz free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span> <span class="o">+</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span> <span class="o">+</span> \
+                    <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.beta_A_0"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_A_0">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Helmholtz free energy</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        for the reference system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isometric&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isotensional`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Helmholtz free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_0</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span></div>
+
+<div class="viewcode-block" id="Crack.beta_A_b"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_A_b">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Helmholtz free energy</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        for the isolated bending system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isometric&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isotensional`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Helmholtz free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric_abs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_b</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_b_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">+</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span></div>
+
+<div class="viewcode-block" id="Crack.beta_G"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_G">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span>
+               <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Gibbs free energy</span>
+<span class="sd">        as a function of the nondimensional end force.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isometric`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
+<span class="sd">                The calculation approach.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Gibbs free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.beta_G_0"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_G_0">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Gibbs free energy</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        for the reference system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isometric`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Gibbs free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_0</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.beta_G_b"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.beta_G_b">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional Gibbs free energy</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        for the isolated bending system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble. The `isometric`</span>
+<span class="sd">                ensemble uses the Legendre transformation method.</span>
+<span class="sd">            absolute (bool, optional, default=False):</span>
+<span class="sd">                Whether not to use the absolute free energy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional Gibbs free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_b</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric_abs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> <span class="o">-</span> <span class="n">p</span><span class="o">*</span><span class="n">v</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">absolute</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_b_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.p"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.p">[docs]</a>    <span class="k">def</span> <span class="nf">p</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional end force</span>
+<span class="sd">        as a function of the nondimensional end separation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+<span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
+<span class="sd">                The calculation approach.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end force.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">),</span> <span class="n">v</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.p_0"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.p_0">[docs]</a>    <span class="k">def</span> <span class="nf">p_0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional end force</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        for the reference system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isometric&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end force.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">),</span> <span class="n">v</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.p_b"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.p_b">[docs]</a>    <span class="k">def</span> <span class="nf">p_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional end force</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        for the isolated bending system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isometric&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end force.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">p</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">),</span> <span class="n">v</span>
+            <span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.v"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.v">[docs]</a>    <span class="k">def</span> <span class="nf">v</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional end separation</span>
+<span class="sd">        as a function of the nondimensional end force.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+<span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
+<span class="sd">                The calculation approach.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end separation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">),</span> <span class="n">p</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.v_0"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.v_0">[docs]</a>    <span class="k">def</span> <span class="nf">v_0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional end separation</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        for the reference system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end separation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">),</span> <span class="n">p</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.v_b"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.v_b">[docs]</a>    <span class="k">def</span> <span class="nf">v_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The nondimensional end separation</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        for the isolated bending system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional end separation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span>
+                <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">),</span> <span class="n">p</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.k"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.k">[docs]</a>    <span class="k">def</span> <span class="nf">k</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_or_v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        or the nondimensional end separation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_or_v (array_like):</span>
+<span class="sd">                The nondimensional end force or position. Assumed to be</span>
+<span class="sd">                the end separation for the isometric ensemble and</span>
+<span class="sd">                the end force for the isotensional ensemble.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+<span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
+<span class="sd">                The calculation approach.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isometric</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isotensional</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="n">approach</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.k_0"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.k_0">[docs]</a>    <span class="k">def</span> <span class="nf">k_0</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        or the nondimensional end separation</span>
+<span class="sd">        for the reference system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_or_v (array_like):</span>
+<span class="sd">                The nondimensional end force or position. Assumed to be</span>
+<span class="sd">                the end separation for the isometric ensemble and</span>
+<span class="sd">                the end force for the isotensional ensemble.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_0_isometric</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_0_isotensional</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Crack.k_b"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.k_b">[docs]</a>    <span class="k">def</span> <span class="nf">k_b</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        or the nondimensional end separation</span>
+<span class="sd">        for the isolated bending system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_or_v (array_like):</span>
+<span class="sd">                The nondimensional end force or position. Assumed to be</span>
+<span class="sd">                the end separation for the isometric ensemble and</span>
+<span class="sd">                the end force for the isotensional ensemble.</span>
+<span class="sd">            lambda_ (array_like): The intact bond stretches.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b_isometric</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b_isotensional</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 National Technology &amp; Engineering Solutions of Sandia,     LLC (NTESS). Under the terms of Contract DE-NA0003525 with NTESS,     the U.S. Government retains certain rights in this software.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

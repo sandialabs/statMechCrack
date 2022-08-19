@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statmechcrack.monte_carlo module &mdash; statMechCrack 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="statmechcrack.utility module" href="statmechcrack.utility.html" />
+    <link rel="prev" title="statmechcrack.mechanical module" href="statmechcrack.mechanical.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> statMechCrack
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.core.html">statmechcrack.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.monte_carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">statMechCrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>statmechcrack.monte_carlo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/statmechcrack.monte_carlo.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-statmechcrack.monte_carlo">
+<span id="statmechcrack-monte-carlo-module"></span><h1>statmechcrack.monte_carlo<a class="headerlink" href="#module-statmechcrack.monte_carlo" title="Permalink to this heading"></a></h1>
+<p>A module for the Metropolis-Hastings Markov chain Monte Carlo method.</p>
+<p>This module consist of the class <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="statmechcrack.monte_carlo.CrackMonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a> which contains
+methods to compute crack model quantities using the
+Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id3" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="statmechcrack.mechanical.html#statmechcrack.mechanical.CrackMechanical" title="statmechcrack.mechanical.CrackMechanical"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMechanical</span></code></a></p>
+<p>The Metropolis-Hastings Markov chain Monte Carlo class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo">
+<span class="sig-name descname"><span class="pre">beta_A_isometric_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_A_isometric_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The relative nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+in the isometric ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta A(v) =
+-\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta U \equiv U(v,s) - U(1,s)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">beta_A_isometric_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_A_isometric_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">beta_A_isometric_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo">
+<span class="sig-name descname"><span class="pre">beta_G_isotensional_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_G_isotensional_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The relative nondimensional Gibbs free energy
+as a function of the nondimensional end force
+in the isometric ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta G(v) =
+-\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\Delta\Pi \equiv \Pi(p,s) - \Pi(0,s)\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Gibbs free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">beta_G_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">beta_G_isotensional_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Gibbs free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.burn_in">
+<span class="sig-name descname"><span class="pre">burn_in</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_burns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.burn_in"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.burn_in" title="Permalink to this definition"></a></dt>
+<dd><p>Burn-in (throw away samples) until in the effective sampling region.</p>
+<p>This method runs a Monte Carlo calculation without utilizing samples,
+instead throwing them away until a desired number have been thrown away
+or a desired tolerance has been reached.
+This is typically done to obtain a burned-in configuration to use as
+the initial configuration for an actual Monte Carlo calculation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_config</strong> (<em>numpy.ndarray</em>) – The initial configuration.</p></li>
+<li><p><strong>num_burns</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=10000</em>) – The number of samples to burn.</p></li>
+<li><p><strong>tol</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=np.inf</em>) – The burn-in tolerance.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config_append()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The final, burned-in configuration.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo">
+<span class="sig-name descname"><span class="pre">k_isometric_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isometric_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end force
+in the isometric ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[k = \frac{
+        \left\langle e^{-\beta U}\right\rangle_{v=1}^\ddagger
+    }{
+        \left\langle e^{-\beta U}\right\rangle_{v=1}
+    }.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">k_isometric_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isometric_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">k_isometric_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo">
+<span class="sig-name descname"><span class="pre">k_isotensional_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isotensional_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end force
+in the isotensional ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[k = \frac{
+        \left\langle e^{-\beta\Pi}\right\rangle_{p=0}^\ddagger
+    }{
+        \left\langle e^{-\beta\Pi}\right\rangle_{p=0}
+    }.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">k_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">k_isotensional_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config">
+<span class="sig-name descname"><span class="pre">mh_next_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">urng=&lt;built-in</span> <span class="pre">method</span> <span class="pre">uniform</span> <span class="pre">of</span> <span class="pre">numpy.random.mtrand.RandomState</span> <span class="pre">object&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.mh_next_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="Permalink to this definition"></a></dt>
+<dd><p>Generates accepted configurations given a previous configuration.</p>
+<p>This function returns an accepted configuration given a
+previous configuration. Trial configurations are generated and
+repeatedly rejected until accepted as the next configuration
+based on the Metropolis-Hastings algorithm.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prev_config</strong> (<em>numpy.ndarray</em>) – The previous configuration.</p></li>
+<li><p><strong>urng</strong> (<em>object</em><em>, </em><em>optional</em><em>, </em><em>default=np.random.uniform</em>) – The uniform random number generator.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.trial_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">trial_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The accepted (next) configuration.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append">
+<span class="sig-name descname"><span class="pre">mh_next_config_append</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_configs</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.mh_next_config_append"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append" title="Permalink to this definition"></a></dt>
+<dd><p>Append next configuration onto a history of previous configurations.</p>
+<p>This method calls <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a> and appends the resulting next
+configuration onto a given history of previous configurations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prev_configs</strong> (<em>numpy.ndarray</em>) – The previous
+history of configurations.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The updated history of configurations.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo">
+<span class="sig-name descname"><span class="pre">p_isometric_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.p_isometric_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+in the isometric ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[p(v) = \kappa\langle v - 2s_1 + s_2\rangle.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">p_isometric_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.p_isometric_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">p_isometric_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation">
+<span class="sig-name descname"><span class="pre">parallel_calculation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">serial_fun</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.parallel_calculation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="Permalink to this definition"></a></dt>
+<dd><p>Monte Carlo calculation averaged over several parallel processes.
+This method performs several Monte Carlo calculations in parallel
+and returns the average result from all processes.
+Each Monte Carlo calculation is performed using <code class="docutils literal notranslate"><span class="pre">serial_fun()</span></code>.
+The default is to utilize all available processors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>serial_fun</strong> (<em>function</em>) – The function for a single Monte Carlo calculation.</p></li>
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration for the burn-in process.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.burn_in" title="statmechcrack.monte_carlo.CrackMonteCarlo.burn_in"><code class="xref py py-meth docutils literal notranslate"><span class="pre">burn_in()</span></code></a> and <code class="docutils literal notranslate"><span class="pre">serial_fun()</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The process-averaged result.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To avoid issues with <code class="docutils literal notranslate"><span class="pre">multiprocessing</span></code> and MacOS/Windows,
+<code class="docutils literal notranslate"><span class="pre">num_processes</span></code> is set to 1 for anything but Linux.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.trial_config">
+<span class="sig-name descname"><span class="pre">trial_config</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prev_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.trial_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config" title="Permalink to this definition"></a></dt>
+<dd><p>Generates trial configurations given a previous configuration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prev_config</strong> (<em>numpy.ndarray</em>) – The previous configuration.</p></li>
+<li><p><strong>cov_config</strong> (<em>float</em><em>, </em><em>optional</em><em>, </em><em>default=1e-2</em>) – The covariance.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The generated trial configuration.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo">
+<span class="sig-name descname"><span class="pre">v_isotensional_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.v_isotensional_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end separation
+as a function of the nondimensional end force
+in the isotensional ensemble, using a
+Metropolis-Hastings Markov chain Monte Carlo calculation
+of the ensemble average</p>
+<div class="math notranslate nohighlight">
+\[v(p) = \langle s_0\rangle.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end separation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial">
+<span class="sig-name descname"><span class="pre">v_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.v_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">v_isotensional_monte_carlo()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>init_config</strong> (<em>np.ndarray</em>) – The initial configuration, typically already burned-in.</p></li>
+<li><p><strong>num_samples</strong> (<em>int</em><em>, </em><em>optional</em><em>, </em><em>default=1000000</em>) – The number of samples to use.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config" title="statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mh_next_config()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end separation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+  <hr><p><strong>References</strong></p>
+<div class="docutils container" id="id2">
+<dl class="citation">
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>James M Haile. <em>Molecular Dynamics Simulation: Elementary Methods</em>. Wiley, 1992. URL: <a class="reference external" href="https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393">https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393</a>.</p>
+</dd>
+</dl>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="statmechcrack.mechanical.html" class="btn btn-neutral float-left" title="statmechcrack.mechanical module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="statmechcrack.utility.html" class="btn btn-neutral float-right" title="statmechcrack.utility module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 National Technology &amp; Engineering Solutions of Sandia,     LLC (NTESS). Under the terms of Contract DE-NA0003525 with NTESS,     the U.S. Government retains certain rights in this software.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

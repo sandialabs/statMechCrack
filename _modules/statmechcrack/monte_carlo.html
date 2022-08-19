@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statmechcrack.monte_carlo &mdash; statMechCrack 0.1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> statMechCrack
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.core.html">statmechcrack.core module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.isometric.html">statmechcrack.isometric module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.isotensional.html">statmechcrack.isotensional module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.mechanical.html">statmechcrack.mechanical module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.monte_carlo.html">statmechcrack.monte_carlo module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.utility.html">statmechcrack.utility module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../example_notebook_1.html">Example Notebook 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_one.html">statmechcrack.tests.test_one module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_many.html">statmechcrack.tests.test_many module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../statmechcrack.tests.test_style.html">statmechcrack.tests.test_style module</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">statMechCrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>statmechcrack.monte_carlo</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for statmechcrack.monte_carlo</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;A module for the Metropolis-Hastings Markov chain Monte Carlo method.</span>
+
+<span class="sd">This module consist of the class :class:`CrackMonteCarlo` which contains</span>
+<span class="sd">methods to compute crack model quantities using the</span>
+<span class="sd">Metropolis-Hastings Markov chain Monte Carlo method :cite:`monte_carlo-haile1992molecular`.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">platform</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy.linalg</span> <span class="k">as</span> <span class="nn">la</span>
+
+<span class="kn">from</span> <span class="nn">.mechanical</span> <span class="kn">import</span> <span class="n">CrackMechanical</span>
+
+<span class="k">if</span> <span class="n">platform</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="s1">&#39;linux2&#39;</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+
+
+<div class="viewcode-block" id="CrackMonteCarlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo">[docs]</a><span class="k">class</span> <span class="nc">CrackMonteCarlo</span><span class="p">(</span><span class="n">CrackMechanical</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The Metropolis-Hastings Markov chain Monte Carlo class.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initializes the :class:`CrackMonteCarlo` class.</span>
+
+<span class="sd">        Initialize and inherit all attributes and methods</span>
+<span class="sd">        from a :class:`.CrackMechanical` class instance.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">CrackMechanical</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="CrackMonteCarlo.trial_config"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config">[docs]</a>    <span class="k">def</span> <span class="nf">trial_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_config</span><span class="p">,</span> <span class="n">cov_config</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates trial configurations given a previous configuration.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prev_config (numpy.ndarray): The previous configuration.</span>
+<span class="sd">            cov_config (float, optional, default=1e-2): The covariance.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The generated trial configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">prev_config</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">cov_config</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_config</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.mh_next_config"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config">[docs]</a>    <span class="k">def</span> <span class="nf">mh_next_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_config</span><span class="p">,</span> <span class="n">urng</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generates accepted configurations given a previous configuration.</span>
+
+<span class="sd">        This function returns an accepted configuration given a</span>
+<span class="sd">        previous configuration. Trial configurations are generated and</span>
+<span class="sd">        repeatedly rejected until accepted as the next configuration</span>
+<span class="sd">        based on the Metropolis-Hastings algorithm.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prev_config (numpy.ndarray): The previous configuration.</span>
+<span class="sd">            urng (object, optional, default=np.random.uniform):</span>
+<span class="sd">                The uniform random number generator.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`trial_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The accepted (next) configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">next_config</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">while</span> <span class="n">next_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">trial_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trial_config</span><span class="p">(</span><span class="n">prev_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">delta_beta_e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span><span class="p">(</span><span class="n">trial_config</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span><span class="p">(</span><span class="n">prev_config</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">delta_beta_e</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_beta_e</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">urng</span><span class="p">()):</span>
+                <span class="n">next_config</span> <span class="o">=</span> <span class="n">trial_config</span>
+        <span class="k">return</span> <span class="n">next_config</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.mh_next_config_append"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append">[docs]</a>    <span class="k">def</span> <span class="nf">mh_next_config_append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_configs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Append next configuration onto a history of previous configurations.</span>
+
+<span class="sd">        This method calls :meth:`mh_next_config` and appends the resulting next</span>
+<span class="sd">        configuration onto a given history of previous configurations.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            prev_configs (numpy.ndarray): The previous</span>
+<span class="sd">                history of configurations.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The updated history of configurations.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prev_configs</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">prev_configs</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.burn_in"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.burn_in">[docs]</a>    <span class="k">def</span> <span class="nf">burn_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">10000</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Burn-in (throw away samples) until in the effective sampling region.</span>
+
+<span class="sd">        This method runs a Monte Carlo calculation without utilizing samples,</span>
+<span class="sd">        instead throwing them away until a desired number have been thrown away</span>
+<span class="sd">        or a desired tolerance has been reached.</span>
+<span class="sd">        This is typically done to obtain a burned-in configuration to use as</span>
+<span class="sd">        the initial configuration for an actual Monte Carlo calculation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            init_config (numpy.ndarray):</span>
+<span class="sd">                The initial configuration.</span>
+<span class="sd">            num_burns (int, optional, default=10000):</span>
+<span class="sd">                The number of samples to burn.</span>
+<span class="sd">            tol (float, optional, default=np.inf):</span>
+<span class="sd">                The burn-in tolerance.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config_append`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The final, burned-in configuration.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">config_history</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">init_config</span><span class="p">])</span>
+        <span class="n">prev_rmc</span> <span class="o">=</span> <span class="n">init_config</span>
+        <span class="n">n_res</span> <span class="o">=</span> <span class="n">tol</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">while</span> <span class="n">n_res</span> <span class="o">&gt;</span> <span class="n">tol</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">config_history</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">num_burns</span><span class="p">:</span>
+            <span class="n">config_history</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config_append</span><span class="p">(</span>
+                <span class="n">config_history</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+            <span class="n">next_rmc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">config_history</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">n_res</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">next_rmc</span> <span class="o">-</span> <span class="n">prev_rmc</span><span class="p">)</span><span class="o">/</span><span class="n">la</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">prev_rmc</span><span class="p">)</span>
+            <span class="n">prev_rmc</span> <span class="o">=</span> <span class="n">next_rmc</span>
+        <span class="k">return</span> <span class="n">config_history</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.parallel_calculation"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation">[docs]</a>    <span class="k">def</span> <span class="nf">parallel_calculation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">serial_fun</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Monte Carlo calculation averaged over several parallel processes.</span>
+<span class="sd">        This method performs several Monte Carlo calculations in parallel</span>
+<span class="sd">        and returns the average result from all processes.</span>
+<span class="sd">        Each Monte Carlo calculation is performed using ``serial_fun()``.</span>
+<span class="sd">        The default is to utilize all available processors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            serial_fun (function):</span>
+<span class="sd">                The function for a single Monte Carlo calculation.</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration for the burn-in process.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`burn_in` and ``serial_fun()``.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The process-averaged result.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            To avoid issues with ``multiprocessing`` and MacOS/Windows,</span>
+<span class="sd">            ``num_processes`` is set to 1 for anything but Linux.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">burned_in_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">burn_in</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">num_processes</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">platform</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;linux&#39;</span><span class="p">,</span> <span class="s1">&#39;linux2&#39;</span><span class="p">):</span>
+            <span class="n">num_processes</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;num_processes&#39;</span><span class="p">,</span> <span class="n">mp</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">num_processes</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">Queue</span><span class="p">()</span>
+
+            <span class="k">def</span> <span class="nf">fun</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+                <span class="n">output</span><span class="o">.</span><span class="n">put</span><span class="p">(</span>
+                    <span class="n">serial_fun</span><span class="p">(</span>
+                        <span class="n">burned_in_config</span><span class="p">,</span>
+                        <span class="n">urng</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span><span class="o">.</span><span class="n">random</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="n">processes</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">mp</span><span class="o">.</span><span class="n">Process</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">seed</span><span class="p">,</span> <span class="n">output</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">88</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">num_processes</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">:</span>
+                <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+            <span class="n">process_results</span> <span class="o">=</span> <span class="p">[</span><span class="n">output</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">processes</span><span class="p">]</span>
+            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">process_results</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">serial_fun</span><span class="p">(</span><span class="n">burned_in_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.p_isometric_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">p_isometric_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                       <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`p_isometric_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like):</span>
+<span class="sd">                The nondimensional end separation.</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The nondimensional end force.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">init_config</span>
+        <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_samples</span><span class="p">):</span>
+            <span class="n">p_next</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">config</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">p</span> <span class="o">+=</span> <span class="p">(</span><span class="n">p_next</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span><span class="o">/</span><span class="n">counter</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.p_isometric_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">p_isometric_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional end force</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        in the isometric ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            p(v) = \kappa\langle v - 2s_1 + s_2\rangle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The nondimensional end force.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">config</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">serial_fun</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_isometric_monte_carlo_serial</span><span class="p">(</span>
+                        <span class="n">v_i</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+
+            <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="n">serial_fun</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">)[</span><span class="mi">2</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">p</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.v_isotensional_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">v_isotensional_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                          <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`v_isotensional_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The nondimensional end separation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">init_config</span>
+        <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_samples</span><span class="p">):</span>
+            <span class="n">v_next</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">v</span> <span class="o">+=</span> <span class="p">(</span><span class="n">v_next</span> <span class="o">-</span> <span class="n">v</span><span class="p">)</span><span class="o">/</span><span class="n">counter</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.v_isotensional_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">v_isotensional_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional end separation</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        in the isotensional ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            v(p) = \langle s_0\rangle.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The nondimensional end separation.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">v</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">v_isotensional_monte_carlo_serial</span><span class="p">,</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])),</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">v</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.beta_A_isometric_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_isometric_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                            <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`beta_A_isometric_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like):</span>
+<span class="sd">                The nondimensional end separation.</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The relative nondimensional Helmholtz free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">exp_neg_beta_A</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">init_config</span>
+        <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_samples</span><span class="p">):</span>
+            <span class="n">exp_neg_beta_A_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">exp_neg_beta_A</span> <span class="o">+=</span> <span class="p">(</span><span class="n">exp_neg_beta_A_next</span> <span class="o">-</span> <span class="n">exp_neg_beta_A</span><span class="p">)</span><span class="o">/</span><span class="n">counter</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp_neg_beta_A</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.beta_A_isometric_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_isometric_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The relative nondimensional Helmholtz free energy</span>
+<span class="sd">        as a function of the nondimensional end separation</span>
+<span class="sd">        in the isometric ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \beta\Delta A(v) =</span>
+<span class="sd">            -\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},</span>
+
+<span class="sd">        where :math:`\Delta U \equiv U(v,s) - U(1,s)`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The relative nondimensional Helmholtz free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">beta_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">config</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">serial_fun</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_isometric_monte_carlo_serial</span><span class="p">(</span>
+                        <span class="n">v_i</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+
+            <span class="n">beta_A</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="n">serial_fun</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">)[</span><span class="mi">2</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">beta_A</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                               <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`beta_G_isotensional_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The relative nondimensional Gibbs free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.beta_G_isotensional_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The relative nondimensional Gibbs free energy</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        in the isometric ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            \beta\Delta G(v) =</span>
+<span class="sd">            -\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},</span>
+
+<span class="sd">        where :math:`\Delta\Pi \equiv \Pi(p,s) - \Pi(0,s)`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The relative nondimensional Gibbs free energy.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">beta_G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">beta_G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_isotensional_monte_carlo_serial</span><span class="p">,</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])),</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">beta_G</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.k_isometric_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">k_isometric_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                       <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`k_isometric_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.k_isometric_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">k_isometric_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        in the isometric ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            k = \frac{</span>
+<span class="sd">                    \left\langle e^{-\beta U}\right\rangle_{v=1}^\ddagger</span>
+<span class="sd">                }{</span>
+<span class="sd">                    \left\langle e^{-\beta U}\right\rangle_{v=1}</span>
+<span class="sd">                }.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            v (array_like): The nondimensional end separation.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">config</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+
+            <span class="k">def</span> <span class="nf">serial_fun</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isometric_monte_carlo_serial</span><span class="p">(</span>
+                        <span class="n">v_i</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+
+            <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="n">serial_fun</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">)[</span><span class="mi">2</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">k</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.k_isotensional_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">k_isotensional_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+                                          <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`k_isotensional_monte_carlo`.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            init_config (np.ndarray):</span>
+<span class="sd">                The initial configuration, typically already burned-in.</span>
+<span class="sd">            num_samples (int, optional, default=1000000):</span>
+<span class="sd">                The number of samples to use.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`mh_next_config`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="CrackMonteCarlo.k_isotensional_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">k_isotensional_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        in the isotensional ensemble, using a</span>
+<span class="sd">        Metropolis-Hastings Markov chain Monte Carlo calculation</span>
+<span class="sd">        of the ensemble average</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">            k = \frac{</span>
+<span class="sd">                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}^\ddagger</span>
+<span class="sd">                }{</span>
+<span class="sd">                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}</span>
+<span class="sd">                }.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+<span class="sd">            **kwargs: Arbitrary keyword arguments.</span>
+<span class="sd">                Passed to :meth:`parallel_calculation`.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional forward reaction rate.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">k_isotensional_monte_carlo_serial</span><span class="p">,</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])),</span>
+                <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">)</span>
+        <span class="k">return</span> <span class="n">k</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 National Technology &amp; Engineering Solutions of Sandia,     LLC (NTESS). Under the terms of Contract DE-NA0003525 with NTESS,     the U.S. Government retains certain rights in this software.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

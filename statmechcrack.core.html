@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statmechcrack.core module &mdash; statMechCrack 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="statmechcrack.isometric module" href="statmechcrack.isometric.html" />
+    <link rel="prev" title="Tutorial" href="tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> statMechCrack
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.core</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.monte_carlo.html">statmechcrack.monte_carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">statMechCrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>statmechcrack.core</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/statmechcrack.core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-statmechcrack.core">
+<span id="statmechcrack-core-module"></span><h1>statmechcrack.core<a class="headerlink" href="#module-statmechcrack.core" title="Permalink to this heading"></a></h1>
+<p>The core module for the crack model.</p>
+<p>This module consist of the class <a class="reference internal" href="#statmechcrack.core.Crack" title="statmechcrack.core.Crack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crack</span></code></a>
+which, upon instantiation,
+becomes a crack model instance with methods for computing
+quantities in either thermodynamic ensemble.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Crack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional" title="statmechcrack.isotensional.CrackIsotensional"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackIsotensional</span></code></a></p>
+<p>The crack model class.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_A">
+<span class="sig-name descname"><span class="pre">beta_A</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_A"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_A" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Helmholtz free energy
+as a function of the nondimensional end separation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isometric'</em>) – The thermodynamic ensemble. The <cite>isotensional</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_A_0">
+<span class="sig-name descname"><span class="pre">beta_A_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_A_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_A_0" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the reference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isometric'</em>) – The thermodynamic ensemble. The <cite>isotensional</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_A_b">
+<span class="sig-name descname"><span class="pre">beta_A_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_A_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_A_b" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the isolated bending system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isometric'</em>) – The thermodynamic ensemble. The <cite>isotensional</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_G">
+<span class="sig-name descname"><span class="pre">beta_G</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_G"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_G" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Gibbs free energy
+as a function of the nondimensional end force.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble. The <cite>isometric</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Gibbs free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_G_0">
+<span class="sig-name descname"><span class="pre">beta_G_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_G_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_G_0" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Gibbs free energy
+as a function of the nondimensional end force
+for the reference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble. The <cite>isometric</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Gibbs free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.beta_G_b">
+<span class="sig-name descname"><span class="pre">beta_G_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">absolute</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.beta_G_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.beta_G_b" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Gibbs free energy
+as a function of the nondimensional end force
+for the isolated bending system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble. The <cite>isometric</cite>
+ensemble uses the Legendre transformation method.</p></li>
+<li><p><strong>absolute</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether not to use the absolute free energy.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Gibbs free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.k">
+<span class="sig-name descname"><span class="pre">k</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_or_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.k"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.k" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end force
+or the nondimensional end separation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_or_v</strong> (<em>array_like</em>) – The nondimensional end force or position. Assumed to be
+the end separation for the isometric ensemble and
+the end force for the isotensional ensemble.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.k_0">
+<span class="sig-name descname"><span class="pre">k_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_or_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.k_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.k_0" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end force
+or the nondimensional end separation
+for the reference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_or_v</strong> (<em>array_like</em>) – The nondimensional end force or position. Assumed to be
+the end separation for the isometric ensemble and
+the end force for the isotensional ensemble.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.k_b">
+<span class="sig-name descname"><span class="pre">k_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_or_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.k_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.k_b" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end force
+or the nondimensional end separation
+for the isolated bending system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_or_v</strong> (<em>array_like</em>) – The nondimensional end force or position. Assumed to be
+the end separation for the isometric ensemble and
+the end force for the isotensional ensemble.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.p">
+<span class="sig-name descname"><span class="pre">p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.p" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.p_0">
+<span class="sig-name descname"><span class="pre">p_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.p_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.p_0" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+for the reference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isometric'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.p_b">
+<span class="sig-name descname"><span class="pre">p_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.p_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.p_b" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+for the isolated bending system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isometric'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.v">
+<span class="sig-name descname"><span class="pre">v</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.v"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.v" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end separation
+as a function of the nondimensional end force.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end separation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.v_0">
+<span class="sig-name descname"><span class="pre">v_0</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.v_0"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.v_0" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end separation
+as a function of the nondimensional end force
+for the reference system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end separation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.v_b">
+<span class="sig-name descname"><span class="pre">v_b</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isotensional'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.v_b"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.v_b" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end separation
+as a function of the nondimensional end force
+for the isolated bending system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end separation.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="statmechcrack.isometric.html" class="btn btn-neutral float-right" title="statmechcrack.isometric module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 National Technology &amp; Engineering Solutions of Sandia,     LLC (NTESS). Under the terms of Contract DE-NA0003525 with NTESS,     the U.S. Government retains certain rights in this software.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

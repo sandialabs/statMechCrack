@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>statmechcrack.isometric module &mdash; statMechCrack 0.1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
+      <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="statmechcrack.isotensional module" href="statmechcrack.isotensional.html" />
+    <link rel="prev" title="statmechcrack.core module" href="statmechcrack.core.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> statMechCrack
+          </a>
+              <div class="version">
+                0.1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.core.html">statmechcrack.core</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.isometric</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.monte_carlo.html">statmechcrack.monte_carlo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tests</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">statMechCrack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>statmechcrack.isometric</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/statmechcrack.isometric.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="module-statmechcrack.isometric">
+<span id="statmechcrack-isometric-module"></span><h1>statmechcrack.isometric<a class="headerlink" href="#module-statmechcrack.isometric" title="Permalink to this heading"></a></h1>
+<p>A module for the crack model in the isometric ensemble.</p>
+<p>This module consist of the class <a class="reference internal" href="#statmechcrack.isometric.CrackIsometric" title="statmechcrack.isometric.CrackIsometric"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackIsometric</span></code></a> which
+contains methods for computing quantities in the
+isometric (constant displacement) thermodynamic ensemble.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackIsometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo" title="statmechcrack.monte_carlo.CrackMonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a></p>
+<p>The crack model class for the isometric ensemble.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.Q_0_isometric">
+<span class="sig-name descname"><span class="pre">Q_0_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.Q_0_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.Q_0_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional isometric partition function
+as a function of the nondimensional end separation
+for the reference system,</p>
+<div class="math notranslate nohighlight">
+\[Q_0(v,\boldsymbol{\lambda}) =
+Q_b(v,\lambda_1,\lambda_2)
+e^{-\beta U_{01}(\boldsymbol{\lambda})}.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional isometric partition function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional equilibrium radial distribution
+as a function of the nondimensional end separation
+for the reference system in the isometric ensemble
+for an increasing number of broken bonds <span class="math notranslate nohighlight">\(N\)</span>
+and compare to the thermodynamic limit:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">r_Q_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>        <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r_Q_0</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span>
+<span class="gp">... </span>             <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(\Delta v)^2$&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s1">&#39;$\left[\frac{Q_0(v)}{Q_0(1)}\right]^{N^3/3\kappa}$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-1.png" class="plot-directive" src="_images/statmechcrack-isometric-1.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.Q_b_isometric">
+<span class="sig-name descname"><span class="pre">Q_b_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.Q_b_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.Q_b_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional isometric partition function
+as a function of the nondimensional end separation
+for the isolated bending system,</p>
+<div class="math notranslate nohighlight">
+\[Q_b(v,\lambda_1,\lambda_2) =
+\sqrt{\frac{(2\pi)^N}{\det\mathbf{H}}}
+\,e^{\frac{1}{2}\mathbf{g}^T\cdot\mathbf{H}^{-1}\cdot\mathbf{g}-f},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{H}\)</span>,
+the nondimensional Hessian of the potential energy
+for the isolated bending system, and
+<span class="math notranslate nohighlight">\(\mathbf{g}\)</span> and <span class="math notranslate nohighlight">\(f\)</span> are</p>
+<div class="math notranslate nohighlight">
+\[\mathbf{g}(v,\lambda_1,\lambda_2) = \kappa\left(
+    2v, -v, 0, \ldots, 0, -\lambda_1, 4\lambda_1 - \lambda_2
+\right)^T,\]</div>
+<div class="math notranslate nohighlight">
+\[f(v,\lambda_1,\lambda_2) = \frac{\kappa}{2}\left[v^2 + \lambda_1^2
+    + \left(2\lambda_1 - \lambda_2\right)^2\right]
+.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional isometric partition function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.Q_isometric">
+<span class="sig-name descname"><span class="pre">Q_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transition_state</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.Q_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.Q_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional isometric partition function
+as a function of the nondimensional end separation,</p>
+<div class="math notranslate nohighlight">
+\[Q(v) = \int d\lambda \
+    Q_0(v,\boldsymbol{\lambda})
+    e^{-\beta U_1(\boldsymbol{\lambda})},\]</div>
+<p>approximated using the asymptotic relation</p>
+<div class="math notranslate nohighlight">
+\[Q(v) \sim
+Q_0(v, \hat{\boldsymbol{\lambda}})
+\prod_{j=1}^M \sqrt{\frac{2\pi}{\beta u''(\hat{\lambda}_j)}}
+\, e^{-\beta u(\hat{\lambda}_j)},\]</div>
+<p>which is valid for <span class="math notranslate nohighlight">\(\varepsilon\gg 1\)</span>,
+where <span class="math notranslate nohighlight">\(\hat{\boldsymbol{\lambda}}\)</span>
+is from minimizing <span class="math notranslate nohighlight">\(\beta U\)</span>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>transition_state</strong> (<em>bool</em><em>, </em><em>optional</em><em>, </em><em>default=False</em>) – Whether or not to calculate in the transition state.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional isometric partition function.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional equilibrium radial distribution
+as a function of the nondimensional end separation
+in the isometric ensemble
+for an increasing nondimensional bond energy
+and compare to the limit given by the reference system:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">r_Q</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Q_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
+<span class="gp">... </span>        <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">Q_isometric</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r_Q</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r_Q_0</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="o">/</span> <span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">r_Q_0</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(\Delta v)^2$&#39;</span> <span class="o">+</span>
+<span class="gp">... </span>    <span class="sa">r</span><span class="s1">&#39;$\left[\frac{Q(v)}{Q(1)}\right]^{N^3/3\kappa}$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-2.png" class="plot-directive" src="_images/statmechcrack-isometric-2.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_0_abs_isometric">
+<span class="sig-name descname"><span class="pre">beta_A_0_abs_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_0_abs_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_0_abs_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The absolute nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the reference system,</p>
+<div class="math notranslate nohighlight">
+\[\beta A_0(v,\boldsymbol{\lambda}) =
+-\ln Q_0(v,\boldsymbol{\lambda}) =
+\beta A_b(v,\lambda_1,\lambda_2)
++ \beta U_{01}(\boldsymbol{\lambda}).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The absolute nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_0_isometric">
+<span class="sig-name descname"><span class="pre">beta_A_0_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_0_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_0_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The relative nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the reference system,</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta A_0(v,\boldsymbol{\lambda}) =
+\beta A_0(v,\boldsymbol{\lambda}) -
+\beta A_0(v_0,\boldsymbol{\lambda}).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional relative Helmholtz free energy
+as a function of the nondimensional end separation
+for the reference system in the isometric ensemble
+for an increasing number of broken bonds <span class="math notranslate nohighlight">\(N\)</span>
+and compare to the thermodynamic limit:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">beta_A_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">beta_A_0</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(N^3/3\kappa)\beta\Delta A_0$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-3.png" class="plot-directive" src="_images/statmechcrack-isometric-3.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_abs_isometric">
+<span class="sig-name descname"><span class="pre">beta_A_abs_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_abs_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_abs_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The absolute nondimensional Helmholtz free energy
+as a function of the nondimensional end separation,</p>
+<div class="math notranslate nohighlight">
+\[\beta A(v) = -\ln Q(v).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The absolute nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_b_isometric">
+<span class="sig-name descname"><span class="pre">beta_A_b_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_b_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_b_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The relative nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the isolated bending system,</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta A_b(v,\lambda_1,\lambda_2) =
+\beta A_b(v,\lambda_1,\lambda_2) -
+\beta A_b(v_0,\lambda_1,\lambda_2).\]</div>
+<p>In the thermodynamic limit of a large number of broken bonds
+<span class="math notranslate nohighlight">\(N\)</span>, this function has the asymptotic relation</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta A_b(v,\lambda_1,\lambda_2) \sim
+\frac{3\kappa}{2N^3}(v - v_0)^2 \quad\text{for }N\gg 1.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_b_isometric_abs">
+<span class="sig-name descname"><span class="pre">beta_A_b_isometric_abs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_b_isometric_abs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_b_isometric_abs" title="Permalink to this definition"></a></dt>
+<dd><p>The absolute nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
+for the isolated bending system,</p>
+<div class="math notranslate nohighlight">
+\[\beta A_b(v,\lambda_1,\lambda_2) =
+-\ln Q_b(v,\lambda_1,\lambda_2).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The absolute nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.beta_A_isometric">
+<span class="sig-name descname"><span class="pre">beta_A_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.beta_A_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.beta_A_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The relative nondimensional Helmholtz free energy
+as a function of the nondimensional end separation,</p>
+<div class="math notranslate nohighlight">
+\[\beta\Delta A(v) = \beta A(v) - \beta A(1).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">beta_A_isometric_monte_carlo()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional relative Helmholtz free energy
+as a function of the nondimensional end separation
+in the isometric ensemble
+for an increasing nondimensional bond energy
+and compare to the limit given by the reference system:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">beta_A</span> <span class="o">=</span> \
+<span class="gp">... </span>        <span class="n">model</span><span class="o">.</span><span class="n">beta_A_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">beta_A</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">beta_A_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">beta_A_0</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(N^3/3\kappa)\Delta\beta A$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-4.png" class="plot-directive" src="_images/statmechcrack-isometric-4.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.k_0_isometric">
+<span class="sig-name descname"><span class="pre">k_0_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.k_0_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.k_0_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end separation
+for the reference system in the isometric ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.k_b_isometric">
+<span class="sig-name descname"><span class="pre">k_b_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.k_b_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.k_b_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end separation
+for the isolated bending system in the isometric ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.k_isometric">
+<span class="sig-name descname"><span class="pre">k_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.k_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.k_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional forward reaction rate coefficient
+as a function of the nondimensional end separation
+in the isometric ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">k_isometric_monte_carlo()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional forward reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the nondimensional forward reaction rate coefficient
+as a function of the nondimensional end separation
+in the isometric ensemble
+for an increasing nondimensional bond energy
+and compare to the limit given by the reference system:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">k_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">k_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+<span class="gp">... </span>                 <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-5.png" class="plot-directive" src="_images/statmechcrack-isometric-5.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.p_0_isometric">
+<span class="sig-name descname"><span class="pre">p_0_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.p_0_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.p_0_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+for the reference system in the isometric ensemble,</p>
+<div class="math notranslate nohighlight">
+\[p_0(v,\lambda_1,\lambda_2) =
+\frac{\partial}{\partial v}\,\beta A_0(v,\lambda_1,\lambda_2) =
+p_b(v,\boldsymbol{\lambda}).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional end force
+as a function of the nondimensional end separation
+for the reference system in the isometric ensemble
+for an increasing number of broken bonds <span class="math notranslate nohighlight">\(N\)</span>
+and compare to the thermodynamic limit:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">p_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">p_0</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(N^3/3\kappa)p_0$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-6.png" class="plot-directive" src="_images/statmechcrack-isometric-6.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.p_b_isometric">
+<span class="sig-name descname"><span class="pre">p_b_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.p_b_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.p_b_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+for the isolated bending system in the isometric ensemble,</p>
+<div class="math notranslate nohighlight">
+\[p_b(v,\lambda_1,\lambda_2) =
+\frac{\partial}{\partial v}\,\beta A_b(v,\lambda_1,\lambda_2).\]</div>
+<p>In the thermodynamic limit of a large number of broken bonds
+<span class="math notranslate nohighlight">\(N\)</span>, this function has the asymptotic relation</p>
+<div class="math notranslate nohighlight">
+\[p_b(v,\lambda_1,\lambda_2) \sim
+\frac{3\kappa}{N^3}(v - v_0) \quad\text{for }N\gg 1.\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isometric.CrackIsometric.p_isometric">
+<span class="sig-name descname"><span class="pre">p_isometric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">approach</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'asymptotic'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isometric.html#CrackIsometric.p_isometric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isometric.CrackIsometric.p_isometric" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional end force
+as a function of the nondimensional end separation
+in the isometric ensemble,</p>
+<div class="math notranslate nohighlight">
+\[p(v) = \frac{\partial}{\partial v}\,\beta A(v).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>approach</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='asymptotic'</em>) – The calculation approach.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">p_isometric_monte_carlo()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional end force.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the rescaled nondimensional end force
+as a function of the nondimensional end separation
+in the isometric ensemble
+for an increasing nondimensional bond energy
+and compare to the limit given by the reference system:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">p</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">p_0</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(N^3/3\kappa)p$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isometric-7.png" class="plot-directive" src="_images/statmechcrack-isometric-7.png" />
+</figure>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="statmechcrack.core.html" class="btn btn-neutral float-left" title="statmechcrack.core module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="statmechcrack.isotensional.html" class="btn btn-neutral float-right" title="statmechcrack.isotensional module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022 National Technology &amp; Engineering Solutions of Sandia,     LLC (NTESS). Under the terms of Contract DE-NA0003525 with NTESS,     the U.S. Government retains certain rights in this software.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
