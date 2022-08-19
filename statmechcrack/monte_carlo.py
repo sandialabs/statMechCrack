@@ -171,7 +171,6 @@ class CrackMonteCarlo(CrackMechanical):
             for p in processes:
                 p.join()
             process_results = [output.get() for p in processes]
-            print(process_results)
             return np.mean(process_results)
         return serial_fun(burned_in_config, **kwargs)
 
@@ -310,7 +309,15 @@ class CrackMonteCarlo(CrackMechanical):
             numpy.ndarray: The relative nondimensional Helmholtz free energy.
 
         """
-        pass
+        exp_neg_beta_A = 0
+        config = init_config
+        for counter in range(1, 1 + num_samples):
+            exp_neg_beta_A_next = np.exp(
+                self.beta_U(1, config) - self.beta_U(v, config)
+            )
+            exp_neg_beta_A += (exp_neg_beta_A_next - exp_neg_beta_A)/counter
+            config = self.mh_next_config(config, **kwargs)
+        return np.log(1/exp_neg_beta_A)
 
     def beta_A_isometric_monte_carlo(self, v, **kwargs):
         r"""The relative nondimensional Helmholtz free energy
@@ -323,7 +330,7 @@ class CrackMonteCarlo(CrackMechanical):
             \beta\Delta A(v) =
             -\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},
 
-        where :math:`\Delta U\equiv U(v,s)-U(1,s)`.
+        where :math:`\Delta U \equiv U(v,s) - U(1,s)`.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -337,7 +344,7 @@ class CrackMonteCarlo(CrackMechanical):
         v = self.np_array(v)
         beta_A = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_e = lambda config: self.beta_U(v_i, config)
+            self.beta_e = lambda config: self.beta_U(1, config)
 
             def serial_fun(init_config, **kwargs):
                 return self.beta_A_isometric_monte_carlo_serial(
@@ -380,7 +387,7 @@ class CrackMonteCarlo(CrackMechanical):
             \beta\Delta G(v) =
             -\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},
 
-        where :math:`\Delta\Pi\equiv\Pi(p,s)-\Pi(0,s)`.
+        where :math:`\Delta\Pi \equiv \Pi(p,s) - \Pi(0,s)`.
 
         Args:
             p (array_like): The nondimensional end force.
@@ -392,16 +399,16 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         p = self.np_array(p)
-        beta_G_isotensional = np.zeros(p.shape)
+        beta_G = np.zeros(p.shape)
         for i, p_i in enumerate(p):
             self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
             v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
-            beta_G_isotensional[i] = self.parallel_calculation(
+            beta_G[i] = self.parallel_calculation(
                 self.beta_G_isotensional_monte_carlo_serial,
                 np.concatenate((v_guess, s_guess[:, 0])),
                 **kwargs
             )
-        return beta_G_isotensional
+        return beta_G
 
     def k_isometric_monte_carlo_serial(self, v, init_config,
                                        num_samples=1000000, **kwargs):
@@ -446,7 +453,7 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         v = self.np_array(v)
-        k_isometric = np.zeros(v.shape)
+        k = np.zeros(v.shape)
         for i, v_i in enumerate(v):
             self.beta_e = lambda config: self.beta_U(v_i, config)
 
@@ -455,12 +462,12 @@ class CrackMonteCarlo(CrackMechanical):
                         v_i, init_config, **kwargs
                     )
 
-            k_isometric[i] = self.parallel_calculation(
+            k[i] = self.parallel_calculation(
                 serial_fun,
                 self.minimize_beta_U(v_i)[2][:, 0],
                 **kwargs
             )
-        return k_isometric
+        return k
 
     def k_isotensional_monte_carlo_serial(self, init_config,
                                           num_samples=1000000, **kwargs):
@@ -504,13 +511,13 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         p = self.np_array(p)
-        k_isotensional = np.zeros(p.shape)
+        k = np.zeros(p.shape)
         for i, p_i in enumerate(p):
             self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
             v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
-            k_isotensional[i] = self.parallel_calculation(
+            k[i] = self.parallel_calculation(
                 self.k_isotensional_monte_carlo_serial,
                 np.concatenate((v_guess, s_guess[:, 0])),
                 **kwargs
             )
-        return k_isotensional
+        return k
