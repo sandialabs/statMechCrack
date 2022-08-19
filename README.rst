@@ -92,3 +92,4 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 
 .. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
     :target: https://doi.org/10.5281/zenodo.7008312
+
