@@ -38,12 +38,11 @@ setup(
     install_requires=['matplotlib', 'numpy', 'scipy'],
     extras_require={
       'docs': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython',
-               'jinja2>=3.0', 'nbsphinx', 'pandoc', 'pycodestyle',
+               'jinja2>=3.0', 'nbsphinx', 'pycodestyle',
                'sphinx', 'sphinx-rtd-theme', 'sphinxcontrib-bibtex'],
       'testing': ['pycodestyle', 'pylint', 'pytest', 'pytest-cov'],
       'all': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython', 'jinja2>=3.0',
-              'nbsphinx', 'pandoc', 'pycodestyle',
-              'pylint', 'pytest', 'pytest-cov',
+              'nbsphinx', 'pycodestyle', 'pylint', 'pytest', 'pytest-cov',
               'sphinx', 'sphinx-rtd-theme', 'sphinxcontrib-bibtex']
     },
     classifiers=[
