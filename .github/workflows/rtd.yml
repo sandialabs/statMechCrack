@@ -27,6 +27,11 @@ jobs:
         with:
           name: statmechcrack
           path: statmechcrack/
+      - name: Upload examples
+        uses: actions/upload-artifact@v2
+        with:
+          name: examples
+          path: examples/
   rtd:
     runs-on: ubuntu-20.04
     needs: docs
@@ -52,6 +57,11 @@ jobs:
         with:
           name: statmechcrack
           path: statmechcrack/
+      - name: Download examples
+        uses: actions/download-artifact@v2
+        with:
+          name: examples
+          path: examples/
       - name: Push docs to rtd branch
         run: |
           git config user.name "GitHub Actions"
@@ -60,5 +70,6 @@ jobs:
           git add .readthedocs.yaml
           git add docs/
           git add statmechcrack/
+          git add examples/
           git commit --allow-empty -m 'update from main branch'
           git push
