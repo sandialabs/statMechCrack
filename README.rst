@@ -52,7 +52,7 @@ Information
 Citation
 ********
 
-\M. R. Buche and S. J. Grutzik, ``statMechCrack``: the Python package for a statistical mechanical model for crack growth, `Zenodo (2022) <https://doi.org/10.????/zenodo.???????>`_.
+\M. R. Buche and S. J. Grutzik, ``statMechCrack``: the Python package for a statistical mechanical model for crack growth, `Zenodo (2022) <https://doi.org/10.5281/zenodo.7008312>`_.
 
 *********
 Copyright
@@ -90,5 +90,5 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |license| image:: https://img.shields.io/github/license/sandialabs/statmechcrack?label=License
     :target: https://github.com/sandialabs/statmechcrack/blob/main/LICENSE
 
-.. |zenodo| image:: https://zenodo.org/badge/DOI/10.????/zenodo.???????.svg
-    :target: https://doi.org/10.????/zenodo.???????
+.. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
+    :target: https://doi.org/10.5281/zenodo.7008312
