@@ -1,8 +1,0 @@
-**.ipynb_checkpoints
-**__pycache__
-**.pyc
-*dist/
-*build/
-*statmechcrack.egg-info/
-**.coverage
-*.vscode/
