@@ -2,7 +2,7 @@
 
 This module consist of the class :class:`CrackMonteCarlo` which contains
 methods to compute crack model quantities using the
-Metropolis-Hastings Markov chain Monte Carlo method :cite:`haile1992molecular`.
+Metropolis-Hastings Markov chain Monte Carlo method :cite:`monte_carlo-haile1992molecular`.
 
 """
 
