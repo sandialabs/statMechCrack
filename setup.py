@@ -32,9 +32,11 @@ setup(
     long_description=read("README.rst"),
     author='Michael R. Buche, Scott J. Grutzik',
     author_email='mrbuche@sandia.gov, sjgrutz@sandia.gov',
-    url='https://sandialabs.github.io/statmechcrack',
+    url='https://sandialabs.github.io/statMechCrack',
     license='BSD-3-Clause',
-    keywords=['fracture', 'statistical mechanics', 'thermodynamics'],
+    keywords=['fracture mechanics',
+              'statistical mechanics',
+              'thermodynamics'],
     install_requires=['matplotlib', 'numpy', 'scipy'],
     extras_require={
       'docs': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython',
