@@ -23,8 +23,8 @@ class Crack(CrackIsotensional):
         """
         CrackIsotensional.__init__(self, **kwargs)
 
-    def beta_A(self, v, ensemble='isometric',
-               approach='asymptotic', absolute=False):
+    def beta_A(self, v, ensemble='isometric', approach='asymptotic',
+               absolute=False, **kwargs):
         """The nondimensional Helmholtz free energy
         as a function of the nondimensional end separation.
 
@@ -37,6 +37,9 @@ class Crack(CrackIsotensional):
                 The calculation approach.
             absolute (bool, optional, default=False):
                 Whether not to use the absolute free energy.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.beta_A_isometric` or
+                :meth:`p` and :meth:`~.beta_G_isotensional`.
 
         Returns:
             numpy.ndarray: The nondimensional Helmholtz free energy.
@@ -46,15 +49,15 @@ class Crack(CrackIsotensional):
             if absolute is True:
                 return self.beta_A_abs_isometric(v, approach=approach)
             else:
-                return self.beta_A_isometric(v, approach=approach)
+                return self.beta_A_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
-            p = self.p(v, ensemble='isotensional', approach=approach)
+            p = self.p(v, ensemble='isotensional', approach=approach, **kwargs)
             if absolute is True:
                 return p*v + \
                     self.beta_G_abs_isotensional(p, approach=approach)
             else:
                 return p*v + \
-                    self.beta_G_isotensional(p, approach=approach)
+                    self.beta_G_isotensional(p, approach=approach, **kwargs)
 
     def beta_A_0(self, v, lambda_, ensemble='isometric', absolute=False):
         """The nondimensional Helmholtz free energy
@@ -117,7 +120,7 @@ class Crack(CrackIsotensional):
                 return self.beta_G_b_isotensional(p, lambda_) + p*v
 
     def beta_G(self, p, ensemble='isotensional',
-               approach='asymptotic', absolute=False):
+               approach='asymptotic', absolute=False, **kwargs):
         """The nondimensional Gibbs free energy
         as a function of the nondimensional end force.
 
@@ -130,22 +133,27 @@ class Crack(CrackIsotensional):
                 The calculation approach.
             absolute (bool, optional, default=False):
                 Whether not to use the absolute free energy.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.beta_G_isotensional` or
+                :meth:`v` and :meth:`~.beta_A_isometric`.
 
         Returns:
             numpy.ndarray: The nondimensional Gibbs free energy.
 
         """
         if ensemble == 'isometric':
-            v = self.v(p, ensemble='isometric', approach=approach)
+            v = self.v(p, ensemble='isometric', approach=approach, **kwargs)
             if absolute is True:
-                return self.beta_A_abs_isometric(v, approach=approach) - p*v
+                return -p*v + \
+                    self.beta_A_abs_isometric(v, approach=approach)
             else:
-                return self.beta_A_isometric(v, approach=approach) - p*v
+                return -p*v + \
+                    self.beta_A_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
             if absolute is True:
                 return self.beta_G_abs_isotensional(p, approach=approach)
             else:
-                return self.beta_G_isotensional(p, approach=approach)
+                return self.beta_G_isotensional(p, approach=approach, **kwargs)
 
     def beta_G_0(self, p, lambda_, ensemble='isotensional', absolute=False):
         """The nondimensional Gibbs free energy
@@ -207,7 +215,7 @@ class Crack(CrackIsotensional):
             else:
                 return self.beta_G_b_isotensional(p, lambda_)
 
-    def p(self, v, ensemble='isometric', approach='asymptotic'):
+    def p(self, v, ensemble='isometric', approach='asymptotic', **kwargs):
         r"""The nondimensional end force
         as a function of the nondimensional end separation.
 
@@ -217,16 +225,19 @@ class Crack(CrackIsotensional):
                 The thermodynamic ensemble.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.p_isometric` or :meth:`~.v_isotensional`.
 
         Returns:
             numpy.ndarray: The nondimensional end force.
 
         """
         if ensemble == 'isometric':
-            return self.p_isometric(v, approach=approach)
+            return self.p_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
             return self.inv_fun(
-                lambda p: self.v_isotensional(p, approach=approach), v
+                lambda p:
+                    self.v_isotensional(p, approach=approach, **kwargs), v
             )
 
     def p_0(self, v, lambda_, ensemble='isometric'):
@@ -273,7 +284,7 @@ class Crack(CrackIsotensional):
                 lambda p: self.v_b_isotensional(p, lambda_), v
             )
 
-    def v(self, p, ensemble='isotensional', approach='asymptotic'):
+    def v(self, p, ensemble='isotensional', approach='asymptotic', **kwargs):
         """The nondimensional end separation
         as a function of the nondimensional end force.
 
@@ -283,6 +294,8 @@ class Crack(CrackIsotensional):
                 The thermodynamic ensemble.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.v_isotensional` or :meth:`~.p_isometric`.
 
         Returns:
             numpy.ndarray: The nondimensional end separation.
@@ -290,10 +303,11 @@ class Crack(CrackIsotensional):
         """
         if ensemble == 'isometric':
             return self.inv_fun(
-                lambda v: self.p_isometric(v, approach=approach), p
+                lambda v:
+                    self.p_isometric(v, approach=approach, **kwargs), p
             )
         elif ensemble == 'isotensional':
-            return self.v_isotensional(p, approach=approach)
+            return self.v_isotensional(p, approach=approach, **kwargs)
 
     def v_0(self, p, lambda_, ensemble='isotensional'):
         """The nondimensional end separation
@@ -339,7 +353,7 @@ class Crack(CrackIsotensional):
         elif ensemble == 'isotensional':
             return self.v_b_isotensional(p, lambda_)
 
-    def k(self, p_or_v, ensemble='isometric', approach='asymptotic'):
+    def k(self, p_or_v, ensemble='isometric', approach='asymptotic', **kwargs):
         r"""The nondimensional forward reaction rate coefficient
         as a function of the nondimensional end force
         or the nondimensional end separation.
@@ -353,15 +367,17 @@ class Crack(CrackIsotensional):
                 The thermodynamic ensemble.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            **kwargs: Arbitrary keyword arguments.
+                Passed to :meth:`~.k_isometric` or :meth:`~.k_isotensional`.
 
         Returns:
             numpy.ndarray: The nondimensional forward reaction rate.
 
         """
         if ensemble == 'isometric':
-            return self.k_isometric(p_or_v, approach=approach)
+            return self.k_isometric(p_or_v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
-            return self.k_isotensional(p_or_v, approach=approach)
+            return self.k_isotensional(p_or_v, approach=approach, **kwargs)
 
     def k_0(self, p_or_v, lambda_, ensemble='isometric'):
         r"""The nondimensional forward reaction rate coefficient

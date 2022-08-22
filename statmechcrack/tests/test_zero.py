@@ -208,6 +208,23 @@ class Zero(unittest.TestCase):
                 1, ensemble='isotensional', approach='asymptotic'
             )[0], 0
         )
+        self.assertEqual(
+            model.beta_A(
+                1, ensemble='isometric', approach='monte carlo',
+                num_processes=1, num_burns=88, num_samples=88
+            )[0], 0
+        )
+        self.assertEqual(
+            model.beta_A_isometric(
+                1, approach='monte carlo',
+                num_processes=1, num_burns=88, num_samples=88
+            )[0], 0
+        )
+        self.assertEqual(
+            model.beta_A_isometric_monte_carlo(
+                1, num_processes=1, num_burns=88, num_samples=88
+            )[0], 0
+        )
 
     def test_zero_relative_nondimensional_gibbs_free_energy(self):
         """Function to test for zero relative Gibbs free energy.
@@ -258,6 +275,23 @@ class Zero(unittest.TestCase):
         self.assertAlmostEqual(
             model.beta_G(
                 0, ensemble='isotensional', approach='asymptotic'
+            )[0], 0
+        )
+        self.assertEqual(
+            model.beta_G(
+                0, ensemble='isotensional', approach='monte carlo',
+                num_processes=1, num_burns=88, num_samples=88
+            )[0], 0
+        )
+        self.assertEqual(
+            model.beta_G_isotensional(
+                0, approach='monte carlo',
+                num_processes=1, num_burns=88, num_samples=88
+            )[0], 0
+        )
+        self.assertEqual(
+            model.beta_G_isotensional_monte_carlo(
+                0, num_processes=1, num_burns=88, num_samples=88
             )[0], 0
         )
 
