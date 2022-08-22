@@ -16,7 +16,7 @@ jobs:
       - name: Move files
         run: |
           shopt -s extglob
-          cd examples/ && cp -r !(statmechcrack) ../docs/ && cd ../
+          cd examples/ && cp -r * ../docs/ && cd ../
           cp ./README.rst docs/README.rst
           cp ./.readthedocs.yaml docs/.readthedocs.yaml
       - name: Upload docs
