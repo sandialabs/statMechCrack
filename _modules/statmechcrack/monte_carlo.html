@@ -410,7 +410,9 @@
             <span class="n">exp_neg_beta_A_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
             <span class="p">)</span>
-            <span class="n">exp_neg_beta_A</span> <span class="o">+=</span> <span class="p">(</span><span class="n">exp_neg_beta_A_next</span> <span class="o">-</span> <span class="n">exp_neg_beta_A</span><span class="p">)</span><span class="o">/</span><span class="n">counter</span>
+            <span class="n">exp_neg_beta_A</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="n">exp_neg_beta_A_next</span> <span class="o">-</span> <span class="n">exp_neg_beta_A</span>
+            <span class="p">)</span><span class="o">/</span><span class="n">counter</span>
             <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp_neg_beta_A</span><span class="p">)</span></div>
 
@@ -453,11 +455,12 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">beta_A</span></div>
 
-<div class="viewcode-block" id="CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
+<div class="viewcode-block" id="CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional_monte_carlo_serial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span>
                                                <span class="n">num_samples</span><span class="o">=</span><span class="mi">1000000</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serial calculation for :meth:`beta_G_isotensional_monte_carlo`.</span>
 
 <span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
 <span class="sd">            init_config (np.ndarray):</span>
 <span class="sd">                The initial configuration, typically already burned-in.</span>
 <span class="sd">            num_samples (int, optional, default=1000000):</span>
@@ -469,7 +472,18 @@
 <span class="sd">            numpy.ndarray: The relative nondimensional Gibbs free energy.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">pass</span></div>
+        <span class="n">exp_neg_beta_G</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">config</span> <span class="o">=</span> <span class="n">init_config</span>
+        <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">num_samples</span><span class="p">):</span>
+            <span class="n">exp_neg_beta_G_next</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">-</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">config</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">config</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="p">)</span>
+            <span class="n">exp_neg_beta_G</span> <span class="o">+=</span> <span class="p">(</span>
+                <span class="n">exp_neg_beta_G_next</span> <span class="o">-</span> <span class="n">exp_neg_beta_G</span>
+            <span class="p">)</span><span class="o">/</span><span class="n">counter</span>
+            <span class="n">config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mh_next_config</span><span class="p">(</span><span class="n">config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">exp_neg_beta_G</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CrackMonteCarlo.beta_G_isotensional_monte_carlo"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional_monte_carlo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The relative nondimensional Gibbs free energy</span>
@@ -496,10 +510,16 @@
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">beta_G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+            <span class="k">def</span> <span class="nf">serial_fun</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_isotensional_monte_carlo_serial</span><span class="p">(</span>
+                        <span class="n">p_i</span><span class="p">,</span> <span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+
             <span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="n">beta_G</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_isotensional_monte_carlo_serial</span><span class="p">,</span>
+                <span class="n">serial_fun</span><span class="p">,</span>
                 <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])),</span>
                 <span class="o">**</span><span class="n">kwargs</span>
             <span class="p">)</span>
@@ -550,7 +570,7 @@
         <span class="n">v</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">config</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="n">v_i</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">config</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_U</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span>
 
             <span class="k">def</span> <span class="nf">serial_fun</span><span class="p">(</span><span class="n">init_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isometric_monte_carlo_serial</span><span class="p">(</span>
@@ -608,7 +628,7 @@
         <span class="n">p</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">np_array</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="n">k</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">vs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_Pi</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">vs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">vs</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
             <span class="n">v_guess</span><span class="p">,</span> <span class="n">s_guess</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p_i</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
             <span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel_calculation</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">k_isotensional_monte_carlo_serial</span><span class="p">,</span>

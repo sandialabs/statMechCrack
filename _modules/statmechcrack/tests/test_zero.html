@@ -302,6 +302,23 @@
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A</span><span class="p">(</span>
                 <span class="mi">1</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_A</span><span class="p">(</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;monte carlo&#39;</span><span class="p">,</span>
+                <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_A_isometric</span><span class="p">(</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;monte carlo&#39;</span><span class="p">,</span>
+                <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_A_isometric_monte_carlo</span><span class="p">(</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Zero.test_zero_relative_nondimensional_gibbs_free_energy"><a class="viewcode-back" href="../../../statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_relative_nondimensional_gibbs_free_energy">[docs]</a>    <span class="k">def</span> <span class="nf">test_zero_relative_nondimensional_gibbs_free_energy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -353,6 +370,23 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_G</span><span class="p">(</span>
                 <span class="mi">0</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_G</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;monte carlo&#39;</span><span class="p">,</span>
+                <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_G_isotensional</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;monte carlo&#39;</span><span class="p">,</span>
+                <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
+            <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">beta_G_isotensional_monte_carlo</span><span class="p">(</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="n">num_processes</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_burns</span><span class="o">=</span><span class="mi">88</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">88</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span></div></div>
 
