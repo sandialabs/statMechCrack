@@ -40,12 +40,12 @@ In all of these cases, a valid installation can be tested by running
 Information
 ***********
 
-- `Contributing <https://statmechcrack.readthedocs.io/en/latest/CONTRIBUTING.html>`__
-- `Documentation <https://statmechcrack.readthedocs.io/en/latest>`__
+- `Contributing <https://github.com/sandialabs/statMechCrack/blob/main/CONTRIBUTING.md>`__
+- `Documentation <https://sandialabs.github.io/statMechCrack>`__
 - `License <https://github.com/sandialabs/statmechcrack/blob/main/LICENSE>`__
 - `Releases <https://github.com/sandialabs/statmechcrack/releases>`__
 - `Repository <https://github.com/sandialabs/statmechcrack>`__
-- `Tutorial <https://statmechcrack.readthedocs.io/en/latest/tutorial.html>`__
+- `Tutorial <https://sandialabs.github.io/statMechCrack/tutorial.html>`__
 
 ********
 Citation
