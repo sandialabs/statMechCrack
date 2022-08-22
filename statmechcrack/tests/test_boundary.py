@@ -100,25 +100,25 @@ class Boundary(unittest.TestCase):
         compare = model.k_0(rgn, [1, 1], ensemble='isometric')[0]
         self.assertAlmostEqual(
             model.k(rgn, ensemble='isometric')[0],
-            compare, delta=np.abs(1e-1*compare)
+            compare, delta=np.abs(1e-0*compare)
         )
         compare = model.k_0(rgn, [1, 1], ensemble='isotensional')[0]
         self.assertAlmostEqual(
             model.k(rgn, ensemble='isotensional')[0],
-            compare, delta=np.abs(1e-1*compare)
+            compare, delta=np.abs(1e-0*compare)
         )
         model = random_crack_model(N=100, varepsilon=800)
         compare = np.exp(2*model.kappa/model.alpha/model.N**2*(rgn - 1))
         self.assertAlmostEqual(
             model.k(rgn, ensemble='isometric')[0],
-            compare, delta=np.abs(1e-1*compare)
+            compare, delta=np.abs(1e-0*compare)
         )
         model = random_crack_model(N=100, varepsilon=800)
         rgn = 3*model.kappa/model.N**3*np.random.rand()
         compare = np.exp(2*model.N/3/model.alpha*rgn)
         self.assertAlmostEqual(
             model.k(rgn, ensemble='isotensional')[0],
-            compare, delta=np.abs(1e-1*compare)
+            compare, delta=np.abs(1e-0*compare)
         )
 
 

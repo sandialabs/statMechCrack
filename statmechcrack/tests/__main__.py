@@ -22,8 +22,6 @@ from .test_one import One
 from .test_many import Many
 from .test_boundary import Boundary
 from .test_interface import Interface
-from .test_examples import Examples
-from .test_style import Style
 
 Zero().main()
 One().main()
@@ -35,5 +33,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-x', action='store_true')
 args = parser.parse_args()
 if parser.parse_args().x is True:
+    from .test_examples import Examples
+    from .test_style import Style
     Examples().main()
     Style().main()

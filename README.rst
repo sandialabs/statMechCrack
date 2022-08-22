@@ -42,11 +42,10 @@ Information
 
 - `Contributing <https://statmechcrack.readthedocs.io/en/latest/CONTRIBUTING.html>`__
 - `Documentation <https://statmechcrack.readthedocs.io/en/latest>`__
-- `Examples <https://statmechcrack.readthedocs.io/en/latest/statmechcrack.examples.html>`__
 - `License <https://github.com/sandialabs/statmechcrack/blob/main/LICENSE>`__
 - `Releases <https://github.com/sandialabs/statmechcrack/releases>`__
 - `Repository <https://github.com/sandialabs/statmechcrack>`__
-- `Tutorial <https://statmechcrack.readthedocs.io/en/latest/TUTORIAL.html>`__
+- `Tutorial <https://statmechcrack.readthedocs.io/en/latest/tutorial.html>`__
 
 ********
 Citation
@@ -69,8 +68,8 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |build| image:: https://img.shields.io/github/workflow/status/sandialabs/statmechcrack/main?label=GitHub&logo=github
     :target: https://github.com/sandialabs/statmechcrack
 
-.. |coveralls| image:: https://img.shields.io/coveralls/github/sandialabs/statmechcrack?logo=coveralls&label=Coveralls
-    :target: https://coveralls.io/github/sandialabs/statmechcrack?branch=main
+.. |coveralls| image:: https://img.shields.io/coveralls/github/sandialabs/statMechCrack?logo=coveralls&label=Coveralls
+    :target: https://coveralls.io/github/sandialabs/statMechCrack?branch=main
 
 .. |codecov| image:: https://img.shields.io/codecov/c/github/sandialabs/statmechcrack?label=Codecov&logo=codecov
     :target: https://codecov.io/gh/sandialabs/statmechcrack
@@ -92,3 +91,4 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 
 .. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
     :target: https://doi.org/10.5281/zenodo.7008312
+

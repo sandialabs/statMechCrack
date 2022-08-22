@@ -1,5 +1,3 @@
-anaconda-client
-conda-build
 docutils<0.18,>=0.14
 ipykernel
 ipython
@@ -7,15 +5,8 @@ jinja2>=3.0
 matplotlib
 nbsphinx
 numpy
-pandoc
 pycodestyle
-pylint
-pytest
-pytest-cov
 scipy
-setuptools
 sphinx
 sphinx-rtd-theme
 sphinxcontrib-bibtex
-twine
-wheel

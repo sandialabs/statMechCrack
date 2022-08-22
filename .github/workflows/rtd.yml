@@ -13,8 +13,10 @@ jobs:
         run: pip install .[docs]
       - name: Set up docs
         run: source .github/workflows/docs.sh
-      - name: Move README.rst and .readthedocs.yaml
-        run: | 
+      - name: Move files
+        run: |
+          shopt -s extglob
+          cd examples/ && cp -r !(statmechcrack) ../docs/ && cd ../
           cp ./README.rst docs/README.rst
           cp ./.readthedocs.yaml docs/.readthedocs.yaml
       - name: Upload docs
