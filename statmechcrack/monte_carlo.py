@@ -29,7 +29,7 @@ class CrackMonteCarlo(CrackMechanical):
         """
         CrackMechanical.__init__(self, **kwargs)
 
-    def trial_config(self, prev_config, cov_config=1e-2, **kwargs):
+    def trial_config(self, prev_config, cov_config=1e-2):
         """Generates trial configurations given a previous configuration.
 
         Args:
@@ -64,7 +64,7 @@ class CrackMonteCarlo(CrackMechanical):
         """
         next_config = None
         while next_config is None:
-            trial_config = self.trial_config(prev_config, **kwargs)
+            trial_config = self.trial_config(prev_config)
             delta_beta_e = self.beta_e(trial_config) - self.beta_e(prev_config)
             if (delta_beta_e < 0) or (np.exp(-delta_beta_e) > urng()):
                 next_config = trial_config

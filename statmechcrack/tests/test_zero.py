@@ -57,7 +57,7 @@ class Zero(unittest.TestCase):
         """
         self.assertEqual(BasicUtility().inv_fun(lambda x: x, 0), 0)
 
-    def test_zero_nondimensional_force(self):
+    def test_zero_nondimensional_end_force(self):
         """Function to test for zero nondimensional end force.
 
         """
