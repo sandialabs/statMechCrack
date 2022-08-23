@@ -124,7 +124,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">CrackMechanical</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-<div class="viewcode-block" id="CrackMonteCarlo.trial_config"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config">[docs]</a>    <span class="k">def</span> <span class="nf">trial_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_config</span><span class="p">,</span> <span class="n">cov_config</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="CrackMonteCarlo.trial_config"><a class="viewcode-back" href="../../statmechcrack.monte_carlo.html#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config">[docs]</a>    <span class="k">def</span> <span class="nf">trial_config</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prev_config</span><span class="p">,</span> <span class="n">cov_config</span><span class="o">=</span><span class="mf">1e-2</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Generates trial configurations given a previous configuration.</span>
 
 <span class="sd">        Args:</span>
@@ -159,7 +159,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">next_config</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">while</span> <span class="n">next_config</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">trial_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trial_config</span><span class="p">(</span><span class="n">prev_config</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">trial_config</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">trial_config</span><span class="p">(</span><span class="n">prev_config</span><span class="p">)</span>
             <span class="n">delta_beta_e</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span><span class="p">(</span><span class="n">trial_config</span><span class="p">)</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_e</span><span class="p">(</span><span class="n">prev_config</span><span class="p">)</span>
             <span class="k">if</span> <span class="p">(</span><span class="n">delta_beta_e</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">delta_beta_e</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">urng</span><span class="p">()):</span>
                 <span class="n">next_config</span> <span class="o">=</span> <span class="n">trial_config</span>

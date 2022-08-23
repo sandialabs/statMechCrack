@@ -129,7 +129,7 @@
         <span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">det_H_Pi_00</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H_Pi_00</span><span class="p">())</span>
 
-<div class="viewcode-block" id="CrackIsotensional.Z_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.Z_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">Z_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CrackIsotensional.Z_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.Z_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">Z_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional isotensional partition function</span>
 <span class="sd">        as a function of the nondimensional end force,</span>
 
@@ -173,8 +173,7 @@
 <span class="sd">                &gt;&gt;&gt; for varepsilon in [50, 100, 800]:</span>
 <span class="sd">                ...     model = CrackIsotensional(varepsilon=varepsilon)</span>
 <span class="sd">                ...     p = 3*model.kappa/model.N**3*rp</span>
-<span class="sd">                ...     r_Z = (model.Z_isotensional(0, approach=&#39;asymptotic&#39;)</span>
-<span class="sd">                ...         / model.Z_isotensional(p, approach=&#39;asymptotic&#39;)</span>
+<span class="sd">                ...     r_Z = (model.Z_isotensional(0)/model.Z_isotensional(p)</span>
 <span class="sd">                ...     )**(model.N**3/3/model.kappa)</span>
 <span class="sd">                ...     _ = plt.plot(rp, rp**2*r_Z,</span>
 <span class="sd">                ...                  label=r&#39;$\varepsilon=$&#39;+str(varepsilon))</span>
@@ -223,9 +222,11 @@
         <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;asymptotic&#39;</span><span class="p">:</span>
             <span class="n">s_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">lambda_hat</span> <span class="o">=</span> <span class="n">s_hat</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">:]</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
+            <span class="n">beta_G_abs_isotensional</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_G_0_abs_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;monte carlo&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="n">p</span></div>
+            <span class="n">beta_G_abs_isotensional</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="n">p</span>
+        <span class="k">return</span> <span class="n">beta_G_abs_isotensional</span></div>
 
 <div class="viewcode-block" id="CrackIsotensional.beta_G_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.beta_G_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">beta_G_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The relative nondimensional Gibbs free energy</span>
@@ -330,17 +331,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;asymptotic&#39;</span><span class="p">:</span>
             <span class="n">lambda_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_Pi</span><span class="p">(</span><span class="n">p</span><span class="p">)[</span><span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">:]</span>
-            <span class="c1"># lambda_hat_p = self.minimize_beta_Pi(p + self.h)[2][-self.M:]</span>
-            <span class="c1"># lambda_hat_m = self.minimize_beta_Pi(p - self.h)[2][-self.M:]</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>  <span class="c1"># - np.sum(</span>
-            <span class="c1">#     np.log(</span>
-            <span class="c1">#         self.beta_u_pp(lambda_hat_p)/self.beta_u_pp(lambda_hat_m)</span>
-            <span class="c1">#     )/2 +</span>
-            <span class="c1">#     self.beta_u(lambda_hat_p) - self.beta_u(lambda_hat_m),</span>
-            <span class="c1">#     axis=0</span>
-            <span class="c1"># )/(2*self.h)</span>
+            <span class="n">v_isotensional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;monte carlo&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_isotensional_monte_carlo</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+            <span class="n">v_isotensional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_isotensional_monte_carlo</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">v_isotensional</span></div>
 
 <div class="viewcode-block" id="CrackIsotensional.k_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.k_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">k_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional forward reaction rate coefficient</span>

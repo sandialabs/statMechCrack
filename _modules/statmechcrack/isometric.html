@@ -133,7 +133,7 @@
         <span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">det_H_U_00</span> <span class="o">=</span> <span class="n">la</span><span class="o">.</span><span class="n">det</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">H_U_00</span><span class="p">())</span>
 
-<div class="viewcode-block" id="CrackIsometric.Q_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.Q_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">Q_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="CrackIsometric.Q_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.Q_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">Q_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional isometric partition function</span>
 <span class="sd">        as a function of the nondimensional end separation,</span>
 
@@ -180,8 +180,7 @@
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
 <span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 800]:</span>
 <span class="sd">                ...     model = CrackIsometric(varepsilon=varepsilon)</span>
-<span class="sd">                ...     r_Q = (model.Q_isometric(v, approach=&#39;asymptotic&#39;)</span>
-<span class="sd">                ...         / model.Q_isometric(1, approach=&#39;asymptotic&#39;)</span>
+<span class="sd">                ...     r_Q = (model.Q_isometric(v)/model.Q_isometric(1)</span>
 <span class="sd">                ...     )**(model.N**3/3/model.kappa)</span>
 <span class="sd">                ...     _ = plt.plot(v - 1, (v - 1)**2*r_Q,</span>
 <span class="sd">                ...                  label=r&#39;$\varepsilon=$&#39;+str(varepsilon))</span>
@@ -228,11 +227,12 @@
         <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;asymptotic&#39;</span><span class="p">:</span>
             <span class="n">s_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span><span class="n">v</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
             <span class="n">lambda_hat</span> <span class="o">=</span> <span class="n">s_hat</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">:]</span>
-            <span class="k">return</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+            <span class="n">beta_A_abs_isometric</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">varepsilon</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
             <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;monte carlo&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="n">v</span></div>
+            <span class="n">beta_A_abs_isometric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="n">v</span>
+        <span class="k">return</span> <span class="n">beta_A_abs_isometric</span></div>
 
 <div class="viewcode-block" id="CrackIsometric.beta_A_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.beta_A_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The relative nondimensional Helmholtz free energy</span>
