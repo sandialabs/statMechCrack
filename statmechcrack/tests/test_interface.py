@@ -39,7 +39,7 @@ class Interface(unittest.TestCase):
             BasicUtility().inv_fun(lambda x: x, y).shape, y.shape
         )
 
-    def test_interface_nondimensional_force(self):
+    def test_interface_nondimensional_end_force(self):
         """Function to test nondimensional end force interface.
 
         """
@@ -65,6 +65,12 @@ class Interface(unittest.TestCase):
                   num_processes=1, num_burns=8, num_samples=8)
             _ = p(v, approach='monte carlo', ensemble='isotensional',
                   num_processes=1, num_burns=8, num_samples=8)
+        with self.assertRaises(TypeError):
+            p('a')
+        with self.assertRaises(TypeError):
+            p_0('a', 'b')
+        with self.assertRaises(TypeError):
+            p_b('a', 'b')
 
     def test_interface_nondimensional_end_separation(self):
         """Function to test nondimensional end separation interface.
@@ -92,6 +98,12 @@ class Interface(unittest.TestCase):
                   num_processes=1, num_burns=8, num_samples=8)
             _ = v(p, approach='monte carlo', ensemble='isotensional',
                   num_processes=1, num_burns=8, num_samples=8)
+        with self.assertRaises(TypeError):
+            v('a')
+        with self.assertRaises(TypeError):
+            v_0('a', 'b')
+        with self.assertRaises(TypeError):
+            v_b('a', 'b')
 
     def test_interface_relative_nondimensional_helmholtz_free_energy(self):
         """Function to test relative Helmholtz free energy interface.
@@ -173,6 +185,12 @@ class Interface(unittest.TestCase):
             _ = beta_A(v, approach='monte carlo',
                        absolute=True, ensemble='isotensional',
                        num_processes=1, num_burns=8, num_samples=8)
+        with self.assertRaises(TypeError):
+            beta_A('a')
+        with self.assertRaises(TypeError):
+            beta_A_0('a', 'b')
+        with self.assertRaises(TypeError):
+            beta_A_b('a', 'b')
 
     def test_interface_relative_nondimensional_gibbs_free_energy(self):
         """Function to test relative Gibbs free energy interface.
@@ -254,6 +272,12 @@ class Interface(unittest.TestCase):
             _ = beta_G(p, approach='monte carlo',
                        absolute=True, ensemble='isotensional',
                        num_processes=1, num_burns=8, num_samples=8)
+        with self.assertRaises(TypeError):
+            beta_G('a')
+        with self.assertRaises(TypeError):
+            beta_G_0('a', 'b')
+        with self.assertRaises(TypeError):
+            beta_G_b('a', 'b')
 
     def test_interface_relative_nondimensional_reaction_rate_coefficient(self):
         """Function to test relative nondimensional
@@ -283,6 +307,8 @@ class Interface(unittest.TestCase):
             _ = k(p, ensemble='isotensional', approach='asymptotic')
             _ = k(p, approach='monte carlo', ensemble='isotensional',
                   num_processes=1, num_burns=8, num_samples=8)
+        with self.assertRaises(TypeError):
+            k('a')
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-"""
+"""A module for testing many or more complicated things.
 
 """
 

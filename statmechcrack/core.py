@@ -47,17 +47,18 @@ class Crack(CrackIsotensional):
         """
         if ensemble == 'isometric':
             if absolute is True:
-                return self.beta_A_abs_isometric(v, approach=approach)
+                beta_A = self.beta_A_abs_isometric(v, approach=approach)
             else:
-                return self.beta_A_isometric(v, approach=approach, **kwargs)
+                beta_A = self.beta_A_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
             p = self.p(v, ensemble='isotensional', approach=approach, **kwargs)
             if absolute is True:
-                return p*v + \
+                beta_A = p*v + \
                     self.beta_G_abs_isotensional(p, approach=approach)
             else:
-                return p*v + \
+                beta_A = p*v + \
                     self.beta_G_isotensional(p, approach=approach, **kwargs)
+        return beta_A
 
     def beta_A_0(self, v, lambda_, ensemble='isometric', absolute=False):
         """The nondimensional Helmholtz free energy
@@ -79,15 +80,16 @@ class Crack(CrackIsotensional):
         """
         if ensemble == 'isometric':
             if absolute is True:
-                return self.beta_A_0_abs_isometric(v, lambda_)
+                beta_A_0 = self.beta_A_0_abs_isometric(v, lambda_)
             else:
-                return self.beta_A_0_isometric(v, lambda_)
+                beta_A_0 = self.beta_A_0_isometric(v, lambda_)
         elif ensemble == 'isotensional':
             p = self.p_0(v, lambda_, ensemble='isotensional')
             if absolute is True:
-                return self.beta_G_0_abs_isotensional(p, lambda_) + p*v
+                beta_A_0 = self.beta_G_0_abs_isotensional(p, lambda_) + p*v
             else:
-                return self.beta_G_0_isotensional(p, lambda_) + p*v
+                beta_A_0 = self.beta_G_0_isotensional(p, lambda_) + p*v
+        return beta_A_0
 
     def beta_A_b(self, v, lambda_, ensemble='isometric', absolute=False):
         """The nondimensional Helmholtz free energy
@@ -109,15 +111,16 @@ class Crack(CrackIsotensional):
         """
         if ensemble == 'isometric':
             if absolute is True:
-                return self.beta_A_b_isometric_abs(v, lambda_)
+                beta_A_b = self.beta_A_b_isometric_abs(v, lambda_)
             else:
-                return self.beta_A_b_isometric(v, lambda_)
+                beta_A_b = self.beta_A_b_isometric(v, lambda_)
         elif ensemble == 'isotensional':
             p = self.p_b(v, lambda_, ensemble='isotensional')
             if absolute is True:
-                return self.beta_G_b_abs_isotensional(p, lambda_) + p*v
+                beta_A_b = self.beta_G_b_abs_isotensional(p, lambda_) + p*v
             else:
-                return self.beta_G_b_isotensional(p, lambda_) + p*v
+                beta_A_b = self.beta_G_b_isotensional(p, lambda_) + p*v
+        return beta_A_b
 
     def beta_G(self, p, ensemble='isotensional',
                approach='asymptotic', absolute=False, **kwargs):
@@ -144,16 +147,19 @@ class Crack(CrackIsotensional):
         if ensemble == 'isometric':
             v = self.v(p, ensemble='isometric', approach=approach, **kwargs)
             if absolute is True:
-                return -p*v + \
+                beta_G = -p*v + \
                     self.beta_A_abs_isometric(v, approach=approach)
             else:
-                return -p*v + \
+                beta_G = -p*v + \
                     self.beta_A_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
             if absolute is True:
-                return self.beta_G_abs_isotensional(p, approach=approach)
+                beta_G = \
+                    self.beta_G_abs_isotensional(p, approach=approach)
             else:
-                return self.beta_G_isotensional(p, approach=approach, **kwargs)
+                beta_G = \
+                    self.beta_G_isotensional(p, approach=approach, **kwargs)
+        return beta_G
 
     def beta_G_0(self, p, lambda_, ensemble='isotensional', absolute=False):
         """The nondimensional Gibbs free energy
@@ -176,14 +182,15 @@ class Crack(CrackIsotensional):
         if ensemble == 'isometric':
             v = self.v_0(p, lambda_, ensemble='isometric')
             if absolute is True:
-                return self.beta_A_0_abs_isometric(v, lambda_) - p*v
+                beta_G_0 = self.beta_A_0_abs_isometric(v, lambda_) - p*v
             else:
-                return self.beta_A_0_isometric(v, lambda_) - p*v
+                beta_G_0 = self.beta_A_0_isometric(v, lambda_) - p*v
         elif ensemble == 'isotensional':
             if absolute is True:
-                return self.beta_G_0_abs_isotensional(p, lambda_)
+                beta_G_0 = self.beta_G_0_abs_isotensional(p, lambda_)
             else:
-                return self.beta_G_0_isotensional(p, lambda_)
+                beta_G_0 = self.beta_G_0_isotensional(p, lambda_)
+        return beta_G_0
 
     def beta_G_b(self, p, lambda_, ensemble='isotensional', absolute=False):
         """The nondimensional Gibbs free energy
@@ -206,14 +213,15 @@ class Crack(CrackIsotensional):
         if ensemble == 'isometric':
             v = self.v_b(p, lambda_, ensemble='isometric')
             if absolute is True:
-                return self.beta_A_b_isometric_abs(v, lambda_) - p*v
+                beta_G_b = self.beta_A_b_isometric_abs(v, lambda_) - p*v
             else:
-                return self.beta_A_b_isometric(v, lambda_) - p*v
+                beta_G_b = self.beta_A_b_isometric(v, lambda_) - p*v
         elif ensemble == 'isotensional':
             if absolute is True:
-                return self.beta_G_b_abs_isotensional(p, lambda_)
+                beta_G_b = self.beta_G_b_abs_isotensional(p, lambda_)
             else:
-                return self.beta_G_b_isotensional(p, lambda_)
+                beta_G_b = self.beta_G_b_isotensional(p, lambda_)
+        return beta_G_b
 
     def p(self, v, ensemble='isometric', approach='asymptotic', **kwargs):
         r"""The nondimensional end force
@@ -233,12 +241,13 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.p_isometric(v, approach=approach, **kwargs)
+            p = self.p_isometric(v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
-            return self.inv_fun(
+            p = self.inv_fun(
                 lambda p:
                     self.v_isotensional(p, approach=approach, **kwargs), v
             )
+        return p
 
     def p_0(self, v, lambda_, ensemble='isometric'):
         """The nondimensional end force
@@ -256,11 +265,12 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.p_0_isometric(v, lambda_)
+            p_0 = self.p_0_isometric(v, lambda_)
         elif ensemble == 'isotensional':
-            return self.inv_fun(
+            p_0 = self.inv_fun(
                 lambda p: self.v_0_isotensional(p, lambda_), v
             )
+        return p_0
 
     def p_b(self, v, lambda_, ensemble='isometric'):
         """The nondimensional end force
@@ -278,11 +288,12 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.p_b_isometric(v, lambda_)
+            p_b = self.p_b_isometric(v, lambda_)
         elif ensemble == 'isotensional':
-            return self.inv_fun(
+            p_b = self.inv_fun(
                 lambda p: self.v_b_isotensional(p, lambda_), v
             )
+        return p_b
 
     def v(self, p, ensemble='isotensional', approach='asymptotic', **kwargs):
         """The nondimensional end separation
@@ -302,12 +313,13 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.inv_fun(
+            v = self.inv_fun(
                 lambda v:
                     self.p_isometric(v, approach=approach, **kwargs), p
             )
         elif ensemble == 'isotensional':
-            return self.v_isotensional(p, approach=approach, **kwargs)
+            v = self.v_isotensional(p, approach=approach, **kwargs)
+        return v
 
     def v_0(self, p, lambda_, ensemble='isotensional'):
         """The nondimensional end separation
@@ -325,11 +337,12 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.inv_fun(
+            v_0 = self.inv_fun(
                 lambda v: self.p_0_isometric(v, lambda_), p
             )
         elif ensemble == 'isotensional':
-            return self.v_0_isotensional(p, lambda_)
+            v_0 = self.v_0_isotensional(p, lambda_)
+        return v_0
 
     def v_b(self, p, lambda_, ensemble='isotensional'):
         """The nondimensional end separation
@@ -347,11 +360,12 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.inv_fun(
+            v_b = self.inv_fun(
                 lambda v: self.p_b_isometric(v, lambda_), p
             )
         elif ensemble == 'isotensional':
-            return self.v_b_isotensional(p, lambda_)
+            v_b = self.v_b_isotensional(p, lambda_)
+        return v_b
 
     def k(self, p_or_v, ensemble='isometric', approach='asymptotic', **kwargs):
         r"""The nondimensional forward reaction rate coefficient
@@ -375,9 +389,10 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.k_isometric(p_or_v, approach=approach, **kwargs)
+            k = self.k_isometric(p_or_v, approach=approach, **kwargs)
         elif ensemble == 'isotensional':
-            return self.k_isotensional(p_or_v, approach=approach, **kwargs)
+            k = self.k_isotensional(p_or_v, approach=approach, **kwargs)
+        return k
 
     def k_0(self, p_or_v, lambda_, ensemble='isometric'):
         r"""The nondimensional forward reaction rate coefficient
@@ -399,9 +414,10 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.k_0_isometric(p_or_v, lambda_)
+            k_0 = self.k_0_isometric(p_or_v, lambda_)
         elif ensemble == 'isotensional':
-            return self.k_0_isotensional(p_or_v, lambda_)
+            k_0 = self.k_0_isotensional(p_or_v, lambda_)
+        return k_0
 
     def k_b(self, p_or_v, lambda_, ensemble='isometric'):
         r"""The nondimensional forward reaction rate coefficient
@@ -423,6 +439,7 @@ class Crack(CrackIsotensional):
 
         """
         if ensemble == 'isometric':
-            return self.k_b_isometric(p_or_v, lambda_)
+            k_b = self.k_b_isometric(p_or_v, lambda_)
         elif ensemble == 'isotensional':
-            return self.k_b_isotensional(p_or_v, lambda_)
+            k_b = self.k_b_isotensional(p_or_v, lambda_)
+        return k_b

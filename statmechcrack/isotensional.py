@@ -34,7 +34,7 @@ class CrackIsotensional(CrackIsometric):
         ])
         self.det_H_Pi_00 = la.det(self.H_Pi_00())
 
-    def Z_isotensional(self, p, approach='asymptotic', transition_state=False):
+    def Z_isotensional(self, p, transition_state=False):
         r"""The nondimensional isotensional partition function
         as a function of the nondimensional end force,
 
@@ -78,8 +78,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> for varepsilon in [50, 100, 800]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
-                ...     r_Z = (model.Z_isotensional(0, approach='asymptotic')
-                ...         / model.Z_isotensional(p, approach='asymptotic')
+                ...     r_Z = (model.Z_isotensional(0)/model.Z_isotensional(p)
                 ...     )**(model.N**3/3/model.kappa)
                 ...     _ = plt.plot(rp, rp**2*r_Z,
                 ...                  label=r'$\varepsilon=$'+str(varepsilon))
@@ -128,9 +127,11 @@ class CrackIsotensional(CrackIsometric):
         if approach == 'asymptotic':
             s_hat = self.minimize_beta_Pi(p)[2]
             lambda_hat = s_hat[-self.M:]
-            return self.beta_G_0_abs_isotensional(p, lambda_hat)
+            beta_G_abs_isotensional = \
+                self.beta_G_0_abs_isotensional(p, lambda_hat)
         elif approach == 'monte carlo':
-            return np.nan*p
+            beta_G_abs_isotensional = np.nan*p
+        return beta_G_abs_isotensional
 
     def beta_G_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Gibbs free energy
@@ -235,17 +236,10 @@ class CrackIsotensional(CrackIsometric):
         """
         if approach == 'asymptotic':
             lambda_hat = self.minimize_beta_Pi(p)[2][-self.M:]
-            # lambda_hat_p = self.minimize_beta_Pi(p + self.h)[2][-self.M:]
-            # lambda_hat_m = self.minimize_beta_Pi(p - self.h)[2][-self.M:]
-            return self.v_0_isotensional(p, lambda_hat)  # - np.sum(
-            #     np.log(
-            #         self.beta_u_pp(lambda_hat_p)/self.beta_u_pp(lambda_hat_m)
-            #     )/2 +
-            #     self.beta_u(lambda_hat_p) - self.beta_u(lambda_hat_m),
-            #     axis=0
-            # )/(2*self.h)
+            v_isotensional = self.v_0_isotensional(p, lambda_hat)
         elif approach == 'monte carlo':
-            return self.v_isotensional_monte_carlo(p, **kwargs)
+            v_isotensional = self.v_isotensional_monte_carlo(p, **kwargs)
+        return v_isotensional
 
     def k_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The nondimensional forward reaction rate coefficient

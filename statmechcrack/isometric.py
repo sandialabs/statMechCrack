@@ -38,7 +38,7 @@ class CrackIsometric(CrackMonteCarlo):
         ])
         self.det_H_U_00 = la.det(self.H_U_00())
 
-    def Q_isometric(self, v, approach='asymptotic', transition_state=False):
+    def Q_isometric(self, v, transition_state=False):
         r"""The nondimensional isometric partition function
         as a function of the nondimensional end separation,
 
@@ -85,8 +85,7 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> _ = plt.figure()
                 >>> for varepsilon in [10, 25, 100, 800]:
                 ...     model = CrackIsometric(varepsilon=varepsilon)
-                ...     r_Q = (model.Q_isometric(v, approach='asymptotic')
-                ...         / model.Q_isometric(1, approach='asymptotic')
+                ...     r_Q = (model.Q_isometric(v)/model.Q_isometric(1)
                 ...     )**(model.N**3/3/model.kappa)
                 ...     _ = plt.plot(v - 1, (v - 1)**2*r_Q,
                 ...                  label=r'$\varepsilon=$'+str(varepsilon))
@@ -133,11 +132,12 @@ class CrackIsometric(CrackMonteCarlo):
         if approach == 'asymptotic':
             s_hat = self.minimize_beta_U(v)[2]
             lambda_hat = s_hat[-self.M:]
-            return 0.5*self.M*np.log(
+            beta_A_abs_isometric = 0.5*self.M*np.log(
                 self.alpha**2*self.varepsilon/np.pi
             ) + self.beta_A_0_isometric(v, lambda_hat)
         elif approach == 'monte carlo':
-            return np.nan*v
+            beta_A_abs_isometric = np.nan*v
+        return beta_A_abs_isometric
 
     def beta_A_isometric(self, v, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Helmholtz free energy
