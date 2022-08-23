@@ -23,9 +23,6 @@ jobs:
       - name: pylint
         run: |
           python -m pylint --disable=C0103 --output-format=text statmechcrack | tee lint.log || pylint-exit $?
-          PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' lint.log)
-          pip install anybadge
-          anybadge -o --label=lint --file=lint.svg --value=${PYLINT_SCORE} 2=red 4=orange 8=yellow 10=green
       - name: pytest
         run: python -m pytest --verbose --cov=statmechcrack --cov-report xml
       - name: coveralls
