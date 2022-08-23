@@ -211,18 +211,18 @@ class Zero(unittest.TestCase):
         self.assertEqual(
             model.beta_A(
                 1, ensemble='isometric', approach='monte carlo',
-                num_processes=1, num_burns=88, num_samples=88
+                num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
         self.assertEqual(
             model.beta_A_isometric(
                 1, approach='monte carlo',
-                num_processes=1, num_burns=88, num_samples=88
+                num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
         self.assertEqual(
             model.beta_A_isometric_monte_carlo(
-                1, num_processes=1, num_burns=88, num_samples=88
+                1, num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
 
@@ -280,18 +280,18 @@ class Zero(unittest.TestCase):
         self.assertEqual(
             model.beta_G(
                 0, ensemble='isotensional', approach='monte carlo',
-                num_processes=1, num_burns=88, num_samples=88
+                num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
         self.assertEqual(
             model.beta_G_isotensional(
                 0, approach='monte carlo',
-                num_processes=1, num_burns=88, num_samples=88
+                num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
         self.assertEqual(
             model.beta_G_isotensional_monte_carlo(
-                0, num_processes=1, num_burns=88, num_samples=88
+                0, num_processes=2, num_burns=88, num_samples=88
             )[0], 0
         )
 
