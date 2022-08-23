@@ -1,5 +1,4 @@
 anaconda-client
-anybadge
 conda-build
 docutils<0.18,>=0.14
 ipykernel

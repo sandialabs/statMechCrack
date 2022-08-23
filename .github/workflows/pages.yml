@@ -9,13 +9,21 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install package and docs extras
-        run: pip install .[docs]
+        run: pip install .[all]
       - name: pylint badge
         run: |
-          python -m pylint --disable=C0103 --output-format=text statmechcrack | tee lint.log || pylint-exit $?
-          PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' lint.log)
-          pip install anybadge
-          anybadge -o --label=Pylint --file=pylint.svg --value=${PYLINT_SCORE} 2=red 4=orange 8=yellow 10=green
+          python -m pylint --disable=C0103 --output-format=text statmechcrack | tee pylint.log || pylint-exit $?
+          PYLINT_SCORE=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' pylint.log)
+          if (( $(echo "${PYLINT_SCORE} >= 8.0" | bc -l) )); then
+            COLOR=brightgreen
+          elif (( $(echo "${PYLINT_SCORE} >= 4.0" | bc -l) )); then
+            COLOR=yellow
+          elif (( $(echo "${PYLINT_SCORE} >= 2.0" | bc -l) )); then
+            COLOR=orange
+          else
+            COLOR=red
+          fi
+          curl "https://img.shields.io/badge/Pylint-${PYLINT_SCORE}-${COLOR}?logo=python&logoColor=FBE072" -o pylint.svg
       - name: Build docs
         run: |
           sudo apt-get install pandoc

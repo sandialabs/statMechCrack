@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|build| |docs| |codecov| |coveralls| |pyversions| |pypi| |conda| |docker| |license| |zenodo|
+|build| |docs| |codecov| |coveralls| |pylint| |pyversions| |pypi| |conda| |docker| |license| |zenodo|
 
 The Python package for a statistical mechanical model for crack growth. 
 
@@ -74,6 +74,9 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |codecov| image:: https://img.shields.io/codecov/c/github/sandialabs/statmechcrack?label=Codecov&logo=codecov
     :target: https://codecov.io/gh/sandialabs/statmechcrack
 
+.. |pylint| image:: https://github.com/sandialabs/statMechCrack/blob/gh-pages/pylint.svg
+    :target: https://github.com/sandialabs/statmechcrack
+
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/statmechcrack.svg?logo=python&logoColor=FBE072&color=4B8BBE&label=Python
     :target: https://pypi.org/project/statmechcrack/
 
@@ -91,4 +94,3 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 
 .. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
     :target: https://doi.org/10.5281/zenodo.7008312
-
