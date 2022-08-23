@@ -65,8 +65,8 @@ class CrackMonteCarlo(CrackMechanical):
         next_config = None
         while next_config is None:
             trial_config = self.trial_config(prev_config)
-            delta_beta_e = self.beta_e(trial_config) - self.beta_e(prev_config)
-            if (delta_beta_e < 0) or (np.exp(-delta_beta_e) > urng()):
+            delta_beta_E = self.beta_E(trial_config) - self.beta_E(prev_config)
+            if (delta_beta_E < 0) or (np.exp(-delta_beta_E) > urng()):
                 next_config = trial_config
         return next_config
 
@@ -222,7 +222,7 @@ class CrackMonteCarlo(CrackMechanical):
         v = self.np_array(v)
         p = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_e = lambda config: self.beta_U(v_i, config)
+            self.beta_E = lambda config: self.beta_U(v_i, config)
 
             def serial_fun(init_config, **kwargs):
                 return self.p_isometric_monte_carlo_serial(
@@ -282,7 +282,7 @@ class CrackMonteCarlo(CrackMechanical):
         p = self.np_array(p)
         v = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_e = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
+            self.beta_E = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
             v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
             v[i] = self.parallel_calculation(
                 self.v_isotensional_monte_carlo_serial,
@@ -309,17 +309,17 @@ class CrackMonteCarlo(CrackMechanical):
             numpy.ndarray: The relative nondimensional Helmholtz free energy.
 
         """
-        exp_neg_beta_A = 0
+        exp_neg_beta_Delta_A = 0
         config = init_config
         for counter in range(1, 1 + num_samples):
-            exp_neg_beta_A_next = np.exp(
-                self.beta_U(1, config) - self.beta_U(v, config)
+            exp_neg_beta_Delta_A_next = np.exp(
+                -self.beta_A_b_isometric(v, config)
             )
-            exp_neg_beta_A += (
-                exp_neg_beta_A_next - exp_neg_beta_A
+            exp_neg_beta_Delta_A += (
+                exp_neg_beta_Delta_A_next - exp_neg_beta_Delta_A
             )/counter
             config = self.mh_next_config(config, **kwargs)
-        return np.log(1/exp_neg_beta_A)
+        return np.log(1/exp_neg_beta_Delta_A)
 
     def beta_A_isometric_monte_carlo(self, v, **kwargs):
         r"""The relative nondimensional Helmholtz free energy
@@ -330,9 +330,9 @@ class CrackMonteCarlo(CrackMechanical):
 
         .. math::
             \beta\Delta A(v) =
-            -\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},
+            -\ln\left\langle ? \right\rangle_*,
 
-        where :math:`\Delta U \equiv U(v,s) - U(1,s)`.
+        where :math:`\beta U_1^* \equiv ?`.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -346,7 +346,9 @@ class CrackMonteCarlo(CrackMechanical):
         v = self.np_array(v)
         beta_A = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_e = lambda config: self.beta_U(1, config)
+            self.beta_E = lambda lambda_: \
+                self.beta_U_1(lambda_) + self.beta_U_01(lambda_) + \
+                self.beta_A_b_isometric_abs(1, lambda_)
 
             def serial_fun(init_config, **kwargs):
                 return self.beta_A_isometric_monte_carlo_serial(
@@ -355,7 +357,7 @@ class CrackMonteCarlo(CrackMechanical):
 
             beta_A[i] = self.parallel_calculation(
                 serial_fun,
-                self.minimize_beta_U(v_i)[2][:, 0],
+                self.minimize_beta_U(v_i)[2][-self.M:, 0],
                 **kwargs
             )
         return beta_A
@@ -415,7 +417,7 @@ class CrackMonteCarlo(CrackMechanical):
         p = self.np_array(p)
         beta_G = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_e = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
+            self.beta_E = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
 
             def serial_fun(init_config, **kwargs):
                 return self.beta_G_isotensional_monte_carlo_serial(
@@ -475,7 +477,7 @@ class CrackMonteCarlo(CrackMechanical):
         v = self.np_array(v)
         k = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_e = lambda config: self.beta_U(1, config)
+            self.beta_E = lambda config: self.beta_U(1, config)
 
             def serial_fun(init_config, **kwargs):
                 return self.k_isometric_monte_carlo_serial(
@@ -533,7 +535,7 @@ class CrackMonteCarlo(CrackMechanical):
         p = self.np_array(p)
         k = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_e = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
+            self.beta_E = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
             v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
             k[i] = self.parallel_calculation(
                 self.k_isotensional_monte_carlo_serial,
