@@ -74,7 +74,7 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |codecov| image:: https://img.shields.io/codecov/c/github/sandialabs/statmechcrack?label=Codecov&logo=codecov
     :target: https://codecov.io/gh/sandialabs/statmechcrack
 
-.. |pylint| image:: https://github.com/sandialabs/statMechCrack/blob/gh-pages/pylint.svg
+.. |pylint| image:: https://raw.githubusercontent.com/sandialabs/statmechcrack/gh-pages/pylint.svg
     :target: https://github.com/sandialabs/statmechcrack
 
 .. |codeql| image:: https://img.shields.io/github/workflow/status/sandialabs/statmechcrack/CodeQL?label=CodeQL&logo=github
