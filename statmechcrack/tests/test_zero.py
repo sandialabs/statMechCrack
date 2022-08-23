@@ -44,9 +44,9 @@ class Zero(unittest.TestCase):
 
         """
         self.test_zero_inverse()
-        self.test_zero_nondimensional_force()
         self.test_zero_nondimensional_energy()
         self.test_zero_nondimensional_jacobian()
+        self.test_zero_nondimensional_end_force()
         self.test_zero_minimized_nondimensional_energy()
         self.test_zero_relative_nondimensional_gibbs_free_energy()
         self.test_zero_relative_nondimensional_helmholtz_free_energy()
@@ -58,7 +58,7 @@ class Zero(unittest.TestCase):
         self.assertEqual(BasicUtility().inv_fun(lambda x: x, 0), 0)
 
     def test_zero_nondimensional_force(self):
-        """Function to test for zero nondimensional force.
+        """Function to test for zero nondimensional end force.
 
         """
         rgn = np.random.rand()

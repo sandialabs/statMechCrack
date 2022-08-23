@@ -129,6 +129,8 @@ class CrackIsotensional(CrackIsometric):
             s_hat = self.minimize_beta_Pi(p)[2]
             lambda_hat = s_hat[-self.M:]
             return self.beta_G_0_abs_isotensional(p, lambda_hat)
+        elif approach == 'monte carlo':
+            return np.nan*p
 
     def beta_G_isotensional(self, p, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Gibbs free energy

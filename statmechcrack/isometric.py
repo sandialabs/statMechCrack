@@ -136,6 +136,8 @@ class CrackIsometric(CrackMonteCarlo):
             return 0.5*self.M*np.log(
                 self.alpha**2*self.varepsilon/np.pi
             ) + self.beta_A_0_isometric(v, lambda_hat)
+        elif approach == 'monte carlo':
+            return np.nan*v
 
     def beta_A_isometric(self, v, approach='asymptotic', **kwargs):
         r"""The relative nondimensional Helmholtz free energy
