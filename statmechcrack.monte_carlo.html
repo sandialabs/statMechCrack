@@ -126,7 +126,7 @@
 <p>A module for the Metropolis-Hastings Markov chain Monte Carlo method.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="statmechcrack.monte_carlo.CrackMonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a> which contains
 methods to compute crack model quantities using the
-Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id3" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
+Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id11" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="Permalink to this definition"></a></dt>
@@ -142,8 +142,25 @@ Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
 \[\beta\Delta A(v) =
--\ln\left\langle e^{-\beta\Delta U}\right\rangle_{v=1},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Delta U \equiv U(v,s) - U(1,s)\)</span>.</p>
+-\ln\left\langle e^{-\beta\Delta A_0} \right\rangle_\star,\]</div>
+<dl class="simple">
+<dt>where :math:<a href="#id2"><span class="problematic" id="id3">`</span></a>Delta A_0equiv</dt><dd><p>A_0(v,boldsymbol{lambda})-A_0(1,boldsymbol{lambda})`</p>
+</dd>
+</dl>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\left\langle \phi \right\rangle_\star \equiv
+\frac{
+    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+        \, \phi(\boldsymbol{\lambda})
+}{
+    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+}
+,\]</div>
+<dl class="simple">
+<dt>where :math:<a href="#id4"><span class="problematic" id="id5">`</span></a><a href="#id13"><span class="problematic" id="id14">A_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>A_0(1,lambda}) + U_1(boldsymbol{lambda})`.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -194,8 +211,25 @@ Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
 \[\beta\Delta G(v) =
--\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},\]</div>
-<p>where <span class="math notranslate nohighlight">\(\Delta\Pi \equiv \Pi(p,s) - \Pi(0,s)\)</span>.</p>
+-\ln\left\langle e^{-\beta\Delta G_0} \right\rangle_\star,\]</div>
+<dl class="simple">
+<dt>where :math:<a href="#id6"><span class="problematic" id="id7">`</span></a>Delta G_0equiv</dt><dd><p>G_0(p,boldsymbol{lambda})-G_0(0,boldsymbol{lambda})`</p>
+</dd>
+</dl>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[\left\langle \phi \right\rangle_\star \equiv
+\frac{
+    \int d\lambda \ e^{-\beta G_\star(\boldsymbol{\lambda})}
+        \, \phi(\boldsymbol{\lambda})
+}{
+    \int d\lambda \ e^{-\beta G_\star(\boldsymbol{\lambda})}
+}
+,\]</div>
+<dl class="simple">
+<dt>where :math:<a href="#id8"><span class="problematic" id="id9">`</span></a><a href="#id15"><span class="problematic" id="id16">G_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>G_0(0,lambda}) + U_1(boldsymbol{lambda})`.</p>
+</dd>
+</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -273,11 +307,12 @@ in the isometric ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[k = \frac{
-        \left\langle e^{-\beta U}\right\rangle_{v=1}^\ddagger
-    }{
-        \left\langle e^{-\beta U}\right\rangle_{v=1}
-    }.\]</div>
+\[k \propto
+    \frac{\left\langle
+        e^{-\beta\Delta A_0^\ddagger}
+    \right\rangle_\star^\ddagger}{\left\langle
+        e^{-\beta\Delta A_0}
+    \right\rangle_\star}.\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -327,11 +362,12 @@ in the isotensional ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[k = \frac{
-        \left\langle e^{-\beta\Pi}\right\rangle_{p=0}^\ddagger
-    }{
-        \left\langle e^{-\beta\Pi}\right\rangle_{p=0}
-    }.\]</div>
+\[k \propto
+    \frac{\left\langle
+        e^{-\beta\Delta G_0^\ddagger}
+    \right\rangle_\star^\ddagger}{\left\langle
+        e^{-\beta\Delta G_0}
+    \right\rangle_\star}.\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -351,7 +387,7 @@ Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial">
-<span class="sig-name descname"><span class="pre">k_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">k_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.k_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
 <dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">k_isotensional_monte_carlo()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -430,7 +466,10 @@ in the isometric ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[p(v) = \kappa\langle v - 2s_1 + s_2\rangle.\]</div>
+\[p(v) =
+e^{\beta\Delta A} \left\langle
+    p_0 \, e^{-\beta\Delta A_0}
+\right\rangle_\star.\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -532,7 +571,10 @@ in the isotensional ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[v(p) = \langle s_0\rangle.\]</div>
+\[v(p) =
+e^{\beta\Delta G} \left\langle
+    v_0 \, e^{-\beta\Delta G_0}
+\right\rangle_\star.\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -552,7 +594,7 @@ Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMo
 
 <dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial">
-<span class="sig-name descname"><span class="pre">v_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.v_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">v_isotensional_monte_carlo_serial</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">init_config</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000000</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.v_isotensional_monte_carlo_serial"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial" title="Permalink to this definition"></a></dt>
 <dd><p>Serial calculation for <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo" title="statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo"><code class="xref py py-meth docutils literal notranslate"><span class="pre">v_isotensional_monte_carlo()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -575,9 +617,9 @@ Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMo
 </dd></dl>
 
   <hr><p><strong>References</strong></p>
-<div class="docutils container" id="id2">
+<div class="docutils container" id="id10">
 <dl class="citation">
-<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>James M Haile. <em>Molecular Dynamics Simulation: Elementary Methods</em>. Wiley, 1992. URL: <a class="reference external" href="https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393">https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393</a>.</p>
 </dd>
 </dl>

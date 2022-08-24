@@ -178,7 +178,7 @@
 <span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsometric</span>
 <span class="sd">                &gt;&gt;&gt; v = np.linspace(1, 11, 250)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
-<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 800]:</span>
+<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 1000]:</span>
 <span class="sd">                ...     model = CrackIsometric(varepsilon=varepsilon)</span>
 <span class="sd">                ...     r_Q = (model.Q_isometric(v)/model.Q_isometric(1)</span>
 <span class="sd">                ...     )**(model.N**3/3/model.kappa)</span>
@@ -265,7 +265,7 @@
 <span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsometric</span>
 <span class="sd">                &gt;&gt;&gt; v = np.linspace(1, 11, 33)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
-<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 800]:</span>
+<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 1000]:</span>
 <span class="sd">                ...     model = CrackIsometric(varepsilon=varepsilon)</span>
 <span class="sd">                ...     beta_A = \</span>
 <span class="sd">                ...         model.beta_A_isometric(v, approach=&#39;asymptotic&#39;)</span>
@@ -320,7 +320,7 @@
 <span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsometric</span>
 <span class="sd">                &gt;&gt;&gt; v = np.linspace(1, 11, 33)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
-<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 800]:</span>
+<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 1000]:</span>
 <span class="sd">                ...     model = CrackIsometric(varepsilon=varepsilon)</span>
 <span class="sd">                ...     p = model.p_isometric(v, approach=&#39;asymptotic&#39;)</span>
 <span class="sd">                ...     _ = plt.plot(v - 1, model.N**3/3/model.kappa*p,</span>
@@ -371,7 +371,7 @@
 <span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsometric</span>
 <span class="sd">                &gt;&gt;&gt; v = np.linspace(1, 11, 33)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
-<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 800]:</span>
+<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 1000]:</span>
 <span class="sd">                ...     model = CrackIsometric(varepsilon=varepsilon)</span>
 <span class="sd">                ...     _ = plt.semilogy(</span>
 <span class="sd">                ...         v - 1, model.k_isometric(v),</span>
@@ -510,7 +510,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> \
-            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="n">lambda_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lambda_</span><span class="p">)</span></div>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CrackIsometric.p_0_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.p_0_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">p_0_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional end force</span>
@@ -674,7 +674,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric_abs</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span> \
-            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric_abs</span><span class="p">(</span><span class="n">lambda_</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">lambda_</span><span class="p">)</span></div>
+            <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_b_isometric_abs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="CrackIsometric.p_b_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.p_b_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">p_b_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional end force</span>

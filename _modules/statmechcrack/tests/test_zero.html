@@ -260,22 +260,22 @@
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A_b_isometric</span><span class="p">(</span>
-                <span class="n">rgn</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">]</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">]</span>
             <span class="p">),</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span>
-                <span class="n">rgn</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">]</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">]</span>
             <span class="p">),</span> <span class="mi">0</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A_isometric</span><span class="p">(</span>
                 <span class="mi">1</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">),</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
-                <span class="n">rgn</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
@@ -285,7 +285,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
-                <span class="n">rgn</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
+                <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
@@ -293,7 +293,7 @@
                 <span class="n">rgn</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn</span><span class="p">,</span> <span class="n">rgn</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_A</span><span class="p">(</span>
                 <span class="mi">1</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
@@ -337,14 +337,14 @@
                 <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]</span>
             <span class="p">),</span> <span class="mi">0</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_G_isotensional</span><span class="p">(</span>
                 <span class="mi">0</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">),</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_G_b</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn0</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
@@ -354,7 +354,7 @@
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_G_0</span><span class="p">(</span>
-                <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn0</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
+                <span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
@@ -367,7 +367,7 @@
                 <span class="mi">0</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertAlmostEqual</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span>
             <span class="n">model</span><span class="o">.</span><span class="n">beta_G</span><span class="p">(</span>
                 <span class="mi">0</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span>
             <span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span>
