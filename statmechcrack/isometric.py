@@ -83,7 +83,7 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> from statmechcrack import CrackIsometric
                 >>> v = np.linspace(1, 11, 250)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [10, 25, 100, 800]:
+                >>> for varepsilon in [10, 25, 100, 1000]:
                 ...     model = CrackIsometric(varepsilon=varepsilon)
                 ...     r_Q = (model.Q_isometric(v)/model.Q_isometric(1)
                 ...     )**(model.N**3/3/model.kappa)
@@ -170,7 +170,7 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> from statmechcrack import CrackIsometric
                 >>> v = np.linspace(1, 11, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [10, 25, 100, 800]:
+                >>> for varepsilon in [10, 25, 100, 1000]:
                 ...     model = CrackIsometric(varepsilon=varepsilon)
                 ...     beta_A = \
                 ...         model.beta_A_isometric(v, approach='asymptotic')
@@ -225,7 +225,7 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> from statmechcrack import CrackIsometric
                 >>> v = np.linspace(1, 11, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [10, 25, 100, 800]:
+                >>> for varepsilon in [10, 25, 100, 1000]:
                 ...     model = CrackIsometric(varepsilon=varepsilon)
                 ...     p = model.p_isometric(v, approach='asymptotic')
                 ...     _ = plt.plot(v - 1, model.N**3/3/model.kappa*p,
@@ -276,7 +276,7 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> from statmechcrack import CrackIsometric
                 >>> v = np.linspace(1, 11, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [10, 25, 100, 800]:
+                >>> for varepsilon in [10, 25, 100, 1000]:
                 ...     model = CrackIsometric(varepsilon=varepsilon)
                 ...     _ = plt.semilogy(
                 ...         v - 1, model.k_isometric(v),
@@ -415,7 +415,7 @@ class CrackIsometric(CrackMonteCarlo):
 
         """
         return self.beta_A_0_abs_isometric(v, lambda_) \
-            - self.beta_A_0_abs_isometric(lambda_[0], lambda_)
+            - self.beta_A_0_abs_isometric(1, lambda_)
 
     def p_0_isometric(self, v, lambda_):
         r"""The nondimensional end force
@@ -579,7 +579,7 @@ class CrackIsometric(CrackMonteCarlo):
 
         """
         return self.beta_A_b_isometric_abs(v, lambda_) \
-            - self.beta_A_b_isometric_abs(lambda_[0], lambda_)
+            - self.beta_A_b_isometric_abs(1, lambda_)
 
     def p_b_isometric(self, v, lambda_):
         r"""The nondimensional end force
