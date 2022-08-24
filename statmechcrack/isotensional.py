@@ -75,7 +75,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> from statmechcrack import CrackIsotensional
                 >>> rp = np.linspace(0, 10, 250)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [50, 100, 800]:
+                >>> for varepsilon in [50, 100, 1000]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
                 ...     r_Z = (model.Z_isotensional(0)/model.Z_isotensional(p)
@@ -164,7 +164,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> from statmechcrack import CrackIsotensional
                 >>> rp = np.linspace(0, 10, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [50, 100, 800]:
+                >>> for varepsilon in [50, 100, 1000]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
                 ...     beta_G = model.beta_G_isotensional(
@@ -220,7 +220,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> from statmechcrack import CrackIsotensional
                 >>> rp = np.linspace(0, 10, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [50, 100, 800]:
+                >>> for varepsilon in [10, 25, 100, 1000]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
                 ...     v = model.v_isotensional(p, approach='asymptotic')
@@ -268,7 +268,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> from statmechcrack import CrackIsotensional
                 >>> rp = np.linspace(0, 10, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [50, 100, 800]:
+                >>> for varepsilon in [50, 100, 1000]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
                 ...     _ = plt.semilogy(

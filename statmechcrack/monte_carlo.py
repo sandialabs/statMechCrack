@@ -192,13 +192,15 @@ class CrackMonteCarlo(CrackMechanical):
             float: The nondimensional end force.
 
         """
-        p = 0
+        fun = 0
         config = init_config
         for counter in range(1, 1 + num_samples):
-            p_next = self.kappa*(v - (2*config[0] - config[1]))
-            p += (p_next - p)/counter
+            fun_next = self.p_0_isometric(v, config)*np.exp(
+                -self.beta_A_b_isometric(v, config)
+            )
+            fun += (fun_next - fun)/counter
             config = self.mh_next_config(config, **kwargs)
-        return p
+        return fun
 
     def p_isometric_monte_carlo(self, v, **kwargs):
         r"""The nondimensional end force
@@ -208,7 +210,10 @@ class CrackMonteCarlo(CrackMechanical):
         of the ensemble average
 
         .. math::
-            p(v) = \kappa\langle v - 2s_1 + s_2\rangle.
+            p(v) =
+            e^{\beta\Delta A} \left\langle
+                p_0 \, e^{-\beta\Delta A_0}
+            \right\rangle_\star.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -220,23 +225,25 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         v = self.np_array(v)
-        p = np.zeros(v.shape)
+        ensemble_average_fun = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_E = lambda config: self.beta_U(v_i, config)
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_A_0_abs_isometric(1, lambda_)
 
             def serial_fun(init_config, **kwargs):
                 return self.p_isometric_monte_carlo_serial(
                         v_i, init_config, **kwargs
                     )
 
-            p[i] = self.parallel_calculation(
+            ensemble_average_fun[i] = self.parallel_calculation(
                 serial_fun,
-                self.minimize_beta_U(v_i)[2][:, 0],
+                self.minimize_beta_U(v_i)[2][-self.M:, 0],
                 **kwargs
             )
-        return p
+        beta_Delta_A = self.beta_A_isometric_monte_carlo(v, **kwargs)
+        return np.exp(beta_Delta_A)*ensemble_average_fun
 
-    def v_isotensional_monte_carlo_serial(self, init_config,
+    def v_isotensional_monte_carlo_serial(self, p, init_config,
                                           num_samples=1000000, **kwargs):
         """Serial calculation for :meth:`v_isotensional_monte_carlo`.
 
@@ -252,13 +259,15 @@ class CrackMonteCarlo(CrackMechanical):
             float: The nondimensional end separation.
 
         """
-        v = 0
+        fun = 0
         config = init_config
         for counter in range(1, 1 + num_samples):
-            v_next = config[0]
-            v += (v_next - v)/counter
+            fun_next = self.v_0_isotensional(p, config)*np.exp(
+                -self.beta_G_b_isotensional(p, config)
+            )
+            fun += (fun_next - fun)/counter
             config = self.mh_next_config(config, **kwargs)
-        return v
+        return fun
 
     def v_isotensional_monte_carlo(self, p, **kwargs):
         r"""The nondimensional end separation
@@ -268,7 +277,10 @@ class CrackMonteCarlo(CrackMechanical):
         of the ensemble average
 
         .. math::
-            v(p) = \langle s_0\rangle.
+            v(p) =
+            e^{\beta\Delta G} \left\langle
+                v_0 \, e^{-\beta\Delta G_0}
+            \right\rangle_\star.
 
         Args:
             p (array_like): The nondimensional end force.
@@ -280,16 +292,23 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         p = self.np_array(p)
-        v = np.zeros(p.shape)
+        ensemble_average_fun = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_E = lambda vs: self.beta_Pi(p_i, vs[0], vs[1:])
-            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
-            v[i] = self.parallel_calculation(
-                self.v_isotensional_monte_carlo_serial,
-                np.concatenate((v_guess, s_guess[:, 0])),
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_G_0_abs_isotensional(0, lambda_)
+
+            def serial_fun(init_config, **kwargs):
+                return self.v_isotensional_monte_carlo_serial(
+                        p_i, init_config, **kwargs
+                    )
+
+            ensemble_average_fun[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_Pi(p_i)[2][-self.M:, 0],
                 **kwargs
             )
-        return v
+        beta_Delta_G = self.beta_G_isotensional_monte_carlo(p, **kwargs)
+        return np.exp(beta_Delta_G)*ensemble_average_fun
 
     def beta_A_isometric_monte_carlo_serial(self, v, init_config,
                                             num_samples=1000000, **kwargs):
@@ -330,9 +349,24 @@ class CrackMonteCarlo(CrackMechanical):
 
         .. math::
             \beta\Delta A(v) =
-            -\ln\left\langle ? \right\rangle_*,
+            -\ln\left\langle e^{-\beta\Delta A_0} \right\rangle_\star,
 
-        where :math:`\beta U_1^* \equiv ?`.
+        where :math:`\Delta A_0\equiv
+            A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda})`
+        and
+
+        .. math::
+            \left\langle \phi \right\rangle_\star \equiv
+            \frac{
+                \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+                    \, \phi(\boldsymbol{\lambda})
+            }{
+                \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+            }
+            ,
+
+        where :math:`A_\star(\boldsymbol{\lambda})\equiv
+            A_0(1,\lambda}) + U_1(\boldsymbol{\lambda})`.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -346,9 +380,8 @@ class CrackMonteCarlo(CrackMechanical):
         v = self.np_array(v)
         beta_A = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_E = lambda lambda_: \
-                self.beta_U_1(lambda_) + self.beta_U_01(lambda_) + \
-                self.beta_A_b_isometric_abs(1, lambda_)
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_A_0_abs_isometric(1, lambda_)
 
             def serial_fun(init_config, **kwargs):
                 return self.beta_A_isometric_monte_carlo_serial(
@@ -379,18 +412,17 @@ class CrackMonteCarlo(CrackMechanical):
             numpy.ndarray: The relative nondimensional Gibbs free energy.
 
         """
-        exp_neg_beta_G = 0
+        exp_neg_beta_Delta_G = 0
         config = init_config
         for counter in range(1, 1 + num_samples):
-            exp_neg_beta_G_next = np.exp(
-                self.beta_Pi(0, config[0], config[1:]) -
-                self.beta_Pi(p, config[0], config[1:])
+            exp_neg_beta_Delta_G_next = np.exp(
+                -self.beta_G_b_isotensional(p, config)
             )
-            exp_neg_beta_G += (
-                exp_neg_beta_G_next - exp_neg_beta_G
+            exp_neg_beta_Delta_G += (
+                exp_neg_beta_Delta_G_next - exp_neg_beta_Delta_G
             )/counter
             config = self.mh_next_config(config, **kwargs)
-        return np.log(1/exp_neg_beta_G)
+        return np.log(1/exp_neg_beta_Delta_G)
 
     def beta_G_isotensional_monte_carlo(self, p, **kwargs):
         r"""The relative nondimensional Gibbs free energy
@@ -401,9 +433,24 @@ class CrackMonteCarlo(CrackMechanical):
 
         .. math::
             \beta\Delta G(v) =
-            -\ln\left\langle e^{-\beta\Delta\Pi}\right\rangle_{p=0},
+            -\ln\left\langle e^{-\beta\Delta G_0} \right\rangle_\star,
 
-        where :math:`\Delta\Pi \equiv \Pi(p,s) - \Pi(0,s)`.
+        where :math:`\Delta G_0\equiv
+            G_0(p,\boldsymbol{\lambda})-G_0(0,\boldsymbol{\lambda})`
+        and
+
+        .. math::
+            \left\langle \phi \right\rangle_\star \equiv
+            \frac{
+                \int d\lambda \ e^{-\beta G_\star(\boldsymbol{\lambda})}
+                    \, \phi(\boldsymbol{\lambda})
+            }{
+                \int d\lambda \ e^{-\beta G_\star(\boldsymbol{\lambda})}
+            }
+            ,
+
+        where :math:`G_\star(\boldsymbol{\lambda})\equiv
+            G_0(0,\lambda}) + U_1(\boldsymbol{\lambda})`.
 
         Args:
             p (array_like): The nondimensional end force.
@@ -417,17 +464,17 @@ class CrackMonteCarlo(CrackMechanical):
         p = self.np_array(p)
         beta_G = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_E = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_G_0_abs_isotensional(0, lambda_)
 
             def serial_fun(init_config, **kwargs):
                 return self.beta_G_isotensional_monte_carlo_serial(
                         p_i, init_config, **kwargs
                     )
 
-            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
             beta_G[i] = self.parallel_calculation(
                 serial_fun,
-                np.concatenate((v_guess, s_guess[:, 0])),
+                self.minimize_beta_Pi(p_i)[2][-self.M:, 0],
                 **kwargs
             )
         return beta_G
@@ -449,7 +496,21 @@ class CrackMonteCarlo(CrackMechanical):
             numpy.ndarray: The nondimensional forward reaction rate.
 
         """
-        pass
+        exp_neg_beta_Delta_A_0 = 0
+        config = init_config
+        for counter in range(1, 1 + num_samples):
+            if len(init_config) == self.M:
+                lambda_ = config
+            else:
+                lambda_ = np.concatenate(([self.lambda_TS], config))
+            exp_neg_beta_Delta_A_0_next = np.exp(
+                -self.beta_A_b_isometric(v, lambda_)
+            )
+            exp_neg_beta_Delta_A_0 += (
+                exp_neg_beta_Delta_A_0_next - exp_neg_beta_Delta_A_0
+            )/counter
+            config = self.mh_next_config(config, **kwargs)
+        return exp_neg_beta_Delta_A_0
 
     def k_isometric_monte_carlo(self, v, **kwargs):
         r"""The nondimensional forward reaction rate coefficient
@@ -459,11 +520,12 @@ class CrackMonteCarlo(CrackMechanical):
         of the ensemble average
 
         .. math::
-            k = \frac{
-                    \left\langle e^{-\beta U}\right\rangle_{v=1}^\ddagger
-                }{
-                    \left\langle e^{-\beta U}\right\rangle_{v=1}
-                }.
+            k \propto
+                \frac{\left\langle
+                    e^{-\beta\Delta A_0^\ddagger}
+                \right\rangle_\star^\ddagger}{\left\langle
+                    e^{-\beta\Delta A_0}
+                \right\rangle_\star}.
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -475,23 +537,45 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         v = self.np_array(v)
-        k = np.zeros(v.shape)
+        ensemble_average_fun = np.zeros(v.shape)
         for i, v_i in enumerate(v):
-            self.beta_E = lambda config: self.beta_U(1, config)
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_A_0_abs_isometric(1, lambda_)
 
             def serial_fun(init_config, **kwargs):
                 return self.k_isometric_monte_carlo_serial(
                         v_i, init_config, **kwargs
                     )
 
-            k[i] = self.parallel_calculation(
+            ensemble_average_fun[i] = self.parallel_calculation(
                 serial_fun,
-                self.minimize_beta_U(v_i)[2][:, 0],
+                self.minimize_beta_U(v_i)[2][-self.M:, 0],
                 **kwargs
             )
-        return k
+        ensemble_average_fun_TS = np.zeros(v.shape)
+        for i, v_i in enumerate(v):
+            self.beta_E = lambda lambda_: \
+                self.beta_U_1(
+                    np.concatenate(([self.lambda_TS], lambda_))
+                ) + self.beta_A_0_abs_isometric(
+                    1, np.concatenate(([self.lambda_TS], lambda_))
+                )
 
-    def k_isotensional_monte_carlo_serial(self, init_config,
+            def serial_fun(init_config, **kwargs):
+                return self.k_isometric_monte_carlo_serial(
+                        v_i, init_config, **kwargs
+                    )
+
+            ensemble_average_fun_TS[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_U(
+                    v_i, transition_state=True
+                )[2][-(self.M - 1):, 0],
+                **kwargs
+            )
+        return ensemble_average_fun_TS/ensemble_average_fun
+
+    def k_isotensional_monte_carlo_serial(self, p, init_config,
                                           num_samples=1000000, **kwargs):
         """Serial calculation for :meth:`k_isotensional_monte_carlo`.
 
@@ -507,7 +591,21 @@ class CrackMonteCarlo(CrackMechanical):
             numpy.ndarray: The nondimensional forward reaction rate.
 
         """
-        pass
+        exp_neg_beta_Delta_G_0 = 0
+        config = init_config
+        for counter in range(1, 1 + num_samples):
+            if len(init_config) == self.M:
+                lambda_ = config
+            else:
+                lambda_ = np.concatenate(([self.lambda_TS], config))
+            exp_neg_beta_Delta_G_0_next = np.exp(
+                -self.beta_G_b_isotensional(p, lambda_)
+            )
+            exp_neg_beta_Delta_G_0 += (
+                exp_neg_beta_Delta_G_0_next - exp_neg_beta_Delta_G_0
+            )/counter
+            config = self.mh_next_config(config, **kwargs)
+        return exp_neg_beta_Delta_G_0
 
     def k_isotensional_monte_carlo(self, p, **kwargs):
         r"""The nondimensional forward reaction rate coefficient
@@ -517,11 +615,12 @@ class CrackMonteCarlo(CrackMechanical):
         of the ensemble average
 
         .. math::
-            k = \frac{
-                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}^\ddagger
-                }{
-                    \left\langle e^{-\beta\Pi}\right\rangle_{p=0}
-                }.
+            k \propto
+                \frac{\left\langle
+                    e^{-\beta\Delta G_0^\ddagger}
+                \right\rangle_\star^\ddagger}{\left\langle
+                    e^{-\beta\Delta G_0}
+                \right\rangle_\star}.
 
         Args:
             p (array_like): The nondimensional end force.
@@ -533,13 +632,40 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         p = self.np_array(p)
-        k = np.zeros(p.shape)
+        ensemble_average_fun = np.zeros(p.shape)
         for i, p_i in enumerate(p):
-            self.beta_E = lambda vs: self.beta_Pi(0, vs[0], vs[1:])
-            v_guess, s_guess = self.minimize_beta_Pi(p_i)[1:]
-            k[i] = self.parallel_calculation(
-                self.k_isotensional_monte_carlo_serial,
-                np.concatenate((v_guess, s_guess[:, 0])),
+            self.beta_E = lambda lambda_: self.beta_U_1(lambda_) + \
+                self.beta_G_0_abs_isotensional(0, lambda_)
+
+            def serial_fun(init_config, **kwargs):
+                return self.k_isotensional_monte_carlo_serial(
+                        p_i, init_config, **kwargs
+                    )
+
+            ensemble_average_fun[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_Pi(p_i)[2][-self.M:, 0],
                 **kwargs
             )
-        return k
+        ensemble_average_fun_TS = np.zeros(p.shape)
+        for i, p_i in enumerate(p):
+            self.beta_E = lambda lambda_: \
+                self.beta_U_1(
+                    np.concatenate(([self.lambda_TS], lambda_))
+                ) + self.beta_G_0_abs_isotensional(
+                    0, np.concatenate(([self.lambda_TS], lambda_))
+                )
+
+            def serial_fun(init_config, **kwargs):
+                return self.k_isotensional_monte_carlo_serial(
+                        p_i, init_config, **kwargs
+                    )
+
+            ensemble_average_fun_TS[i] = self.parallel_calculation(
+                serial_fun,
+                self.minimize_beta_Pi(
+                    p_i, transition_state=True
+                )[2][-(self.M - 1):, 0],
+                **kwargs
+            )
+        return ensemble_average_fun_TS/ensemble_average_fun
