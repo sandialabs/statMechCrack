@@ -126,7 +126,7 @@
 <p>A module for the Metropolis-Hastings Markov chain Monte Carlo method.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="statmechcrack.monte_carlo.CrackMonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a> which contains
 methods to compute crack model quantities using the
-Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id11" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
+Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id3" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="Permalink to this definition"></a></dt>
@@ -135,47 +135,35 @@ Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="re
 <dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo">
 <span class="sig-name descname"><span class="pre">beta_A_isometric_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_A_isometric_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo" title="Permalink to this definition"></a></dt>
-<dd><p>The relative nondimensional Helmholtz free energy
-as a function of the nondimensional end separation
+<dd><dl>
+<dt>The relative nondimensional Helmholtz free energy</dt><dd><p>as a function of the nondimensional end separation
 in the isometric ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
 \[\beta\Delta A(v) =
 -\ln\left\langle e^{-\beta\Delta A_0} \right\rangle_\star,\]</div>
-<dl class="simple">
-<dt>where :math:<a href="#id2"><span class="problematic" id="id3">`</span></a>Delta A_0equiv</dt><dd><p>A_0(v,boldsymbol{lambda})-A_0(1,boldsymbol{lambda})`</p>
+<p>where the relative free energy of the reference system is</p>
 </dd>
 </dl>
-<p>and</p>
 <div class="math notranslate nohighlight">
-\[\left\langle \phi \right\rangle_\star \equiv
-\frac{
-    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
-        \, \phi(\boldsymbol{\lambda})
-}{
-    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
-}
-,\]</div>
-<dl class="simple">
-<dt>where :math:<a href="#id4"><span class="problematic" id="id5">`</span></a><a href="#id13"><span class="problematic" id="id14">A_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>A_0(1,lambda}) + U_1(boldsymbol{lambda})`.</p>
-</dd>
-</dl>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
-<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
-Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>numpy.ndarray</p>
-</dd>
-</dl>
+\[ \begin{align}\begin{aligned}\Delta A_0\equiv
+    A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda}),\\and where the isometric ensemble average here is\\.. math::
+    \left\langle \phi \right\rangle_\star \equiv
+    \frac{
+        \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+            \, \phi(\boldsymbol{\lambda})
+    }{
+        \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+    }
+    ,\\where the free energy measure here is\end{aligned}\end{align} \]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}A_\star(\boldsymbol{\lambda})\equiv
+    A_0(1,\lambda}) + U_1(\boldsymbol{\lambda}).\\Args:
+    v (array_like): The nondimensional end separation.
+    **kwargs: Arbitrary keyword arguments.
+        Passed to :meth:`parallel_calculation`.\\Returns:
+    numpy.ndarray: The relative nondimensional Helmholtz free energy.\end{aligned}\end{align} \]</div>
 </dd></dl>
 
 <dl class="py method">
@@ -212,11 +200,14 @@ of the ensemble average</p>
 <div class="math notranslate nohighlight">
 \[\beta\Delta G(v) =
 -\ln\left\langle e^{-\beta\Delta G_0} \right\rangle_\star,\]</div>
+<p>where the relative free energy of the reference system is</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
 <dl class="simple">
-<dt>where :math:<a href="#id6"><span class="problematic" id="id7">`</span></a>Delta G_0equiv</dt><dd><p>G_0(p,boldsymbol{lambda})-G_0(0,boldsymbol{lambda})`</p>
+<dt>Delta G_0equiv</dt><dd><p>G_0(p,boldsymbol{lambda})-G_0(0,boldsymbol{lambda}),</p>
 </dd>
 </dl>
-<p>and</p>
+<p>and where the isotensional ensemble average here is</p>
 <div class="math notranslate nohighlight">
 \[\left\langle \phi \right\rangle_\star \equiv
 \frac{
@@ -226,8 +217,11 @@ of the ensemble average</p>
     \int d\lambda \ e^{-\beta G_\star(\boldsymbol{\lambda})}
 }
 ,\]</div>
+<p>where the free energy measure here is</p>
+<div class="math notranslate nohighlight">
+\[\]</div>
 <dl class="simple">
-<dt>where :math:<a href="#id8"><span class="problematic" id="id9">`</span></a><a href="#id15"><span class="problematic" id="id16">G_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>G_0(0,lambda}) + U_1(boldsymbol{lambda})`.</p>
+<dt><a href="#id5"><span class="problematic" id="id6">G_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>G_0(0,lambda}) + U_1(boldsymbol{lambda}).</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -307,7 +301,7 @@ in the isometric ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[k \propto
+\[\frac{k(v)}{k(1)} =
     \frac{\left\langle
         e^{-\beta\Delta A_0^\ddagger}
     \right\rangle_\star^\ddagger}{\left\langle
@@ -362,7 +356,7 @@ in the isotensional ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
 <div class="math notranslate nohighlight">
-\[k \propto
+\[\frac{k(p)}{k(0)} =
     \frac{\left\langle
         e^{-\beta\Delta G_0^\ddagger}
     \right\rangle_\star^\ddagger}{\left\langle
@@ -617,9 +611,9 @@ Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMo
 </dd></dl>
 
   <hr><p><strong>References</strong></p>
-<div class="docutils container" id="id10">
+<div class="docutils container" id="id2">
 <dl class="citation">
-<dt class="label" id="id11"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
 <dd><p>James M Haile. <em>Molecular Dynamics Simulation: Elementary Methods</em>. Wiley, 1992. URL: <a class="reference external" href="https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393">https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393</a>.</p>
 </dd>
 </dl>

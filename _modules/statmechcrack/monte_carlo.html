@@ -446,9 +446,13 @@
 <span class="sd">            \beta\Delta A(v) =</span>
 <span class="sd">            -\ln\left\langle e^{-\beta\Delta A_0} \right\rangle_\star,</span>
 
-<span class="sd">        where :math:`\Delta A_0\equiv</span>
-<span class="sd">            A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda})`</span>
-<span class="sd">        and</span>
+<span class="sd">        where the relative free energy of the reference system is</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        \Delta A_0\equiv</span>
+<span class="sd">            A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda}),</span>
+
+<span class="sd">        and where the isometric ensemble average here is</span>
 
 <span class="sd">        .. math::</span>
 <span class="sd">            \left\langle \phi \right\rangle_\star \equiv</span>
@@ -460,8 +464,11 @@
 <span class="sd">            }</span>
 <span class="sd">            ,</span>
 
-<span class="sd">        where :math:`A_\star(\boldsymbol{\lambda})\equiv</span>
-<span class="sd">            A_0(1,\lambda}) + U_1(\boldsymbol{\lambda})`.</span>
+<span class="sd">        where the free energy measure here is</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        A_\star(\boldsymbol{\lambda})\equiv</span>
+<span class="sd">            A_0(1,\lambda}) + U_1(\boldsymbol{\lambda}).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            v (array_like): The nondimensional end separation.</span>
@@ -530,9 +537,13 @@
 <span class="sd">            \beta\Delta G(v) =</span>
 <span class="sd">            -\ln\left\langle e^{-\beta\Delta G_0} \right\rangle_\star,</span>
 
-<span class="sd">        where :math:`\Delta G_0\equiv</span>
-<span class="sd">            G_0(p,\boldsymbol{\lambda})-G_0(0,\boldsymbol{\lambda})`</span>
-<span class="sd">        and</span>
+<span class="sd">        where the relative free energy of the reference system is</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">        \Delta G_0\equiv</span>
+<span class="sd">            G_0(p,\boldsymbol{\lambda})-G_0(0,\boldsymbol{\lambda}),</span>
+
+<span class="sd">        and where the isotensional ensemble average here is</span>
 
 <span class="sd">        .. math::</span>
 <span class="sd">            \left\langle \phi \right\rangle_\star \equiv</span>
@@ -544,8 +555,11 @@
 <span class="sd">            }</span>
 <span class="sd">            ,</span>
 
-<span class="sd">        where :math:`G_\star(\boldsymbol{\lambda})\equiv</span>
-<span class="sd">            G_0(0,\lambda}) + U_1(\boldsymbol{\lambda})`.</span>
+<span class="sd">        where the free energy measure here is</span>
+
+<span class="sd">        .. math::</span>
+<span class="sd">        G_\star(\boldsymbol{\lambda})\equiv</span>
+<span class="sd">            G_0(0,\lambda}) + U_1(\boldsymbol{\lambda}).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            p (array_like): The nondimensional end force.</span>
@@ -615,7 +629,7 @@
 <span class="sd">        of the ensemble average</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            k \propto</span>
+<span class="sd">            \frac{k(v)}{k(1)} =</span>
 <span class="sd">                \frac{\left\langle</span>
 <span class="sd">                    e^{-\beta\Delta A_0^\ddagger}</span>
 <span class="sd">                \right\rangle_\star^\ddagger}{\left\langle</span>
@@ -710,7 +724,7 @@
 <span class="sd">        of the ensemble average</span>
 
 <span class="sd">        .. math::</span>
-<span class="sd">            k \propto</span>
+<span class="sd">            \frac{k(p)}{k(0)} =</span>
 <span class="sd">                \frac{\left\langle</span>
 <span class="sd">                    e^{-\beta\Delta G_0^\ddagger}</span>
 <span class="sd">                \right\rangle_\star^\ddagger}{\left\langle</span>
