@@ -135,8 +135,8 @@ Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="re
 <dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo">
 <span class="sig-name descname"><span class="pre">beta_A_isometric_monte_carlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo.beta_A_isometric_monte_carlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo" title="Permalink to this definition"></a></dt>
-<dd><dl>
-<dt>The relative nondimensional Helmholtz free energy</dt><dd><p>as a function of the nondimensional end separation
+<dd><p>The relative nondimensional Helmholtz free energy
+as a function of the nondimensional end separation
 in the isometric ensemble, using a
 Metropolis-Hastings Markov chain Monte Carlo calculation
 of the ensemble average</p>
@@ -144,26 +144,38 @@ of the ensemble average</p>
 \[\beta\Delta A(v) =
 -\ln\left\langle e^{-\beta\Delta A_0} \right\rangle_\star,\]</div>
 <p>where the relative free energy of the reference system is</p>
+<div class="math notranslate nohighlight">
+\[\Delta A_0\equiv
+A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda}),\]</div>
+<p>and where the isometric ensemble average here is</p>
+<div class="math notranslate nohighlight">
+\[\left\langle \phi \right\rangle_\star \equiv
+\frac{
+    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+        \, \phi(\boldsymbol{\lambda})
+}{
+    \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
+}
+,\]</div>
+<p>where the free energy measure here is</p>
+<div class="math notranslate nohighlight">
+\[A_\star(\boldsymbol{\lambda})\equiv
+A_0(1,\boldsymbol{\lambda}) + U_1(\boldsymbol{\lambda}).\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary keyword arguments.
+Passed to <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation" title="statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="xref py py-meth docutils literal notranslate"><span class="pre">parallel_calculation()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The relative nondimensional Helmholtz free energy.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}\Delta A_0\equiv
-    A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda}),\\and where the isometric ensemble average here is\\.. math::
-    \left\langle \phi \right\rangle_\star \equiv
-    \frac{
-        \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
-            \, \phi(\boldsymbol{\lambda})
-    }{
-        \int d\lambda \ e^{-\beta A_\star(\boldsymbol{\lambda})}
-    }
-    ,\\where the free energy measure here is\end{aligned}\end{align} \]</div>
-<div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}A_\star(\boldsymbol{\lambda})\equiv
-    A_0(1,\lambda}) + U_1(\boldsymbol{\lambda}).\\Args:
-    v (array_like): The nondimensional end separation.
-    **kwargs: Arbitrary keyword arguments.
-        Passed to :meth:`parallel_calculation`.\\Returns:
-    numpy.ndarray: The relative nondimensional Helmholtz free energy.\end{aligned}\end{align} \]</div>
 </dd></dl>
 
 <dl class="py method">
@@ -202,11 +214,8 @@ of the ensemble average</p>
 -\ln\left\langle e^{-\beta\Delta G_0} \right\rangle_\star,\]</div>
 <p>where the relative free energy of the reference system is</p>
 <div class="math notranslate nohighlight">
-\[\]</div>
-<dl class="simple">
-<dt>Delta G_0equiv</dt><dd><p>G_0(p,boldsymbol{lambda})-G_0(0,boldsymbol{lambda}),</p>
-</dd>
-</dl>
+\[\Delta G_0\equiv
+G_0(p,\boldsymbol{\lambda})-G_0(0,\boldsymbol{\lambda}),\]</div>
 <p>and where the isotensional ensemble average here is</p>
 <div class="math notranslate nohighlight">
 \[\left\langle \phi \right\rangle_\star \equiv
@@ -219,11 +228,8 @@ of the ensemble average</p>
 ,\]</div>
 <p>where the free energy measure here is</p>
 <div class="math notranslate nohighlight">
-\[\]</div>
-<dl class="simple">
-<dt><a href="#id5"><span class="problematic" id="id6">G_</span></a>star(boldsymbol{lambda})equiv</dt><dd><p>G_0(0,lambda}) + U_1(boldsymbol{lambda}).</p>
-</dd>
-</dl>
+\[G_\star(\boldsymbol{\lambda})\equiv
+G_0(0,\boldsymbol{\lambda}) + U_1(\boldsymbol{\lambda}).\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
