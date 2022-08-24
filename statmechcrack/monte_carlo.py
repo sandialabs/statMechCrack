@@ -353,8 +353,8 @@ class CrackMonteCarlo(CrackMechanical):
 
         where the relative free energy of the reference system is
 
-    .. math::
-        \Delta A_0\equiv
+        .. math::
+            \Delta A_0\equiv
             A_0(v,\boldsymbol{\lambda})-A_0(1,\boldsymbol{\lambda}),
 
         and where the isometric ensemble average here is
@@ -371,9 +371,9 @@ class CrackMonteCarlo(CrackMechanical):
 
         where the free energy measure here is
 
-    .. math::
-        A_\star(\boldsymbol{\lambda})\equiv
-            A_0(1,\lambda}) + U_1(\boldsymbol{\lambda}).
+        .. math::
+            A_\star(\boldsymbol{\lambda})\equiv
+            A_0(1,\boldsymbol{\lambda}) + U_1(\boldsymbol{\lambda}).
 
         Args:
             v (array_like): The nondimensional end separation.
@@ -445,7 +445,7 @@ class CrackMonteCarlo(CrackMechanical):
         where the relative free energy of the reference system is
 
         .. math::
-        \Delta G_0\equiv
+            \Delta G_0\equiv
             G_0(p,\boldsymbol{\lambda})-G_0(0,\boldsymbol{\lambda}),
 
         and where the isotensional ensemble average here is
@@ -463,8 +463,8 @@ class CrackMonteCarlo(CrackMechanical):
         where the free energy measure here is
 
         .. math::
-        G_\star(\boldsymbol{\lambda})\equiv
-            G_0(0,\lambda}) + U_1(\boldsymbol{\lambda}).
+            G_\star(\boldsymbol{\lambda})\equiv
+            G_0(0,\boldsymbol{\lambda}) + U_1(\boldsymbol{\lambda}).
 
         Args:
             p (array_like): The nondimensional end force.
