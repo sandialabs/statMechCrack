@@ -165,22 +165,22 @@ class Zero(unittest.TestCase):
         model = random_crack_model()
         self.assertEqual(
             model.beta_A_b_isometric(
-                rgn, [rgn, rgn]
+                1, [rgn, rgn]
             ), 0
         )
         self.assertEqual(
             model.beta_A_0_isometric(
-                rgn, [rgn, rgn]
+                1, [rgn, rgn]
             ), 0
         )
-        self.assertAlmostEqual(
+        self.assertEqual(
             model.beta_A_isometric(
                 1, approach='asymptotic'
             ), 0
         )
         self.assertEqual(
             model.beta_A_b(
-                rgn, [rgn, rgn], ensemble='isometric'
+                1, [rgn, rgn], ensemble='isometric'
             )[0], 0
         )
         self.assertAlmostEqual(
@@ -190,7 +190,7 @@ class Zero(unittest.TestCase):
         )
         self.assertEqual(
             model.beta_A_0(
-                rgn, [rgn, rgn], ensemble='isometric'
+                1, [rgn, rgn], ensemble='isometric'
             )[0], 0
         )
         self.assertAlmostEqual(
@@ -198,7 +198,7 @@ class Zero(unittest.TestCase):
                 rgn, [rgn, rgn], ensemble='isotensional'
             )[0], 0
         )
-        self.assertAlmostEqual(
+        self.assertEqual(
             model.beta_A(
                 1, ensemble='isometric', approach='asymptotic'
             )[0], 0
@@ -242,14 +242,14 @@ class Zero(unittest.TestCase):
                 0, [rgn0, rgn1]
             ), 0
         )
-        self.assertAlmostEqual(
+        self.assertEqual(
             model.beta_G_isotensional(
                 0, approach='asymptotic'
             ), 0
         )
         self.assertAlmostEqual(
             model.beta_G_b(
-                0, [rgn0, rgn0], ensemble='isometric'
+                0, [1, 1], ensemble='isometric'
             )[0], 0
         )
         self.assertEqual(
@@ -259,7 +259,7 @@ class Zero(unittest.TestCase):
         )
         self.assertAlmostEqual(
             model.beta_G_0(
-                0, [rgn0, rgn0], ensemble='isometric'
+                0, [1, 1], ensemble='isometric'
             )[0], 0
         )
         self.assertEqual(
@@ -272,7 +272,7 @@ class Zero(unittest.TestCase):
                 0, ensemble='isometric', approach='asymptotic'
             )[0], 0
         )
-        self.assertAlmostEqual(
+        self.assertEqual(
             model.beta_G(
                 0, ensemble='isotensional', approach='asymptotic'
             )[0], 0

@@ -147,7 +147,9 @@ class CrackMechanical(BasicUtility):
             numpy.ndarray: The nondimensional potential energy.
 
         """
-        return self.varepsilon*(1 - np.exp(-self.alpha*(lambda_ - 1)))**2
+        return self.varepsilon*(
+            1 - np.exp(-self.alpha*(lambda_ - 1))
+        )**2 + 1e88*(lambda_ > self.lambda_TS)
 
     def beta_u_p(self, lambda_):
         r"""The first derivative of the potential energy of a single bond
