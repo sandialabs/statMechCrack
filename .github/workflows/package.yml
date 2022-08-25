@@ -130,7 +130,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: test zenodo
         run: |
-          curl https://zenodo.org/record/???????/files/sandialabs/statmechcrack-v${{ needs.get-version.outputs.VERSION }}.zip?download=1 -o clone.zip
+          curl https://zenodo.org/record/7023259/files/sandialabs/statmechcrack-v${{ needs.get-version.outputs.VERSION }}.zip?download=1 -o clone.zip
           unzip -d clone/ clone.zip
           cd clone/$(ls clone/)
           pip install numpy scipy
