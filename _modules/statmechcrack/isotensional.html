@@ -315,7 +315,7 @@
 <span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsotensional</span>
 <span class="sd">                &gt;&gt;&gt; rp = np.linspace(0, 10, 33)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
-<span class="sd">                &gt;&gt;&gt; for varepsilon in [10, 25, 100, 1000]:</span>
+<span class="sd">                &gt;&gt;&gt; for varepsilon in [50, 100, 1000]:</span>
 <span class="sd">                ...     model = CrackIsotensional(varepsilon=varepsilon)</span>
 <span class="sd">                ...     p = 3*model.kappa/model.N**3*rp</span>
 <span class="sd">                ...     v = model.v_isotensional(p, approach=&#39;asymptotic&#39;)</span>

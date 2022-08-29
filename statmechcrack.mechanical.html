@@ -299,10 +299,29 @@ due to stretching intact bonds,</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.H_Pi_TS">
+<span class="sig-name descname"><span class="pre">H_Pi_TS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.H_Pi_TS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.H_Pi_TS" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Hessian
+of the total potential energy of the system
+in its transition state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>array_like</em>) – The nondimensional configuration.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Hessian.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.H_U">
 <span class="sig-name descname"><span class="pre">H_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.H_U"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.H_U" title="Permalink to this definition"></a></dt>
 <dd><p>The nondimensional Hessian
-of the total potential energy of the system,</p>
+of the potential energy of the system,</p>
 <div class="math notranslate nohighlight">
 \[\mathbf{H}^U(\mathbf{s}) =
 \mathbf{H}^U_0
@@ -376,6 +395,25 @@ due to stretching intact bonds,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Hessian.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.H_U_TS">
+<span class="sig-name descname"><span class="pre">H_U_TS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.H_U_TS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.H_U_TS" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Hessian
+of the potential energy of the system
+in its transition state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>s</strong> (<em>array_like</em>) – The nondimensional configuration.</p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The nondimensional Hessian.</p>
@@ -762,6 +800,29 @@ due to stretching intact bonds,</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.j_Pi_TS">
+<span class="sig-name descname"><span class="pre">j_Pi_TS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.j_Pi_TS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.j_Pi_TS" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Jacobian
+of the total potential energy of the system
+in its transition state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p></li>
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>s</strong> (<em>array_like</em>) – The nondimensional configuration.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Jacobian.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.j_U">
 <span class="sig-name descname"><span class="pre">j_U</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.j_U"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.j_U" title="Permalink to this definition"></a></dt>
 <dd><p>The nondimensional Jacobian
@@ -855,6 +916,28 @@ due to stretching intact bonds,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>lambda</strong> (<em>array_like</em>) – The intact bond stretches.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional Jacobian.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical.j_U_TS">
+<span class="sig-name descname"><span class="pre">j_U_TS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical.j_U_TS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical.j_U_TS" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional Jacobian
+of the potential energy of the system
+in its transition state.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>v</strong> (<em>array_like</em>) – The nondimensional end separation.</p></li>
+<li><p><strong>s</strong> (<em>array_like</em>) – The nondimensional configuration.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>The nondimensional Jacobian.</p>
