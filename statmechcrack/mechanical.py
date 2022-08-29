@@ -325,6 +325,26 @@ class CrackMechanical(BasicUtility):
         lambda_ = s[-self.M:]
         return self.j_U_0(v, s) + self.j_U_1(lambda_)
 
+    def j_U_TS(self, v, s):
+        r"""The nondimensional Jacobian
+        of the potential energy of the system
+        in its transition state.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+            s (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Jacobian.
+
+        """
+        rows_cols = np.concatenate((
+            np.arange(self.N), np.arange(self.N + 1, self.L)
+        ))
+        return self.j_U(v, np.concatenate((
+            s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
+        )))[rows_cols]
+
     def H_U_00(self):
         r"""The nondimensional Hessian
         of the potential energy
@@ -385,7 +405,7 @@ class CrackMechanical(BasicUtility):
 
     def H_U(self, s):
         r"""The nondimensional Hessian
-        of the total potential energy of the system,
+        of the potential energy of the system,
 
         .. math::
             \mathbf{H}^U(\mathbf{s}) =
@@ -403,6 +423,25 @@ class CrackMechanical(BasicUtility):
         """
         lambda_ = s[-self.M:]
         return self.H_U_0() + self.H_U_1(lambda_)
+
+    def H_U_TS(self, s):
+        r"""The nondimensional Hessian
+        of the potential energy of the system
+        in its transition state.
+
+        Args:
+            s (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Hessian.
+
+        """
+        rows_cols = np.concatenate((
+            np.arange(self.N), np.arange(self.N + 1, self.L)
+        ))
+        return self.H_U(np.concatenate((
+                s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
+            )))[rows_cols, :][:, rows_cols]
 
     def beta_Pi_00(self, p, v, s):
         r"""The nondimensional total potential energy
@@ -552,6 +591,27 @@ class CrackMechanical(BasicUtility):
         lambda_ = s[-self.M:]
         return self.j_Pi_0(p, v, s) + self.j_Pi_1(lambda_)
 
+    def j_Pi_TS(self, p, v, s):
+        r"""The nondimensional Jacobian
+        of the total potential energy of the system
+        in its transition state.
+
+        Args:
+            p (array_like): The nondimensional end force.
+            v (array_like): The nondimensional end separation.
+            s (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Jacobian.
+
+        """
+        rows_cols = np.concatenate((
+            np.arange(self.N + 1), np.arange(self.N + 2, self.L + 1)
+        ))
+        return self.j_Pi(p, v, np.concatenate((
+            s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
+        )))[rows_cols]
+
     def H_Pi_00(self):
         r"""The nondimensional Hessian
         of the total potential energy
@@ -652,6 +712,25 @@ class CrackMechanical(BasicUtility):
         """
         lambda_ = s[-self.M:]
         return self.H_Pi_0() + self.H_Pi_1(lambda_)
+
+    def H_Pi_TS(self, s):
+        r"""The nondimensional Hessian
+        of the total potential energy of the system
+        in its transition state.
+
+        Args:
+            s (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Hessian.
+
+        """
+        rows_cols = np.concatenate((
+            np.arange(self.N + 1), np.arange(self.N + 2, self.L + 1)
+        ))
+        return self.H_Pi(np.concatenate((
+            s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
+        )))[rows_cols, :][:, rows_cols]
 
     def minimize_beta_U_00(self, v, lambda_):
         r"""Function to minimize the potential energy
@@ -779,9 +858,9 @@ class CrackMechanical(BasicUtility):
                         s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
                     ))),
                     s_guess,
-                    # method='Newton-CG',
-                    # jac=lambda s: self.j_U_TS(v_i, s),
-                    # hess=self.H_U_TS
+                    method='Newton-CG',
+                    jac=lambda s: self.j_U_TS(v_i, s),
+                    hess=self.H_U_TS
                 )
                 s[:self.N, i] = res.x[:self.N]
                 s[self.N, i] = self.lambda_TS
@@ -870,9 +949,9 @@ class CrackMechanical(BasicUtility):
                         vs[1:self.N + 1], [self.lambda_TS], vs[-(self.M - 1):]
                     ))),
                     s_guess,
-                    # method='Newton-CG',
-                    # jac=lambda vs: self.j_Pi_TS(p_i, vs[0], vs[1:]),
-                    # hess=lambda vs: self.H_Pi_TS(vs[1:])
+                    method='Newton-CG',
+                    jac=lambda vs: self.j_Pi_TS(p_i, vs[0], vs[1:]),
+                    hess=lambda vs: self.H_Pi_TS(vs[1:])
                 )
                 s[:self.N, i] = res.x[1:self.N + 1]
                 s[self.N, i] = self.lambda_TS
