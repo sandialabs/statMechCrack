@@ -220,7 +220,7 @@ class CrackIsotensional(CrackIsometric):
                 >>> from statmechcrack import CrackIsotensional
                 >>> rp = np.linspace(0, 10, 33)
                 >>> _ = plt.figure()
-                >>> for varepsilon in [10, 25, 100, 1000]:
+                >>> for varepsilon in [50, 100, 1000]:
                 ...     model = CrackIsotensional(varepsilon=varepsilon)
                 ...     p = 3*model.kappa/model.N**3*rp
                 ...     v = model.v_isotensional(p, approach='asymptotic')
