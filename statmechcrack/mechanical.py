@@ -706,12 +706,12 @@ class CrackMechanical(BasicUtility):
         beta_U = np.zeros(len(v))
         p = np.zeros(len(v))
         s = np.zeros((self.N, len(v)))
-        for i in range(len(v)):
+        for i, v_i in enumerate(v):
             s[:, i] = la.inv(self.H_U_00()/self.kappa).dot(
-                np.concatenate(([2*v[i]], [-v[i]], np.zeros(self.N - 4),
+                np.concatenate(([2*v_i], [-v_i], np.zeros(self.N - 4),
                                 [-lambda_[0], 4*lambda_[0] - lambda_[1]])))
-            p[i] = self.kappa*(v[i] - (2*s[0, i] - s[1, i]))
-            beta_U[i] = self.beta_U_00(v[i], s[:, i])
+            p[i] = self.kappa*(v_i - (2*s[0, i] - s[1, i]))
+            beta_U[i] = self.beta_U_00(v_i, s[:, i])
         return beta_U, p, s
 
     def minimize_beta_U(self, v, transition_state=False):
@@ -766,21 +766,21 @@ class CrackMechanical(BasicUtility):
         beta_U = np.zeros(len(v))
         p = np.zeros(len(v))
         s = np.zeros((self.L, len(v)))
-        for i in range(len(v)):
+        for i, v_i in enumerate(v):
             s_guess = np.concatenate((
                 self.minimize_beta_U_00(
-                    v[i], [1 + transition_state*(self.lambda_TS - 1), 1]
+                    v_i, [1 + transition_state*(self.lambda_TS - 1), 1]
                 )[2][:, 0],
                 np.ones(self.M - transition_state)
             ))
             if transition_state is True:
                 res = minimize(
-                    lambda s: self.beta_U(v[i], np.concatenate((
+                    lambda s: self.beta_U(v_i, np.concatenate((
                         s[:self.N], [self.lambda_TS], s[-(self.M - 1):]
                     ))),
                     s_guess,
                     # method='Newton-CG',
-                    # jac=lambda s: self.j_U_TS(v[i], s),
+                    # jac=lambda s: self.j_U_TS(v_i, s),
                     # hess=self.H_U_TS
                 )
                 s[:self.N, i] = res.x[:self.N]
@@ -788,14 +788,14 @@ class CrackMechanical(BasicUtility):
                 s[-(self.M - 1):, i] = res.x[-(self.M - 1):]
             else:
                 res = minimize(
-                    lambda s: self.beta_U(v[i], s),
+                    lambda s: self.beta_U(v_i, s),
                     s_guess,
                     method='Newton-CG',
-                    jac=lambda s: self.j_U(v[i], s),
+                    jac=lambda s: self.j_U(v_i, s),
                     hess=self.H_U
                 )
                 s[:, i] = res.x
-            p[i] = self.kappa*(v[i] - (2*s[0, i] - s[1, i]))
+            p[i] = self.kappa*(v_i - (2*s[0, i] - s[1, i]))
             beta_U[i] = res.fun
         return beta_U, p, s
 
@@ -822,13 +822,13 @@ class CrackMechanical(BasicUtility):
         beta_Pi = np.zeros(len(p))
         v = np.zeros(len(p))
         s = np.zeros((self.N, len(p)))
-        for i in range(len(p)):
+        for i, p_i in enumerate(p):
             vs = la.inv(self.H_Pi_00()/self.kappa).dot(
-                np.concatenate(([p[i]/self.kappa], np.zeros(self.N - 2),
+                np.concatenate(([p_i/self.kappa], np.zeros(self.N - 2),
                                 [-lambda_[0], 4*lambda_[0] - lambda_[1]])))
             v[i] = vs[0]
             s[:, i] = vs[1:]
-            beta_Pi[i] = self.beta_Pi_00(p[i], v[i], s[:, i])
+            beta_Pi[i] = self.beta_Pi_00(p_i, v[i], s[:, i])
         return beta_Pi, v, s
 
     def minimize_beta_Pi(self, p, transition_state=False):
@@ -855,9 +855,9 @@ class CrackMechanical(BasicUtility):
         beta_Pi = np.zeros(len(p))
         v = np.zeros(len(p))
         s = np.zeros((self.L, len(p)))
-        for i in range(len(p)):
+        for i, p_i in enumerate(p):
             v_guess, s_guess_0 = self.minimize_beta_Pi_00(
-                p[i], [1 + transition_state*(self.lambda_TS - 1), 1]
+                p_i, [1 + transition_state*(self.lambda_TS - 1), 1]
             )[1:]
             s_guess = np.concatenate((
                 v_guess,
@@ -866,12 +866,12 @@ class CrackMechanical(BasicUtility):
             ))
             if transition_state is True:
                 res = minimize(
-                    lambda vs: self.beta_Pi(p[i], vs[0], np.concatenate((
+                    lambda vs: self.beta_Pi(p_i, vs[0], np.concatenate((
                         vs[1:self.N + 1], [self.lambda_TS], vs[-(self.M - 1):]
                     ))),
                     s_guess,
                     # method='Newton-CG',
-                    # jac=lambda vs: self.j_Pi_TS(p[i], vs[0], vs[1:]),
+                    # jac=lambda vs: self.j_Pi_TS(p_i, vs[0], vs[1:]),
                     # hess=lambda vs: self.H_Pi_TS(vs[1:])
                 )
                 s[:self.N, i] = res.x[1:self.N + 1]
@@ -879,10 +879,10 @@ class CrackMechanical(BasicUtility):
                 s[-(self.M - 1):, i] = res.x[-(self.M - 1):]
             else:
                 res = minimize(
-                    lambda vs: self.beta_Pi(p[i], vs[0], vs[1:]),
+                    lambda vs: self.beta_Pi(p_i, vs[0], vs[1:]),
                     s_guess,
                     method='Newton-CG',
-                    jac=lambda vs: self.j_Pi(p[i], vs[0], vs[1:]),
+                    jac=lambda vs: self.j_Pi(p_i, vs[0], vs[1:]),
                     hess=lambda vs: self.H_Pi(vs[1:])
                 )
                 s[:, i] = res.x[1:]

@@ -28,6 +28,7 @@ class CrackMonteCarlo(CrackMechanical):
 
         """
         CrackMechanical.__init__(self, **kwargs)
+        self.beta_E = None
 
     def trial_config(self, prev_config, cov_config=1e-2):
         """Generates trial configurations given a previous configuration.
