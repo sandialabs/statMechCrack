@@ -2,8 +2,11 @@
 
 This module consist of the class :class:`Crack`
 which, upon instantiation,
-becomes a crack model instance with methods for computing
+becomes a crack model instance with methods for calculating
 quantities in either thermodynamic ensemble.
+These thermodynamic quantities are calculated using an
+asymptotic approach :cite:`buche2021fundamental`,
+:cite:`buche2022freely` or a Monte Carlo approach.
 
 """
 
