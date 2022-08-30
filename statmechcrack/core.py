@@ -2,8 +2,16 @@
 
 This module consist of the class :class:`Crack`
 which, upon instantiation,
-becomes a crack model instance with methods for computing
+becomes a crack model instance with methods for calculating
 quantities in either thermodynamic ensemble.
+These thermodynamic quantities are calculated using an
+asymptotic approach :cite:`core-buche2021fundamental`,
+:cite:`core-buche2022freely`, :cite:`core-buchegrutzikufjc2022`
+or a Monte Carlo approach (see :class:`.CrackMonteCarlo`).
+Basic mathematical capabilities are provided by
+``numpy`` :cite:`core-numpy` and ``scipy`` :cite:`core-scipy`,
+and ``matplotlib`` :cite:`core-matplotlib` is often used
+for displaying results.
 
 """
 
