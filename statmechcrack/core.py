@@ -6,7 +6,12 @@ becomes a crack model instance with methods for calculating
 quantities in either thermodynamic ensemble.
 These thermodynamic quantities are calculated using an
 asymptotic approach :cite:`buche2021fundamental`,
-:cite:`buche2022freely` or a Monte Carlo approach.
+:cite:`buche2022freely`, :cite:`buchegrutzikufjc2022`
+or a Monte Carlo approach (see :class:`.CrackMonteCarlo`).
+Basic mathematical capabilities are provided by
+``numpy`` :cite:`numpy` and ``scipy`` :cite:`scipy`,
+and ``matplotlib`` :cite:`matplotlib` is often used
+for displaying results.
 
 """
 
