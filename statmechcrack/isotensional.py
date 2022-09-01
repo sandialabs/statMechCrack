@@ -108,7 +108,8 @@ class CrackIsotensional(CrackIsometric):
         Z_isotensional *= np.exp(-np.sum(self.beta_u(lambda_hat), axis=0))
         return Z_isotensional
 
-    def beta_G_abs_isotensional(self, p, approach='asymptotic'):
+    def beta_G_abs_isotensional(self, p, approach='asymptotic',
+                                transition_state=False):
         r"""The absolute nondimensional Gibbs free energy
         as a function of the nondimensional end force,
 
@@ -119,16 +120,25 @@ class CrackIsotensional(CrackIsometric):
             p (array_like): The nondimensional end force.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            transition_state (bool, optional, default=False):
+                Whether or not to calculate in the transition state.
 
         Returns:
             numpy.ndarray: The absolute nondimensional Gibbs free energy.
 
         """
         if approach == 'asymptotic':
-            s_hat = self.minimize_beta_Pi(p)[2]
-            lambda_hat = s_hat[-self.M:]
+            lambda_hat = self.minimize_beta_Pi(
+                p, transition_state=transition_state
+            )[2][-self.M:]
             beta_G_abs_isotensional = \
                 self.beta_G_0_abs_isotensional(p, lambda_hat)
+            beta_G_abs_isotensional += 0.5*np.sum(
+                np.log(
+                    self.beta_u_pp(lambda_hat[transition_state:])/2/np.pi
+                ), axis=0
+            )
+            beta_G_abs_isotensional += np.sum(self.beta_u(lambda_hat), axis=0)
         elif approach == 'monte carlo':
             beta_G_abs_isotensional = np.nan*p
         return beta_G_abs_isotensional

@@ -136,7 +136,8 @@ class CrackIsometric(CrackMonteCarlo):
             lambda_hat = self.minimize_beta_U(
                 v, transition_state=transition_state
             )[2][-self.M:]
-            beta_A_abs_isometric = self.beta_A_0_abs_isometric(v, lambda_hat)
+            beta_A_abs_isometric = \
+                self.beta_A_0_abs_isometric(v, lambda_hat)
             beta_A_abs_isometric += 0.5*np.sum(
                 np.log(
                     self.beta_u_pp(lambda_hat[transition_state:])/2/np.pi
