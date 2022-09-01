@@ -113,7 +113,8 @@ class CrackIsometric(CrackMonteCarlo):
         Q_isometric *= np.exp(-np.sum(self.beta_u(lambda_hat), axis=0))
         return Q_isometric
 
-    def beta_A_abs_isometric(self, v, approach='asymptotic'):
+    def beta_A_abs_isometric(self, v, approach='asymptotic',
+                             transition_state=False):
         r"""The absolute nondimensional Helmholtz free energy
         as a function of the nondimensional end separation,
 
@@ -124,17 +125,24 @@ class CrackIsometric(CrackMonteCarlo):
             v (array_like): The nondimensional end separation.
             approach (str, optional, default='asymptotic'):
                 The calculation approach.
+            transition_state (bool, optional, default=False):
+                Whether or not to calculate in the transition state.
 
         Returns:
             numpy.ndarray: The absolute nondimensional Helmholtz free energy.
 
         """
         if approach == 'asymptotic':
-            s_hat = self.minimize_beta_U(v)[2]
-            lambda_hat = s_hat[-self.M:]
-            beta_A_abs_isometric = 0.5*self.M*np.log(
-                self.alpha**2*self.varepsilon/np.pi
-            ) + self.beta_A_0_isometric(v, lambda_hat)
+            lambda_hat = self.minimize_beta_U(
+                v, transition_state=transition_state
+            )[2][-self.M:]
+            beta_A_abs_isometric = self.beta_A_0_abs_isometric(v, lambda_hat)
+            beta_A_abs_isometric += 0.5*np.sum(
+                np.log(
+                    self.beta_u_pp(lambda_hat[transition_state:])/2/np.pi
+                ), axis=0
+            )
+            beta_A_abs_isometric += np.sum(self.beta_u(lambda_hat), axis=0)
         elif approach == 'monte carlo':
             beta_A_abs_isometric = np.nan*v
         return beta_A_abs_isometric
