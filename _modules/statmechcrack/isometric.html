@@ -208,7 +208,8 @@
         <span class="n">Q_isometric</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_u</span><span class="p">(</span><span class="n">lambda_hat</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">Q_isometric</span></div>
 
-<div class="viewcode-block" id="CrackIsometric.beta_A_abs_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.beta_A_abs_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_abs_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="CrackIsometric.beta_A_abs_isometric"><a class="viewcode-back" href="../../statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric.beta_A_abs_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">beta_A_abs_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">,</span>
+                             <span class="n">transition_state</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The absolute nondimensional Helmholtz free energy</span>
 <span class="sd">        as a function of the nondimensional end separation,</span>
 
@@ -219,17 +220,25 @@
 <span class="sd">            v (array_like): The nondimensional end separation.</span>
 <span class="sd">            approach (str, optional, default=&#39;asymptotic&#39;):</span>
 <span class="sd">                The calculation approach.</span>
+<span class="sd">            transition_state (bool, optional, default=False):</span>
+<span class="sd">                Whether or not to calculate in the transition state.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            numpy.ndarray: The absolute nondimensional Helmholtz free energy.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;asymptotic&#39;</span><span class="p">:</span>
-            <span class="n">s_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span><span class="n">v</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">lambda_hat</span> <span class="o">=</span> <span class="n">s_hat</span><span class="p">[</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">:]</span>
-            <span class="n">beta_A_abs_isometric</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">varepsilon</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
-            <span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
+            <span class="n">lambda_hat</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimize_beta_U</span><span class="p">(</span>
+                <span class="n">v</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="n">transition_state</span>
+            <span class="p">)[</span><span class="mi">2</span><span class="p">][</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="p">:]</span>
+            <span class="n">beta_A_abs_isometric</span> <span class="o">=</span> \
+                <span class="bp">self</span><span class="o">.</span><span class="n">beta_A_0_abs_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">lambda_hat</span><span class="p">)</span>
+            <span class="n">beta_A_abs_isometric</span> <span class="o">+=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">beta_u_pp</span><span class="p">(</span><span class="n">lambda_hat</span><span class="p">[</span><span class="n">transition_state</span><span class="p">:])</span><span class="o">/</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span>
+                <span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="n">beta_A_abs_isometric</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">beta_u</span><span class="p">(</span><span class="n">lambda_hat</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">approach</span> <span class="o">==</span> <span class="s1">&#39;monte carlo&#39;</span><span class="p">:</span>
             <span class="n">beta_A_abs_isometric</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">*</span><span class="n">v</span>
         <span class="k">return</span> <span class="n">beta_A_abs_isometric</span></div>
