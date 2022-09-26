@@ -137,7 +137,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
             <span class="n">model</span><span class="o">.</span><span class="n">Q_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
@@ -159,7 +159,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
             <span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
             <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
@@ -180,7 +180,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
                 <span class="n">model</span><span class="o">.</span><span class="n">Q_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">),</span>
@@ -221,7 +221,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
             <span class="n">model</span><span class="o">.</span><span class="n">Z_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
@@ -244,7 +244,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
             <span class="n">model</span><span class="o">.</span><span class="n">Z_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
@@ -266,7 +266,7 @@
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">10</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
             <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
