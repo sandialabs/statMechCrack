@@ -21,7 +21,7 @@
    :hidden:
    :caption: Examples
 
-   example_notebook_1
+   crack_growth_rate
 
 .. toctree::
    :hidden:
