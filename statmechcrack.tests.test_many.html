@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -58,13 +59,26 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_many</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_many</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_many.Many"><code class="docutils literal notranslate"><span class="pre">Many</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.main"><code class="docutils literal notranslate"><span class="pre">Many.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_inverses"><code class="docutils literal notranslate"><span class="pre">Many.test_many_inverses()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_0"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_b"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional_0"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional_b"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional_b()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
@@ -119,10 +133,10 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.tests.test_many">
-<span id="statmechcrack-tests-test-many-module"></span><h1>statmechcrack.tests.test_many<a class="headerlink" href="#module-statmechcrack.tests.test_many" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-tests-test-many-module">
+<h1>statmechcrack.tests.test_many<a class="headerlink" href="#statmechcrack-tests-test-many-module" title="Permalink to this heading"></a></h1>
 <p>A module for testing many or more complicated things.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.tests.test_many"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_many.Many">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Many</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">or</span> <span class="pre">More</span> <span class="pre">complex</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_many.html#Many"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_many.Many" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>

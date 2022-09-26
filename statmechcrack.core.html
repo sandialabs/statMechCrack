@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -49,7 +50,27 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Modules</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.core</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.core</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.core.Crack"><code class="docutils literal notranslate"><span class="pre">Crack</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_A"><code class="docutils literal notranslate"><span class="pre">Crack.beta_A()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_A_0"><code class="docutils literal notranslate"><span class="pre">Crack.beta_A_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_A_b"><code class="docutils literal notranslate"><span class="pre">Crack.beta_A_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_G"><code class="docutils literal notranslate"><span class="pre">Crack.beta_G()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_G_0"><code class="docutils literal notranslate"><span class="pre">Crack.beta_G_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.beta_G_b"><code class="docutils literal notranslate"><span class="pre">Crack.beta_G_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k"><code class="docutils literal notranslate"><span class="pre">Crack.k()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k_0"><code class="docutils literal notranslate"><span class="pre">Crack.k_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k_b"><code class="docutils literal notranslate"><span class="pre">Crack.k_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p"><code class="docutils literal notranslate"><span class="pre">Crack.p()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p_0"><code class="docutils literal notranslate"><span class="pre">Crack.p_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p_b"><code class="docutils literal notranslate"><span class="pre">Crack.p_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.v"><code class="docutils literal notranslate"><span class="pre">Crack.v()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.v_0"><code class="docutils literal notranslate"><span class="pre">Crack.v_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.v_b"><code class="docutils literal notranslate"><span class="pre">Crack.v_b()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
@@ -58,7 +79,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -119,8 +140,8 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.core">
-<span id="statmechcrack-core-module"></span><h1>statmechcrack.core<a class="headerlink" href="#module-statmechcrack.core" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-core-module">
+<h1>statmechcrack.core<a class="headerlink" href="#statmechcrack-core-module" title="Permalink to this heading"></a></h1>
 <p>The core module for the crack model.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.core.Crack" title="statmechcrack.core.Crack"><code class="xref py py-class docutils literal notranslate"><span class="pre">Crack</span></code></a>
 which, upon instantiation,
@@ -134,7 +155,7 @@ Basic mathematical capabilities are provided by
 <code class="docutils literal notranslate"><span class="pre">numpy</span></code> <span id="id4">[<a class="reference internal" href="#id15" title="Charles R. Harris, K. Jarrod Millman, Stéfan J van der Walt, Ralf Gommers, Pauli Virtanen, David Cournapeau, Eric Wieser, Julian Taylor, Sebastian Berg, Nathaniel J. Smith, Robert Kern, Matti Picus, Stephan Hoyer, Marten H. van Kerkwijk, Matthew Brett, Allan Haldane, Jaime Fernández del Río, Mark Wiebe, Pearu Peterson, Pierre Gérard-Marchant, Kevin Sheppard, Tyler Reddy, Warren Weckesser, Hameer Abbasi, Christoph Gohlke, and Travis E. Oliphant. Array programming with NumPy. Nature, 585:357-362, 2020. doi:10.1038/s41586-020-2649-2.">4</a>]</span> and <code class="docutils literal notranslate"><span class="pre">scipy</span></code> <span id="id5">[<a class="reference internal" href="#id14" title="Pauli Virtanen, Ralf Gommers, Travis E. Oliphant, Matt Haberland, Tyler Reddy, David Cournapeau, Evgeni Burovski, Pearu Peterson, Warren Weckesser, Jonathan Bright, Stéfan J. van der Walt, Matthew Brett, Joshua Wilson, K. Jarrod Millman, Nikolay Mayorov, Andrew R. J. Nelson, Eric Jones, Robert Kern, Eric Larson, C J Carey, İlhan Polat, Yu Feng, Eric W. Moore, Jake VanderPlas, Denis Laxalde, Josef Perktold, Robert Cimrman, Ian Henriksen, E. A. Quintero, Charles R. Harris, Anne M. Archibald, Antônio H. Ribeiro, Fabian Pedregosa, Paul van Mulbregt, and SciPy 1.0 Contributors. SciPy 1.0: fundamental algorithms for scientific computing in Python. Nature Methods, 17:261–272, 2020. doi:10.1038/s41592-019-0686-2.">6</a>]</span>,
 and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> <span id="id6">[<a class="reference internal" href="#id16" title="John D Hunter. Matplotlib: a 2D graphics environment. Computing in Science &amp; Engineering, 9(03):90–95, 2007. doi:10.1109/MCSE.2007.55.">5</a>]</span> is often used
 for displaying results.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.core"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.core.Crack">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Crack</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional" title="statmechcrack.isotensional.CrackIsotensional"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackIsotensional</span></code></a></p>

@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Example Notebook 1 &mdash; statMechCrack 0.2.0 documentation</title>
+  <title>Crack growth rate &mdash; statMechCrack 0.2.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -60,7 +61,11 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Example Notebook 1</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Crack growth rate</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#Isometric-ensemble">Isometric ensemble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#Isotensional-ensemble">Isotensional ensemble</a></li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -87,9 +92,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Example Notebook 1</li>
+      <li>Crack growth rate</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="_sources/example_notebook_1.ipynb.txt" rel="nofollow"> View page source</a>
+            <a href="_sources/crack_growth_rate.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -375,27 +380,62 @@ div.rendered_html tbody tr:hover {
     text-align: unset;
 }
 </style>
-<section id="Example-Notebook-1">
-<h1>Example Notebook 1<a class="headerlink" href="#Example-Notebook-1" title="Permalink to this heading"></a></h1>
-<p>Note that the above title becomes the <code class="docutils literal notranslate"><span class="pre">toctree</span></code> caption, while the filename is what <code class="docutils literal notranslate"><span class="pre">index.rst</span></code> looks for. Also note that if the output is cleared before pushing the notebook to the repository, the pipeline will execute the notebook and generate the output during the documentation build process. This a good way to ensure the notebooks are up-to-date with the source code.</p>
-<div class="nbinput docutils container">
+<section id="Crack-growth-rate">
+<h1>Crack growth rate<a class="headerlink" href="#Crack-growth-rate" title="Permalink to this heading"></a></h1>
+<p>This example demonstrates how to compute the rate of advancing the crack using the asymptotic approach, and compares with Monte Carlo calculations results.</p>
+<section id="Isometric-ensemble">
+<h2>Isometric ensemble<a class="headerlink" href="#Isometric-ensemble" title="Permalink to this heading"></a></h2>
+<p>This is first done in the isometric thermodynamic ensemble. The crack growth rate will be computed for a set of increasing nondimensional bond energies:</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">varepsilons</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Now the rate (relative to the initial rate) is computed as a function of the nondimensional end separation in a loop for each model. The default calculation approach is asymptotic:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsometric</span>
+<span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">Crack</span>
+
 <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">]:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsometric</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
-    <span class="n">beta_A_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">kappa</span><span class="o">*</span><span class="n">beta_A_0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;$N=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$(N^3/3\kappa)\beta\Delta A_0$&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">k_asymptotic</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">33</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+    <span class="n">k_asymptotic</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Monte Carlo is another calculation approach and does not make approximations, but takes a considerable amount of time. These calculations have already been performed, and the results archived in the local data folder. The steps to obtain these results are commented below, and the results are simply loaded instead:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k_monte_carlo</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">33</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">):</span>
+<span class="c1">#     model = Crack(varepsilon=varepsilon)</span>
+<span class="c1">#     k_monte_carlo[:, i] = model.k(</span>
+<span class="c1">#         v, ensemble=&#39;isometric&#39;, approach=&#39;monte carlo&#39;,</span>
+<span class="c1">#         num_processes=32, num_samples=int(3.125e7))</span>
+    <span class="n">k_monte_carlo</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="s1">&#39;data/k_monte_carlo_isometric_varepsilon_&#39;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The results can now be plotted together:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">k_asymptotic</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">k_monte_carlo</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -403,9 +443,41 @@ div.rendered_html tbody tr:hover {
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="_images/example_notebook_1_1_0.png" src="_images/example_notebook_1_1_0.png" />
+<img alt="_images/crack_growth_rate_8_0.png" src="_images/crack_growth_rate_8_0.png" />
 </div>
 </div>
+</section>
+<section id="Isotensional-ensemble">
+<h2>Isotensional ensemble<a class="headerlink" href="#Isotensional-ensemble" title="Permalink to this heading"></a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">33</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">varepsilons</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
+    <span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+    <span class="n">k_asymptotic</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="n">p</span><span class="p">[:,</span> <span class="n">i</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
+<span class="c1">#     model = Crack(varepsilon=varepsilon)</span>
+<span class="c1">#     k_monte_carlo[:, i] = model.k(</span>
+<span class="c1">#         v, ensemble=&#39;isotensional&#39;, approach=&#39;monte carlo&#39;,</span>
+<span class="c1">#         num_processes=32, num_samples=int(3.125e7))</span>
+    <span class="n">k_monte_carlo</span><span class="p">[:,</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+        <span class="s1">&#39;data/k_monte_carlo_isotensional_varepsilon_&#39;</span>
+        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.npy&#39;</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k_asymptotic</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">k_monte_carlo</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="_images/crack_growth_rate_10_0.png" src="_images/crack_growth_rate_10_0.png" />
+</div>
+</div>
+</section>
 </section>
 
 

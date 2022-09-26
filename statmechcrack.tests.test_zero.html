@@ -18,12 +18,13 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="statmechcrack.tests.test_one module" href="statmechcrack.tests.test_one.html" />
-    <link rel="prev" title="Example Notebook 1" href="example_notebook_1.html" /> 
+    <link rel="prev" title="Crack growth rate" href="crack_growth_rate.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -58,11 +59,25 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_zero</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_zero</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero"><code class="docutils literal notranslate"><span class="pre">Zero</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.main"><code class="docutils literal notranslate"><span class="pre">Zero.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_inverse"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_minimized_nondimensional_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_minimized_nondimensional_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_end_force"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_end_force()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_jacobian"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_jacobian()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_relative_nondimensional_gibbs_free_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_relative_nondimensional_gibbs_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_zero.Zero.test_zero_relative_nondimensional_helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_relative_nondimensional_helmholtz_free_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_zero.random_crack_model"><code class="docutils literal notranslate"><span class="pre">random_crack_model()</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
@@ -119,10 +134,10 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.tests.test_zero">
-<span id="statmechcrack-tests-test-zero-module"></span><h1>statmechcrack.tests.test_zero<a class="headerlink" href="#module-statmechcrack.tests.test_zero" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-tests-test-zero-module">
+<h1>statmechcrack.tests.test_zero<a class="headerlink" href="#statmechcrack-tests-test-zero-module" title="Permalink to this heading"></a></h1>
 <p>A module for testing when something is zero.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.tests.test_zero"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_zero.Zero">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Zero</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_zero.html#Zero"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_zero.Zero" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>
@@ -179,7 +194,7 @@
 
 <dl class="py function">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_zero.random_crack_model">
-<span class="sig-name descname"><span class="pre">random_crack_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">21</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">82.59194478091283</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.965776905013111</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varepsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">68.68000337702482</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_zero.html#random_crack_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_zero.random_crack_model" title="Permalink to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">random_crack_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">73.81724384464123</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0636108490049951</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varepsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">59.322801126852696</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_zero.html#random_crack_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_zero.random_crack_model" title="Permalink to this definition"></a></dt>
 <dd><p>Function to produce a random crack model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -206,7 +221,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="example_notebook_1.html" class="btn btn-neutral float-left" title="Example Notebook 1" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="crack_growth_rate.html" class="btn btn-neutral float-left" title="Crack growth rate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="statmechcrack.tests.test_one.html" class="btn btn-neutral float-right" title="statmechcrack.tests.test_one module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

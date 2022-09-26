@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -54,13 +55,65 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.core.html">statmechcrack.core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.mechanical</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.mechanical</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.N"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.N</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.M"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.M</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.L"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.L</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.kappa"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.kappa</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.alpha"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.alpha</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.varepsilon"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.varepsilon</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_Pi"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_Pi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_Pi_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_Pi_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_Pi_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_Pi_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_Pi_1"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_Pi_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_Pi_TS"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_Pi_TS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_U"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_U()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_U_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_U_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_U_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_U_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_U_1"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_U_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.H_U_TS"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.H_U_TS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_Pi"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_Pi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_Pi_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_Pi_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_Pi_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_Pi_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_U"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_U()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_U_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_U_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_U_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_U_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_U_01"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_U_01()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_U_1"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_U_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_u"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_u()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_u_p"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_u_p()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.beta_u_pp"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.beta_u_pp()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_Pi"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_Pi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_Pi_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_Pi_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_Pi_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_Pi_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_Pi_1"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_Pi_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_Pi_TS"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_Pi_TS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_U"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_U()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_U_0"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_U_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_U_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_U_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_U_1"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_U_1()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.j_U_TS"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.j_U_TS()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.minimize_beta_Pi"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.minimize_beta_Pi()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.minimize_beta_Pi_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.minimize_beta_Pi_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.minimize_beta_U"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.minimize_beta_U()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.minimize_beta_U_00"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.minimize_beta_U_00()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.p_0_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.p_0_mechanical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.p_b_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.p_b_mechanical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.p_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.p_mechanical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.v_0_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.v_0_mechanical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.v_b_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.v_b_mechanical()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical.v_mechanical"><code class="docutils literal notranslate"><span class="pre">CrackMechanical.v_mechanical()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.monte_carlo.html">statmechcrack.monte_carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -121,13 +174,13 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.mechanical">
-<span id="statmechcrack-mechanical-module"></span><h1>statmechcrack.mechanical<a class="headerlink" href="#module-statmechcrack.mechanical" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-mechanical-module">
+<h1>statmechcrack.mechanical<a class="headerlink" href="#statmechcrack-mechanical-module" title="Permalink to this heading"></a></h1>
 <p>A module for the crack model treated mechanically.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical" title="statmechcrack.mechanical.CrackMechanical"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMechanical</span></code></a> which
 contains methods for computing quantities when treating
 the crack model mechanically rather than statistical mechanically.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.mechanical"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMechanical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varepsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="statmechcrack.utility.html#statmechcrack.utility.BasicUtility" title="statmechcrack.utility.BasicUtility"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicUtility</span></code></a></p>

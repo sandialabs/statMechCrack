@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -55,12 +56,34 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.monte_carlo</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.monte_carlo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.beta_A_isometric_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_A_isometric_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.beta_A_isometric_monte_carlo_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.beta_G_isotensional_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.beta_G_isotensional_monte_carlo_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.burn_in"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.burn_in()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.k_isometric_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isometric_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.k_isometric_monte_carlo_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.k_isotensional_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.k_isotensional_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.k_isotensional_monte_carlo_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.mh_next_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.mh_next_config_append"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.mh_next_config_append()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.p_isometric_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.p_isometric_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.p_isometric_monte_carlo_serial()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.parallel_calculation"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.parallel_calculation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.trial_config"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.trial_config()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.v_isotensional_monte_carlo()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo.v_isotensional_monte_carlo_serial"><code class="docutils literal notranslate"><span class="pre">CrackMonteCarlo.v_isotensional_monte_carlo_serial()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -121,13 +144,13 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.monte_carlo">
-<span id="statmechcrack-monte-carlo-module"></span><h1>statmechcrack.monte_carlo<a class="headerlink" href="#module-statmechcrack.monte_carlo" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-monte-carlo-module">
+<h1>statmechcrack.monte_carlo<a class="headerlink" href="#statmechcrack-monte-carlo-module" title="Permalink to this heading"></a></h1>
 <p>A module for the Metropolis-Hastings Markov chain Monte Carlo method.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="statmechcrack.monte_carlo.CrackMonteCarlo"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMonteCarlo</span></code></a> which contains
 methods to compute crack model quantities using the
 Metropolis-Hastings Markov chain Monte Carlo method <span id="id1">[<a class="reference internal" href="#id3" title="James M Haile. Molecular Dynamics Simulation: Elementary Methods. Wiley, 1992. URL: https://www.wiley.com/Molecular+Dynamics+Simulation:+Elementary+Methods-p-9780471184393.">1</a>]</span>.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.monte_carlo"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.monte_carlo.CrackMonteCarlo">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMonteCarlo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/monte_carlo.html#CrackMonteCarlo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.monte_carlo.CrackMonteCarlo" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="statmechcrack.mechanical.html#statmechcrack.mechanical.CrackMechanical" title="statmechcrack.mechanical.CrackMechanical"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMechanical</span></code></a></p>

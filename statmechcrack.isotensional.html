@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -53,14 +54,34 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.core.html">statmechcrack.core</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isometric.html">statmechcrack.isometric</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.isotensional</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.isotensional</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.Z_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.Z_0_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.Z_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.Z_b_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.Z_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.Z_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_0_abs_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_0_abs_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_0_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_abs_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_abs_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_b_abs_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_b_abs_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_b_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.beta_G_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.beta_G_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_0_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_b_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_0_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_b_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_isotensional()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.monte_carlo.html">statmechcrack.monte_carlo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.utility.html">statmechcrack.utility</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -121,13 +142,13 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.isotensional">
-<span id="statmechcrack-isotensional-module"></span><h1>statmechcrack.isotensional<a class="headerlink" href="#module-statmechcrack.isotensional" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-isotensional-module">
+<h1>statmechcrack.isotensional<a class="headerlink" href="#statmechcrack-isotensional-module" title="Permalink to this heading"></a></h1>
 <p>A module for the crack model in the isotensional ensemble.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional" title="statmechcrack.isotensional.CrackIsotensional"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackIsotensional</span></code></a> which
 contains methods for computing quantities in the
 isotensional (constant force) thermodynamic ensemble.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.isotensional"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.isotensional.CrackIsotensional">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackIsotensional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isotensional.html#CrackIsotensional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isotensional.CrackIsotensional" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="statmechcrack.isometric.html#statmechcrack.isometric.CrackIsometric" title="statmechcrack.isometric.CrackIsometric"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackIsometric</span></code></a></p>

@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -57,7 +58,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul class="current">
@@ -67,7 +68,14 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_style</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_style</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_style.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_style.Style.main"><code class="docutils literal notranslate"><span class="pre">Style.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_style.Style.test_pep8_conformance"><code class="docutils literal notranslate"><span class="pre">Style.test_pep8_conformance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -118,12 +126,12 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.tests.test_style">
-<span id="statmechcrack-tests-test-style-module"></span><h1>statmechcrack.tests.test_style<a class="headerlink" href="#module-statmechcrack.tests.test_style" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-tests-test-style-module">
+<h1>statmechcrack.tests.test_style<a class="headerlink" href="#statmechcrack-tests-test-style-module" title="Permalink to this heading"></a></h1>
 <p>A module for testing the Python style.</p>
 <p>This module checks all other modules in the package (including itself)
 for adherence to the PEP 8 style standard for Python code.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.tests.test_style"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_style.Style">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Style</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_style.html#Style"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_style.Style" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>

@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -58,7 +59,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul class="current">
@@ -67,7 +68,14 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_examples</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_examples.Examples"><code class="docutils literal notranslate"><span class="pre">Examples</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_examples.Examples.main"><code class="docutils literal notranslate"><span class="pre">Examples.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_examples.Examples.test_docstring_examples"><code class="docutils literal notranslate"><span class="pre">Examples.test_docstring_examples()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
 </ul>
 
@@ -119,13 +127,13 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.tests.test_examples">
-<span id="statmechcrack-tests-test-examples-module"></span><h1>statmechcrack.tests.test_examples<a class="headerlink" href="#module-statmechcrack.tests.test_examples" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-tests-test-examples-module">
+<h1>statmechcrack.tests.test_examples<a class="headerlink" href="#statmechcrack-tests-test-examples-module" title="Permalink to this heading"></a></h1>
 <p>A module for testing examples within docstrings.</p>
 <p>This module checks all other modules in the package
 and ensures that the examples within each docstring
 are executed properly and obtain the expected output.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.tests.test_examples"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_examples.Examples">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Examples</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_examples.html#Examples"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_examples.Examples" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>

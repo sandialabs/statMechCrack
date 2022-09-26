@@ -18,11 +18,12 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example Notebook 1" href="example_notebook_1.html" />
+    <link rel="next" title="Crack growth rate" href="crack_growth_rate.html" />
     <link rel="prev" title="statmechcrack.monte_carlo module" href="statmechcrack.monte_carlo.html" /> 
 </head>
 
@@ -54,11 +55,20 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.isotensional.html">statmechcrack.isotensional</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.mechanical.html">statmechcrack.mechanical</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.monte_carlo.html">statmechcrack.monte_carlo</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.utility</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.utility</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.utility.BasicUtility"><code class="docutils literal notranslate"><span class="pre">BasicUtility</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.utility.BasicUtility.maximum_float"><code class="docutils literal notranslate"><span class="pre">BasicUtility.maximum_float</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.utility.BasicUtility.maximum_exponent"><code class="docutils literal notranslate"><span class="pre">BasicUtility.maximum_exponent</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.utility.BasicUtility.inv_fun"><code class="docutils literal notranslate"><span class="pre">BasicUtility.inv_fun()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.utility.BasicUtility.np_array"><code class="docutils literal notranslate"><span class="pre">BasicUtility.np_array()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -119,13 +129,13 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.utility">
-<span id="statmechcrack-utility-module"></span><h1>statmechcrack.utility<a class="headerlink" href="#module-statmechcrack.utility" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-utility-module">
+<h1>statmechcrack.utility<a class="headerlink" href="#statmechcrack-utility-module" title="Permalink to this heading"></a></h1>
 <p>A module for basic crack model utilities.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.utility.BasicUtility" title="statmechcrack.utility.BasicUtility"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicUtility</span></code></a> which contains
 attributes and methods that are meant to be inherited and utilized as
 basic utilities by an arbitrary crack model class.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.utility"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.utility.BasicUtility">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">BasicUtility</span></span><a class="reference internal" href="_modules/statmechcrack/utility.html#BasicUtility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.utility.BasicUtility" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -223,7 +233,7 @@ rather than shape () numpy arrays, which is useful for indexing.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="statmechcrack.monte_carlo.html" class="btn btn-neutral float-left" title="statmechcrack.monte_carlo module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="example_notebook_1.html" class="btn btn-neutral float-right" title="Example Notebook 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="crack_growth_rate.html" class="btn btn-neutral float-right" title="Crack growth rate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

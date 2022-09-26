@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -58,7 +59,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul class="current">
@@ -66,7 +67,19 @@
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_interface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">statmechcrack.tests.test_interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface"><code class="docutils literal notranslate"><span class="pre">Interface</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.main"><code class="docutils literal notranslate"><span class="pre">Interface.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_inverse"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_nondimensional_end_force"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_nondimensional_end_force()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_nondimensional_end_separation"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_nondimensional_end_separation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_gibbs_free_energy"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_gibbs_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_helmholtz_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_reaction_rate_coefficient"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_reaction_rate_coefficient()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
 </ul>
@@ -119,10 +132,10 @@
     text-align: unset;
 }
 </style>
-<section id="module-statmechcrack.tests.test_interface">
-<span id="statmechcrack-tests-test-interface-module"></span><h1>statmechcrack.tests.test_interface<a class="headerlink" href="#module-statmechcrack.tests.test_interface" title="Permalink to this heading"></a></h1>
+<section id="statmechcrack-tests-test-interface-module">
+<h1>statmechcrack.tests.test_interface<a class="headerlink" href="#statmechcrack-tests-test-interface-module" title="Permalink to this heading"></a></h1>
 <p>A module for testing interfaces.</p>
-<dl class="py class">
+<span class="target" id="module-statmechcrack.tests.test_interface"></span><dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.tests.test_interface.Interface">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">methodName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'runTest'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/tests/test_interface.html#Interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.tests.test_interface.Interface" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">TestCase</span></code></p>

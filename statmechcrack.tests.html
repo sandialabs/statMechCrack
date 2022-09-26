@@ -18,6 +18,7 @@
         <script src="_static/underscore.js"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -56,7 +57,7 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Examples</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="example_notebook_1.html">Example Notebook 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crack_growth_rate.html">Crack growth rate</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tests</span></p>
 <ul>
@@ -124,13 +125,86 @@
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.__main__.html">statmechcrack.tests.__main__</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a></li>
-<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a></li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_boundary.html">statmechcrack.tests.test_boundary</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary"><code class="docutils literal notranslate"><span class="pre">Boundary</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.main"><code class="docutils literal notranslate"><span class="pre">Boundary.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.test_boundary_nondimensional_end_separation"><code class="docutils literal notranslate"><span class="pre">Boundary.test_boundary_nondimensional_end_separation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.test_boundary_nondimensional_force"><code class="docutils literal notranslate"><span class="pre">Boundary.test_boundary_nondimensional_force()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.test_boundary_relative_nondimensional_gibbs_free_energy"><code class="docutils literal notranslate"><span class="pre">Boundary.test_boundary_relative_nondimensional_gibbs_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.test_boundary_relative_nondimensional_helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">Boundary.test_boundary_relative_nondimensional_helmholtz_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_boundary.html#statmechcrack.tests.test_boundary.Boundary.test_boundary_relative_nondimensional_reaction_rate_coefficient"><code class="docutils literal notranslate"><span class="pre">Boundary.test_boundary_relative_nondimensional_reaction_rate_coefficient()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_examples.html">statmechcrack.tests.test_examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_examples.html#statmechcrack.tests.test_examples.Examples"><code class="docutils literal notranslate"><span class="pre">Examples</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_examples.html#statmechcrack.tests.test_examples.Examples.main"><code class="docutils literal notranslate"><span class="pre">Examples.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_examples.html#statmechcrack.tests.test_examples.Examples.test_docstring_examples"><code class="docutils literal notranslate"><span class="pre">Examples.test_docstring_examples()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_interface.html">statmechcrack.tests.test_interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface"><code class="docutils literal notranslate"><span class="pre">Interface</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.main"><code class="docutils literal notranslate"><span class="pre">Interface.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_inverse"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_nondimensional_end_force"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_nondimensional_end_force()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_nondimensional_end_separation"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_nondimensional_end_separation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_gibbs_free_energy"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_gibbs_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_helmholtz_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_interface.html#statmechcrack.tests.test_interface.Interface.test_interface_relative_nondimensional_reaction_rate_coefficient"><code class="docutils literal notranslate"><span class="pre">Interface.test_interface_relative_nondimensional_reaction_rate_coefficient()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_many.html">statmechcrack.tests.test_many</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many"><code class="docutils literal notranslate"><span class="pre">Many</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.main"><code class="docutils literal notranslate"><span class="pre">Many.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_inverses"><code class="docutils literal notranslate"><span class="pre">Many.test_many_inverses()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_0"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_b"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isometric_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional_0"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional_0()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional_b"><code class="docutils literal notranslate"><span class="pre">Many.test_many_thermodynamic_connection_isotensional_b()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_one.html">statmechcrack.tests.test_one</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_one.html#statmechcrack.tests.test_one.One"><code class="docutils literal notranslate"><span class="pre">One</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_one.html#statmechcrack.tests.test_one.One.main"><code class="docutils literal notranslate"><span class="pre">One.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_one.html#statmechcrack.tests.test_one.One.test_one_inverse"><code class="docutils literal notranslate"><span class="pre">One.test_one_inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_one.html#statmechcrack.tests.test_one.One.test_one_nondimensional_end_separation"><code class="docutils literal notranslate"><span class="pre">One.test_one_nondimensional_end_separation()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_one.html#statmechcrack.tests.test_one.One.test_one_relative_nondimensional_reaction_rate_coefficient"><code class="docutils literal notranslate"><span class="pre">One.test_one_relative_nondimensional_reaction_rate_coefficient()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_style.html">statmechcrack.tests.test_style</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_style.html#statmechcrack.tests.test_style.Style"><code class="docutils literal notranslate"><span class="pre">Style</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_style.html#statmechcrack.tests.test_style.Style.main"><code class="docutils literal notranslate"><span class="pre">Style.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_style.html#statmechcrack.tests.test_style.Style.test_pep8_conformance"><code class="docutils literal notranslate"><span class="pre">Style.test_pep8_conformance()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="statmechcrack.tests.test_zero.html">statmechcrack.tests.test_zero</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero"><code class="docutils literal notranslate"><span class="pre">Zero</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.main"><code class="docutils literal notranslate"><span class="pre">Zero.main()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_inverse"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_inverse()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_minimized_nondimensional_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_minimized_nondimensional_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_end_force"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_end_force()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_nondimensional_jacobian"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_nondimensional_jacobian()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_relative_nondimensional_gibbs_free_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_relative_nondimensional_gibbs_free_energy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.Zero.test_zero_relative_nondimensional_helmholtz_free_energy"><code class="docutils literal notranslate"><span class="pre">Zero.test_zero_relative_nondimensional_helmholtz_free_energy()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="statmechcrack.tests.test_zero.html#statmechcrack.tests.test_zero.random_crack_model"><code class="docutils literal notranslate"><span class="pre">random_crack_model()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>
