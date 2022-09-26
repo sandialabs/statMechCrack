@@ -41,7 +41,7 @@ class Many(unittest.TestCase):
         """
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         self.assertTrue((
             model.Q_b_isometric(v, [rgn0, rgn1]) ==
             np.exp(-model.beta_A_b(
@@ -63,7 +63,7 @@ class Many(unittest.TestCase):
         """
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         self.assertTrue((
             model.Q_0_isometric(v, [rgn0, rgn1]) ==
             np.exp(-model.beta_A_0(
@@ -84,7 +84,7 @@ class Many(unittest.TestCase):
 
         """
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         self.assertTrue(
             np.allclose(
                 model.Q_isometric(v),
@@ -125,7 +125,7 @@ class Many(unittest.TestCase):
         """
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         p = model.p(v, ensemble='isotensional')
         self.assertTrue((
             model.Z_b_isotensional(p, [rgn0, rgn1]) ==
@@ -148,7 +148,7 @@ class Many(unittest.TestCase):
         """
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         p = model.p(v, ensemble='isotensional')
         self.assertTrue((
             model.Z_0_isotensional(p, [rgn0, rgn1]) ==
@@ -170,7 +170,7 @@ class Many(unittest.TestCase):
 
         """
         model = random_crack_model()
-        v = 1 + 10*np.random.rand(88)
+        v = 1 + np.random.rand(88)
         p = model.p(v, ensemble='isotensional')
         self.assertTrue(
             np.allclose(
