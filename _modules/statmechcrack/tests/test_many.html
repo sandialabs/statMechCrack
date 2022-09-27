@@ -127,7 +127,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">BasicUtility</span><span class="p">()</span><span class="o">.</span><span class="n">inv_fun</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isclose</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
 
 <div class="viewcode-block" id="Many.test_many_thermodynamic_connection_isometric_b"><a class="viewcode-back" href="../../../statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_b">[docs]</a>    <span class="k">def</span> <span class="nf">test_many_thermodynamic_connection_isometric_b</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to test the principal thermodynamic connection</span>
@@ -138,18 +138,22 @@
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
         <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">Q_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
-                <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">))</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Q_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]))</span> <span class="o">==</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
-                <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">Q_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">))</span>
             <span class="p">)</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Q_b_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])),</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">beta_A_b</span><span class="p">(</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Many.test_many_thermodynamic_connection_isometric_0"><a class="viewcode-back" href="../../../statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric_0">[docs]</a>    <span class="k">def</span> <span class="nf">test_many_thermodynamic_connection_isometric_0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to test the principal thermodynamic connection</span>
@@ -160,18 +164,22 @@
         <span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
         <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
-                <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">))</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]))</span> <span class="o">==</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
-                <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">))</span>
             <span class="p">)</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Q_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])),</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">beta_A_0</span><span class="p">(</span>
+                    <span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Many.test_many_thermodynamic_connection_isometric"><a class="viewcode-back" href="../../../statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isometric">[docs]</a>    <span class="k">def</span> <span class="nf">test_many_thermodynamic_connection_isometric</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to test the principal thermodynamic connection</span>
@@ -223,18 +231,22 @@
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
         <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">Z_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_G_b</span><span class="p">(</span>
-                <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">))</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Z_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]))</span> <span class="o">==</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">beta_G_b</span><span class="p">(</span>
-                <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">Z_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_G_b</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">))</span>
             <span class="p">)</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Z_b_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])),</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">beta_G_b</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Many.test_many_thermodynamic_connection_isotensional_0"><a class="viewcode-back" href="../../../statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional_0">[docs]</a>    <span class="k">def</span> <span class="nf">test_many_thermodynamic_connection_isotensional_0</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to test the principal thermodynamic connection</span>
@@ -246,18 +258,22 @@
         <span class="n">model</span> <span class="o">=</span> <span class="n">random_crack_model</span><span class="p">()</span>
         <span class="n">v</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">88</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">Z_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])</span> <span class="o">==</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_G_0</span><span class="p">(</span>
-                <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
-            <span class="p">))</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">((</span>
-            <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Z_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]))</span> <span class="o">==</span>
-            <span class="n">model</span><span class="o">.</span><span class="n">beta_G_0</span><span class="p">(</span>
-                <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">Z_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">]),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">model</span><span class="o">.</span><span class="n">beta_G_0</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">))</span>
             <span class="p">)</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">())</span></div>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">assertTrue</span><span class="p">(</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">model</span><span class="o">.</span><span class="n">Z_0_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">])),</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">beta_G_0</span><span class="p">(</span>
+                    <span class="n">p</span><span class="p">,</span> <span class="p">[</span><span class="n">rgn0</span><span class="p">,</span> <span class="n">rgn1</span><span class="p">],</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">,</span> <span class="n">absolute</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span></div>
 
 <div class="viewcode-block" id="Many.test_many_thermodynamic_connection_isotensional"><a class="viewcode-back" href="../../../statmechcrack.tests.test_many.html#statmechcrack.tests.test_many.Many.test_many_thermodynamic_connection_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">test_many_thermodynamic_connection_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Function to test the principal thermodynamic connection</span>
