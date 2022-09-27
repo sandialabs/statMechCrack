@@ -31,7 +31,7 @@ class Many(unittest.TestCase):
         """
         y = np.random.rand(88)
         x = BasicUtility().inv_fun(lambda x: x**2, y)
-        self.assertTrue(np.isclose(y, x**2).all())
+        self.assertTrue(np.allclose(y, x**2))
 
     def test_many_thermodynamic_connection_isometric_b(self):
         """Function to test the principal thermodynamic connection
@@ -42,18 +42,22 @@ class Many(unittest.TestCase):
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
         v = 1 + np.random.rand(88)
-        self.assertTrue((
-            model.Q_b_isometric(v, [rgn0, rgn1]) ==
-            np.exp(-model.beta_A_b(
-                v, [rgn0, rgn1], ensemble='isometric', absolute=True
-            ))
-        ).all())
-        self.assertTrue((
-            np.log(1/model.Q_b_isometric(v, [rgn0, rgn1])) ==
-            model.beta_A_b(
-                v, [rgn0, rgn1], ensemble='isometric', absolute=True
+        self.assertTrue(
+            np.allclose(
+                model.Q_b_isometric(v, [rgn0, rgn1]),
+                np.exp(-model.beta_A_b(
+                    v, [rgn0, rgn1], ensemble='isometric', absolute=True
+                ))
             )
-        ).all())
+        )
+        self.assertTrue(
+            np.allclose(
+                np.log(1/model.Q_b_isometric(v, [rgn0, rgn1])),
+                model.beta_A_b(
+                    v, [rgn0, rgn1], ensemble='isometric', absolute=True
+                )
+            )
+        )
 
     def test_many_thermodynamic_connection_isometric_0(self):
         """Function to test the principal thermodynamic connection
@@ -64,18 +68,22 @@ class Many(unittest.TestCase):
         rgn0, rgn1 = np.random.rand(2)
         model = random_crack_model()
         v = 1 + np.random.rand(88)
-        self.assertTrue((
-            model.Q_0_isometric(v, [rgn0, rgn1]) ==
-            np.exp(-model.beta_A_0(
-                v, [rgn0, rgn1], ensemble='isometric', absolute=True
-            ))
-        ).all())
-        self.assertTrue((
-            np.log(1/model.Q_0_isometric(v, [rgn0, rgn1])) ==
-            model.beta_A_0(
-                v, [rgn0, rgn1], ensemble='isometric', absolute=True
+        self.assertTrue(
+            np.allclose(
+                model.Q_0_isometric(v, [rgn0, rgn1]),
+                np.exp(-model.beta_A_0(
+                    v, [rgn0, rgn1], ensemble='isometric', absolute=True
+                ))
             )
-        ).all())
+        )
+        self.assertTrue(
+            np.allclose(
+                np.log(1/model.Q_0_isometric(v, [rgn0, rgn1])),
+                model.beta_A_0(
+                    v, [rgn0, rgn1], ensemble='isometric', absolute=True
+                )
+            )
+        )
 
     def test_many_thermodynamic_connection_isometric(self):
         """Function to test the principal thermodynamic connection
@@ -127,18 +135,22 @@ class Many(unittest.TestCase):
         model = random_crack_model()
         v = 1 + np.random.rand(88)
         p = model.p(v, ensemble='isotensional')
-        self.assertTrue((
-            model.Z_b_isotensional(p, [rgn0, rgn1]) ==
-            np.exp(-model.beta_G_b(
-                p, [rgn0, rgn1], ensemble='isotensional', absolute=True
-            ))
-        ).all())
-        self.assertTrue((
-            np.log(1/model.Z_b_isotensional(p, [rgn0, rgn1])) ==
-            model.beta_G_b(
-                p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+        self.assertTrue(
+            np.allclose(
+                model.Z_b_isotensional(p, [rgn0, rgn1]),
+                np.exp(-model.beta_G_b(
+                    p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+                ))
             )
-        ).all())
+        )
+        self.assertTrue(
+            np.allclose(
+                np.log(1/model.Z_b_isotensional(p, [rgn0, rgn1])),
+                model.beta_G_b(
+                    p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+                )
+            )
+        )
 
     def test_many_thermodynamic_connection_isotensional_0(self):
         """Function to test the principal thermodynamic connection
@@ -150,18 +162,22 @@ class Many(unittest.TestCase):
         model = random_crack_model()
         v = 1 + np.random.rand(88)
         p = model.p(v, ensemble='isotensional')
-        self.assertTrue((
-            model.Z_0_isotensional(p, [rgn0, rgn1]) ==
-            np.exp(-model.beta_G_0(
-                p, [rgn0, rgn1], ensemble='isotensional', absolute=True
-            ))
-        ).all())
-        self.assertTrue((
-            np.log(1/model.Z_0_isotensional(p, [rgn0, rgn1])) ==
-            model.beta_G_0(
-                p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+        self.assertTrue(
+            np.allclose(
+                model.Z_0_isotensional(p, [rgn0, rgn1]),
+                np.exp(-model.beta_G_0(
+                    p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+                ))
             )
-        ).all())
+        )
+        self.assertTrue(
+            np.allclose(
+                np.log(1/model.Z_0_isotensional(p, [rgn0, rgn1])),
+                model.beta_G_0(
+                    p, [rgn0, rgn1], ensemble='isotensional', absolute=True
+                )
+            )
+        )
 
     def test_many_thermodynamic_connection_isotensional(self):
         """Function to test the principal thermodynamic connection
