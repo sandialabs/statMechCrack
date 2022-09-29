@@ -7,6 +7,7 @@
   <title>statmechcrack.mechanical module &mdash; statMechCrack 0.2.0 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
       <link rel="stylesheet" href="_static/plot_directive.css" type="text/css" />
       <link rel="stylesheet" href="_static/custom.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,6 +20,8 @@
         <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
         <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -174,13 +177,13 @@
     text-align: unset;
 }
 </style>
-<section id="statmechcrack-mechanical-module">
-<h1>statmechcrack.mechanical<a class="headerlink" href="#statmechcrack-mechanical-module" title="Permalink to this heading"></a></h1>
+<section id="module-statmechcrack.mechanical">
+<span id="statmechcrack-mechanical-module"></span><h1>statmechcrack.mechanical<a class="headerlink" href="#module-statmechcrack.mechanical" title="Permalink to this heading"></a></h1>
 <p>A module for the crack model treated mechanically.</p>
 <p>This module consist of the class <a class="reference internal" href="#statmechcrack.mechanical.CrackMechanical" title="statmechcrack.mechanical.CrackMechanical"><code class="xref py py-class docutils literal notranslate"><span class="pre">CrackMechanical</span></code></a> which
 contains methods for computing quantities when treating
 the crack model mechanically rather than statistical mechanically.</p>
-<span class="target" id="module-statmechcrack.mechanical"></span><dl class="py class">
+<dl class="py class">
 <dt class="sig sig-object py" id="statmechcrack.mechanical.CrackMechanical">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">CrackMechanical</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">M</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kappa</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">varepsilon</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/mechanical.html#CrackMechanical"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.mechanical.CrackMechanical" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="statmechcrack.utility.html#statmechcrack.utility.BasicUtility" title="statmechcrack.utility.BasicUtility"><code class="xref py py-class docutils literal notranslate"><span class="pre">BasicUtility</span></code></a></p>
