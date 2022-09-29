@@ -8,5 +8,6 @@ numpy
 pycodestyle
 scipy
 sphinx
+sphinx-copybutton
 sphinx-rtd-theme
 sphinxcontrib-bibtex
