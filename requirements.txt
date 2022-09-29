@@ -15,6 +15,7 @@ pytest-cov
 scipy
 setuptools
 sphinx
+sphinx-copybutton
 sphinx-rtd-theme
 sphinxcontrib-bibtex
 twine
