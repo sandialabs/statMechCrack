@@ -74,9 +74,8 @@ jobs:
       - name: Upload to Anaconda.org
         run: |
           PATH="/usr/share/miniconda/bin/:$PATH"
-          anaconda login --username mrbuche --password ${{ secrets.ANACONDA_PASSWORD }}
-          anaconda upload --force /usr/share/miniconda/conda-bld/noarch/statmechcrack*.tar.bz2
-          anaconda logout
+          export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
+          anaconda upload --user mrbuche --force /usr/share/miniconda/conda-bld/noarch/statmechcrack*.tar.bz2
       - name: Give upload time before downloading
         run: sleep 234s
   test-anaconda:
