@@ -17,6 +17,7 @@ jobs:
         run: |
           shopt -s extglob
           cd examples/ && cp -r !(statmechcrack) ../docs/ && cd ../
+          cp ./setup.py docs/setup.py
           cp ./README.rst docs/README.rst
           cp ./.readthedocs.yaml docs/.readthedocs.yaml
       - name: Upload docs
@@ -47,6 +48,7 @@ jobs:
       - name: Move README.rst and .readthedocs.yaml
         run: |
           ls docs/
+          mv docs/setup.py ./setup.py
           mv docs/README.rst ./README.rst
           mv docs/.readthedocs.yaml ./.readthedocs.yaml
       - name: Download source
@@ -58,6 +60,7 @@ jobs:
         run: |
           git config user.name "GitHub Actions"
           git config user.email "<>"
+          git add setup.py
           git add README.rst
           git add .readthedocs.yaml
           git add docs/
