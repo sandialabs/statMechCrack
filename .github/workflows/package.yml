@@ -44,8 +44,10 @@ jobs:
     needs: [get-version, pypi]
     runs-on: ubuntu-20.04
     steps:
+      - uses: actions/checkout@v2
       - name: Prepare conda
         run: |
+          rm -rf statmechcrack
           conda update conda
           conda install anaconda-client conda-build
       - name: Create conda recipe from PyPI
@@ -120,18 +122,4 @@ jobs:
     steps:
       - name: Test the package
         run: |
-          python -m statmechcrack.tests
-  test-zenodo:
-    needs: get-version
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Give upload time before downloading
-        run: sleep 234s
-      - uses: actions/checkout@v3
-      - name: test zenodo
-        run: |
-          curl https://zenodo.org/record/7023259/files/sandialabs/statmechcrack-v${{ needs.get-version.outputs.VERSION }}.zip?download=1 -o clone.zip
-          unzip -d clone/ clone.zip
-          cd clone/$(ls clone/)
-          pip install numpy scipy
           python -m statmechcrack.tests
