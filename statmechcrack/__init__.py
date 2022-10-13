@@ -9,4 +9,4 @@ from .mechanical import CrackMechanical
 from .monte_carlo import CrackMonteCarlo
 
 
-__version__ = "0.2.1"
+__version__ = "0.2.2"
