@@ -30,7 +30,7 @@ jobs:
       - name: Upload to PyPI.org
         run: twine upload -u __token__ -p ${{ secrets.PYPI_TOKEN }} dist/*
       - name: Give upload time before downloading
-        run: sleep 234s
+        run: sleep 500s
   test-pypi:
     needs: [get-version, pypi]
     runs-on: ubuntu-20.04
@@ -77,7 +77,7 @@ jobs:
           export ANACONDA_API_TOKEN=${{ secrets.ANACONDA_TOKEN }}
           anaconda upload --user mrbuche --force /usr/share/miniconda/conda-bld/noarch/statmechcrack*.tar.bz2
       - name: Give upload time before downloading
-        run: sleep 234s
+        run: sleep 500s
   test-anaconda:
     needs: [get-version, anaconda]
     runs-on: ubuntu-20.04
@@ -113,7 +113,7 @@ jobs:
             mrbuche/statmechcrack:latest
             mrbuche/statmechcrack:${{ needs.get-version.outputs.VERSION }}
       - name: Give upload time before downloading
-        run: sleep 234s
+        run: sleep 500s
   test-docker:
     needs: docker
     runs-on: ubuntu-20.04
