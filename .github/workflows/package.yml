@@ -60,7 +60,7 @@ jobs:
           sed -i 's@license_file:@& LICENSE@' statmechcrack/meta.yaml
           sed -i '/license_file/a \ \ license_url:' statmechcrack/meta.yaml
           sed -i 's@license_url:@& \"https://github.com/sandialabs/'statmechcrack'/blob/main/LICENSE\"@' statmechcrack/meta.yaml
-          sed -i 's@your-github-id-here@'"${{ secrets.ANACONDA_USERNAME }}"'@' statmechcrack/meta.yaml
+          sed -i 's@your-github-id-here@mrbuche@' statmechcrack/meta.yaml
           sed -i "s@license: BSD@license: BSD-3-Clause@" statmechcrack/meta.yaml
           sudo apt install -y pandoc
           pandoc -s -o README.md README.rst
@@ -74,7 +74,7 @@ jobs:
       - name: Upload to Anaconda.org
         run: |
           PATH="/usr/share/miniconda/bin/:$PATH"
-          anaconda login --username ${{ secrets.ANACONDA_USERNAME }} --password ${{ secrets.ANACONDA_PASSWORD }}
+          anaconda login --username mrbuche --password ${{ secrets.ANACONDA_PASSWORD }}
           anaconda upload --force /usr/share/miniconda/conda-bld/noarch/statmechcrack*.tar.bz2
           anaconda logout
       - name: Give upload time before downloading
@@ -104,15 +104,15 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v1.12.0
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          username: mrbuche
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build Docker and push to Dockerhub
         uses: docker/build-push-action@v2.8.0
         with:
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/statmechcrack:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/statmechcrack:${{ needs.get-version.outputs.VERSION }}
+            mrbuche/statmechcrack:latest
+            mrbuche/statmechcrack:${{ needs.get-version.outputs.VERSION }}
       - name: Give upload time before downloading
         run: sleep 234s
   test-docker:
