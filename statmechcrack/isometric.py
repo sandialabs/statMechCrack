@@ -308,6 +308,55 @@ class CrackIsometric(CrackMonteCarlo):
             k_isometric = self.k_isometric_monte_carlo(v, **kwargs)
         return k_isometric
 
+    def k_net_isometric(self, v):
+        r"""The nondimensional net reaction rate coefficient
+        as a function of the nondimensional end separation
+        in the isometric ensemble.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+
+        Returns:
+            numpy.ndarray: The nondimensional net reaction rate.
+
+        Example:
+            Plot the nondimensional net reaction rate coefficient
+            as a function of the nondimensional end separation
+            in the isometric ensemble
+            for an increasing system size:
+
+            .. plot::
+
+                >>> import numpy as np
+                >>> import matplotlib.pyplot as plt
+                >>> from statmechcrack import Crack
+                >>> Np = np.logspace(-1, np.log(6)/np.log(10), 33)
+                >>> _ = plt.figure()
+                >>> for N in [4, 8, 16, 64]:
+                ...     model = Crack(N=N)
+                ...     v = model.v(Np/N, ensemble='isometric')
+                ...     _ = plt.semilogy(
+                ...         3*model.kappa*(v - 1)/N**2,
+                ...         model.k_net_isometric(v),
+                ...         label=r'$N=$'+str(N))
+                >>> _ = plt.xlabel(r'$3\kappa\Delta v/N^2$')
+                >>> _ = plt.ylabel(r'$k^\mathrm{net}/k_\mathrm{ref}$')
+                >>> _ = plt.legend()
+                >>> plt.show()
+
+        """
+        k_isometric = self.k_isometric(v, approach='asymptotic')
+        model_2 = CrackIsometric(
+            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
+            alpha=self.alpha, varepsilon=self.varepsilon
+        )
+        k_rev_isometric = (
+            self.Q_isometric(v, transition_state=True)/model_2.Q_isometric(v)
+        ) / (
+            self.Q_isometric(1, transition_state=True)/model_2.Q_isometric(1)
+        )
+        return k_isometric - k_rev_isometric
+
     def Q_0_isometric(self, v, lambda_):
         r"""The nondimensional isometric partition function
         as a function of the nondimensional end separation

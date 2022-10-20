@@ -451,3 +451,29 @@ class Crack(CrackIsotensional):
         elif ensemble == 'isotensional':
             k_b = self.k_b_isotensional(p_or_v, lambda_)
         return k_b
+
+    def k_net(self, p_or_v, ensemble='isometric'):
+        r"""The nondimensional net reaction rate coefficient
+        as a function of the nondimensional end force
+        or the nondimensional end separation.
+
+        Args:
+            p_or_v (array_like):
+                The nondimensional end force or position. Assumed to be
+                the end separation for the isometric ensemble and
+                the end force for the isotensional ensemble.
+            ensemble (str, optional, default='isotensional'):
+                The thermodynamic ensemble.
+
+        Returns:
+            numpy.ndarray: The nondimensional net reaction rate.
+
+        Note:
+            Only the asymptotic approach is currently available.
+
+        """
+        if ensemble == 'isometric':
+            k_net = self.k_net_isometric(p_or_v)
+        elif ensemble == 'isotensional':
+            k_net = self.k_net_isotensional(p_or_v)
+        return k_net
