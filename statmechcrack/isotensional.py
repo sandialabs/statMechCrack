@@ -304,6 +304,55 @@ class CrackIsotensional(CrackIsometric):
             k_isotensional = self.k_isotensional_monte_carlo(p, **kwargs)
         return k_isotensional
 
+    def k_net_isotensional(self, p):
+        r"""The nondimensional net reaction rate coefficient
+        as a function of the nondimensional end force
+        in the isotensional ensemble.
+
+        Args:
+            p (array_like): The nondimensional end force.
+
+        Returns:
+            numpy.ndarray: The nondimensional net reaction rate.
+
+        Example:
+            Plot the nondimensional net reaction rate coefficient
+            as a function of the nondimensional end force
+            in the isotensional ensemble
+            for an increasing system size:
+
+            .. plot::
+
+                >>> import numpy as np
+                >>> import matplotlib.pyplot as plt
+                >>> from statmechcrack import CrackIsotensional
+                >>> Np = np.logspace(-1, np.log(6)/np.log(10), 33)
+                >>> _ = plt.figure()
+                >>> for N in [4, 8, 16, 64]:
+                ...     model = CrackIsotensional(N=N)
+                ...     _ = plt.semilogy(
+                ...         Np, model.k_net_isotensional(Np/N),
+                ...         label=r'$N=$'+str(N))
+                >>> _ = plt.xlabel(r'$Np$')
+                >>> _ = plt.ylabel(r'$k^\mathrm{net}/k_\mathrm{ref}$')
+                >>> _ = plt.legend()
+                >>> plt.show()
+
+        """
+        k_isotensional = self.k_isotensional(p, approach='asymptotic')
+        model_2 = CrackIsotensional(
+            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
+            alpha=self.alpha, varepsilon=self.varepsilon
+        )
+        k_rev_isotensional = (
+            self.Z_isotensional(p, transition_state=True) /
+            model_2.Z_isotensional(p)
+        ) / (
+            self.Z_isotensional(0, transition_state=True) /
+            model_2.Z_isotensional(0)
+        )
+        return k_isotensional - k_rev_isotensional
+
     def Z_0_isotensional(self, p, lambda_):
         r"""The nondimensional isotensional partition function
         as a function of the nondimensional end force
