@@ -436,7 +436,7 @@
 <span class="sd">                ...     v = model.v(Np/N, ensemble=&#39;isometric&#39;)</span>
 <span class="sd">                ...     _ = plt.semilogy(</span>
 <span class="sd">                ...         3*model.kappa*(v - 1)/N**2,</span>
-<span class="sd">                ...         model.k_net_isometric(v),</span>
+<span class="sd">                ...         model.k_net(v, ensemble=&#39;isometric&#39;),</span>
 <span class="sd">                ...         label=r&#39;$N=$&#39;+str(N))</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.xlabel(r&#39;$3\kappa\Delta v/N^2$&#39;)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.ylabel(r&#39;$k^\mathrm{net}/k_\mathrm{ref}$&#39;)</span>

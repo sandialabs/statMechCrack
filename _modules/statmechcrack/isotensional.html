@@ -424,13 +424,13 @@
 
 <span class="sd">                &gt;&gt;&gt; import numpy as np</span>
 <span class="sd">                &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
-<span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsotensional</span>
+<span class="sd">                &gt;&gt;&gt; from statmechcrack import Crack</span>
 <span class="sd">                &gt;&gt;&gt; Np = np.logspace(-1, np.log(6)/np.log(10), 33)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
 <span class="sd">                &gt;&gt;&gt; for N in [4, 8, 16, 64]:</span>
-<span class="sd">                ...     model = CrackIsotensional(N=N)</span>
+<span class="sd">                ...     model = Crack(N=N)</span>
 <span class="sd">                ...     _ = plt.semilogy(</span>
-<span class="sd">                ...         Np, model.k_net_isotensional(Np/N),</span>
+<span class="sd">                ...         Np, model.k_net(Np/N, ensemble=&#39;isotensional&#39;),</span>
 <span class="sd">                ...         label=r&#39;$N=$&#39;+str(N))</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.xlabel(r&#39;$Np$&#39;)</span>
 <span class="sd">                &gt;&gt;&gt; _ = plt.ylabel(r&#39;$k^\mathrm{net}/k_\mathrm{ref}$&#39;)</span>
