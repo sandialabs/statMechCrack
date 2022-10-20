@@ -325,13 +325,13 @@ class CrackIsotensional(CrackIsometric):
 
                 >>> import numpy as np
                 >>> import matplotlib.pyplot as plt
-                >>> from statmechcrack import CrackIsotensional
+                >>> from statmechcrack import Crack
                 >>> Np = np.logspace(-1, np.log(6)/np.log(10), 33)
                 >>> _ = plt.figure()
                 >>> for N in [4, 8, 16, 64]:
-                ...     model = CrackIsotensional(N=N)
+                ...     model = Crack(N=N)
                 ...     _ = plt.semilogy(
-                ...         Np, model.k_net_isotensional(Np/N),
+                ...         Np, model.k_net(Np/N, ensemble='isotensional'),
                 ...         label=r'$N=$'+str(N))
                 >>> _ = plt.xlabel(r'$Np$')
                 >>> _ = plt.ylabel(r'$k^\mathrm{net}/k_\mathrm{ref}$')

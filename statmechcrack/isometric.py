@@ -337,7 +337,7 @@ class CrackIsometric(CrackMonteCarlo):
                 ...     v = model.v(Np/N, ensemble='isometric')
                 ...     _ = plt.semilogy(
                 ...         3*model.kappa*(v - 1)/N**2,
-                ...         model.k_net_isometric(v),
+                ...         model.k_net(v, ensemble='isometric'),
                 ...         label=r'$N=$'+str(N))
                 >>> _ = plt.xlabel(r'$3\kappa\Delta v/N^2$')
                 >>> _ = plt.ylabel(r'$k^\mathrm{net}/k_\mathrm{ref}$')
