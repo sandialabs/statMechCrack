@@ -64,6 +64,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k"><code class="docutils literal notranslate"><span class="pre">Crack.k()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k_0"><code class="docutils literal notranslate"><span class="pre">Crack.k_0()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k_b"><code class="docutils literal notranslate"><span class="pre">Crack.k_b()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.k_net"><code class="docutils literal notranslate"><span class="pre">Crack.k_net()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p"><code class="docutils literal notranslate"><span class="pre">Crack.p()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p_0"><code class="docutils literal notranslate"><span class="pre">Crack.p_0()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.core.Crack.p_b"><code class="docutils literal notranslate"><span class="pre">Crack.p_b()</span></code></a></li>
@@ -394,6 +395,34 @@ the end force for the isotensional ensemble.</p></li>
 <dd class="field-odd"><p>numpy.ndarray</p>
 </dd>
 </dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.core.Crack.k_net">
+<span class="sig-name descname"><span class="pre">k_net</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p_or_v</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ensemble</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'isometric'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/core.html#Crack.k_net"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.core.Crack.k_net" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional net reaction rate coefficient
+as a function of the nondimensional end force
+or the nondimensional end separation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p_or_v</strong> (<em>array_like</em>) – The nondimensional end force or position. Assumed to be
+the end separation for the isometric ensemble and
+the end force for the isotensional ensemble.</p></li>
+<li><p><strong>ensemble</strong> (<em>str</em><em>, </em><em>optional</em><em>, </em><em>default='isotensional'</em>) – The thermodynamic ensemble.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional net reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only the asymptotic approach is currently available.</p>
+</div>
 </dd></dl>
 
 <dl class="py method">

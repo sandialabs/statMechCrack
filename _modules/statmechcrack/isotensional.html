@@ -403,6 +403,55 @@
             <span class="n">k_isotensional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isotensional_monte_carlo</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">k_isotensional</span></div>
 
+<div class="viewcode-block" id="CrackIsotensional.k_net_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.k_net_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">k_net_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional net reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        in the isotensional ensemble.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p (array_like): The nondimensional end force.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional net reaction rate.</span>
+
+<span class="sd">        Example:</span>
+<span class="sd">            Plot the nondimensional net reaction rate coefficient</span>
+<span class="sd">            as a function of the nondimensional end force</span>
+<span class="sd">            in the isotensional ensemble</span>
+<span class="sd">            for an increasing system size:</span>
+
+<span class="sd">            .. plot::</span>
+
+<span class="sd">                &gt;&gt;&gt; import numpy as np</span>
+<span class="sd">                &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">                &gt;&gt;&gt; from statmechcrack import CrackIsotensional</span>
+<span class="sd">                &gt;&gt;&gt; Np = np.logspace(-1, np.log(6)/np.log(10), 33)</span>
+<span class="sd">                &gt;&gt;&gt; _ = plt.figure()</span>
+<span class="sd">                &gt;&gt;&gt; for N in [4, 8, 16, 64]:</span>
+<span class="sd">                ...     model = CrackIsotensional(N=N)</span>
+<span class="sd">                ...     _ = plt.semilogy(</span>
+<span class="sd">                ...         Np, model.k_net_isotensional(Np/N),</span>
+<span class="sd">                ...         label=r&#39;$N=$&#39;+str(N))</span>
+<span class="sd">                &gt;&gt;&gt; _ = plt.xlabel(r&#39;$Np$&#39;)</span>
+<span class="sd">                &gt;&gt;&gt; _ = plt.ylabel(r&#39;$k^\mathrm{net}/k_\mathrm{ref}$&#39;)</span>
+<span class="sd">                &gt;&gt;&gt; _ = plt.legend()</span>
+<span class="sd">                &gt;&gt;&gt; plt.show()</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">k_isotensional</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
+        <span class="n">model_2</span> <span class="o">=</span> <span class="n">CrackIsotensional</span><span class="p">(</span>
+            <span class="n">N</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">kappa</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">,</span> <span class="n">varepsilon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">varepsilon</span>
+        <span class="p">)</span>
+        <span class="n">k_rev_isotensional</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Z_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">/</span>
+            <span class="n">model_2</span><span class="o">.</span><span class="n">Z_isotensional</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="p">)</span> <span class="o">/</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Z_isotensional</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">transition_state</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">/</span>
+            <span class="n">model_2</span><span class="o">.</span><span class="n">Z_isotensional</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">k_isotensional</span> <span class="o">-</span> <span class="n">k_rev_isotensional</span></div>
+
 <div class="viewcode-block" id="CrackIsotensional.Z_0_isotensional"><a class="viewcode-back" href="../../statmechcrack.isotensional.html#statmechcrack.isotensional.CrackIsotensional.Z_0_isotensional">[docs]</a>    <span class="k">def</span> <span class="nf">Z_0_isotensional</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">):</span>
         <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional isotensional partition function</span>
 <span class="sd">        as a function of the nondimensional end force</span>

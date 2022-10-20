@@ -549,7 +549,33 @@
             <span class="n">k_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b_isometric</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
             <span class="n">k_b</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_b_isotensional</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">,</span> <span class="n">lambda_</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">k_b</span></div></div>
+        <span class="k">return</span> <span class="n">k_b</span></div>
+
+<div class="viewcode-block" id="Crack.k_net"><a class="viewcode-back" href="../../statmechcrack.core.html#statmechcrack.core.Crack.k_net">[docs]</a>    <span class="k">def</span> <span class="nf">k_net</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p_or_v</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;The nondimensional net reaction rate coefficient</span>
+<span class="sd">        as a function of the nondimensional end force</span>
+<span class="sd">        or the nondimensional end separation.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            p_or_v (array_like):</span>
+<span class="sd">                The nondimensional end force or position. Assumed to be</span>
+<span class="sd">                the end separation for the isometric ensemble and</span>
+<span class="sd">                the end force for the isotensional ensemble.</span>
+<span class="sd">            ensemble (str, optional, default=&#39;isotensional&#39;):</span>
+<span class="sd">                The thermodynamic ensemble.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            numpy.ndarray: The nondimensional net reaction rate.</span>
+
+<span class="sd">        Note:</span>
+<span class="sd">            Only the asymptotic approach is currently available.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isometric&#39;</span><span class="p">:</span>
+            <span class="n">k_net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_net_isometric</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">ensemble</span> <span class="o">==</span> <span class="s1">&#39;isotensional&#39;</span><span class="p">:</span>
+            <span class="n">k_net</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">k_net_isotensional</span><span class="p">(</span><span class="n">p_or_v</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">k_net</span></div></div>
 </pre></div>
 
            </div>

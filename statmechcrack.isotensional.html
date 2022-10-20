@@ -71,6 +71,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_0_isotensional()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_b_isotensional()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_isotensional()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.k_net_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.k_net_isotensional()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_0_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_0_isotensional()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_b_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_b_isotensional()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#statmechcrack.isotensional.CrackIsotensional.v_isotensional"><code class="docutils literal notranslate"><span class="pre">CrackIsotensional.v_isotensional()</span></code></a></li>
@@ -630,6 +631,49 @@ and compare to the limit given by the reference system:</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="statmechcrack.isotensional.CrackIsotensional.k_net_isotensional">
+<span class="sig-name descname"><span class="pre">k_net_isotensional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isotensional.html#CrackIsotensional.k_net_isotensional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isotensional.CrackIsotensional.k_net_isotensional" title="Permalink to this definition"></a></dt>
+<dd><p>The nondimensional net reaction rate coefficient
+as a function of the nondimensional end force
+in the isotensional ensemble.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>array_like</em>) – The nondimensional end force.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The nondimensional net reaction rate.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>Plot the nondimensional net reaction rate coefficient
+as a function of the nondimensional end force
+in the isotensional ensemble
+for an increasing system size:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">CrackIsotensional</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Np</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="mi">33</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">N</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">64</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">model</span> <span class="o">=</span> <span class="n">CrackIsotensional</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span>
+<span class="gp">... </span>        <span class="n">Np</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">k_net_isotensional</span><span class="p">(</span><span class="n">Np</span><span class="o">/</span><span class="n">N</span><span class="p">),</span>
+<span class="gp">... </span>        <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$N=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$Np$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$k^\mathrm</span><span class="si">{net}</span><span class="s1">/k_\mathrm</span><span class="si">{ref}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="_images/statmechcrack-isotensional-6.png" class="plot-directive" src="_images/statmechcrack-isotensional-6.png" />
+</figure>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="statmechcrack.isotensional.CrackIsotensional.v_0_isotensional">
 <span class="sig-name descname"><span class="pre">v_0_isotensional</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lambda_</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/statmechcrack/isotensional.html#CrackIsotensional.v_0_isotensional"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#statmechcrack.isotensional.CrackIsotensional.v_0_isotensional" title="Permalink to this definition"></a></dt>
 <dd><p>The nondimensional end separation
@@ -677,7 +721,7 @@ and compare to the thermodynamic limit:</p>
 </pre></div>
 </div>
 <figure class="align-default">
-<img alt="_images/statmechcrack-isotensional-6.png" class="plot-directive" src="_images/statmechcrack-isotensional-6.png" />
+<img alt="_images/statmechcrack-isotensional-7.png" class="plot-directive" src="_images/statmechcrack-isotensional-7.png" />
 </figure>
 </dd></dl>
 
@@ -761,7 +805,7 @@ and compare to the limit given by the reference system:</p>
 </pre></div>
 </div>
 <figure class="align-default">
-<img alt="_images/statmechcrack-isotensional-7.png" class="plot-directive" src="_images/statmechcrack-isotensional-7.png" />
+<img alt="_images/statmechcrack-isotensional-8.png" class="plot-directive" src="_images/statmechcrack-isotensional-8.png" />
 </figure>
 </dd></dl>
 
