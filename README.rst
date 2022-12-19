@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|build| |docs| |codecov| |coveralls| |pylint| |codeql| |pyversions| |pypi| |conda| |docker| |license| |zenodo|
+|build| |docs| |codecov| |coveralls| |codefactor| |pylint| |codeql| |pyversions| |pypi| |conda| |docker| |license| |zenodo|
 
 The Python package for a statistical mechanical model for crack growth. 
 
@@ -62,22 +62,25 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 ..
     Badges ========================================================================
 
-.. |docs| image:: https://img.shields.io/readthedocs/statmechcrack?logo=readthedocs&label=Read%20the%20Docs
-    :target: https://statmechcrack.readthedocs.io/en/latest/
-
-.. |build| image:: https://img.shields.io/github/workflow/status/sandialabs/statmechcrack/main?label=GitHub&logo=github
+.. |build| image:: https://img.shields.io/github/actions/workflow/status/sandialabs/statmechcrack/main.yml?branch=main&label=GitHub&logo=github
     :target: https://github.com/sandialabs/statmechcrack
 
-.. |coveralls| image:: https://img.shields.io/coveralls/github/sandialabs/statMechCrack?logo=coveralls&label=Coveralls
-    :target: https://coveralls.io/github/sandialabs/statMechCrack?branch=main
+.. |docs| image:: https://img.shields.io/readthedocs/statmechcrack?logo=readthedocs&label=Read%20the%20Docs
+    :target: https://statmechcrack.readthedocs.io/en/latest/
 
 .. |codecov| image:: https://img.shields.io/codecov/c/github/sandialabs/statmechcrack?label=Codecov&logo=codecov
     :target: https://codecov.io/gh/sandialabs/statmechcrack
 
+.. |coveralls| image:: https://img.shields.io/coveralls/github/sandialabs/statMechCrack?logo=coveralls&label=Coveralls
+    :target: https://coveralls.io/github/sandialabs/statMechCrack?branch=main
+
+.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sandialabs/statmechcrack?label=Codefactor&logo=codefactor
+   :target: https://www.codefactor.io/repository/github/sandialabs/statmechcrack
+
 .. |pylint| image:: https://raw.githubusercontent.com/sandialabs/statmechcrack/gh-pages/pylint.svg
     :target: https://github.com/sandialabs/statmechcrack
 
-.. |codeql| image:: https://img.shields.io/github/workflow/status/sandialabs/statmechcrack/CodeQL?label=CodeQL&logo=github
+.. |codeql| image:: https://img.shields.io/github/actions/workflow/status/sandialabs/statmechcrack/codeql.yml?branch=main&label=CodeQL&logo=github
     :target: https://github.com/sandialabs/statMechCrack/security/code-scanning
 
 .. |pyversions| image:: https://img.shields.io/pypi/pyversions/statmechcrack.svg?logo=python&logoColor=FBE072&color=4B8BBE&label=Python

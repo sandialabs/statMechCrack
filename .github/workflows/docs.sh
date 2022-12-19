@@ -12,14 +12,14 @@ mv ../docs-temp/* source/
 rm -r ../docs-temp/
 for file in ../statmechcrack/*.py; do
     export file_basename=$(basename ${file%.*})
-    export rst_file=$(echo "source/*`basename ${file%.*}`.rst")
+    export rst_file="source/*$(basename ${file%.*}).rst"
     if [ -f $rst_file ]; then
         if grep -q :cite $file; then
             echo "citations in $file"
             echo "" >> $rst_file
             echo "" >> $rst_file
-            export OLD_CITE=$(echo cite:'`')
-            export NEW_CITE=$(echo $OLD_CITE$file_basename'-')
+            export OLD_CITE="cite:\`"
+            export NEW_CITE="${OLD_CITE}${file_basename}-"
             sed -i -e "s/${OLD_CITE}/${NEW_CITE}/g" $file
             echo ".. raw::" >> $rst_file
             echo " html" >> $rst_file

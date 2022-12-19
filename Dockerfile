@@ -1,2 +1,2 @@
 FROM python:3
-RUN pip install statmechcrack[all]
+RUN pip install --no-cache-dir statmechcrack[all]
