@@ -97,8 +97,8 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Tutorial</li>
+      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li class="breadcrumb-item active">Tutorial</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/tutorial.ipynb.txt" rel="nofollow"> View page source</a>
       </li>
@@ -218,10 +218,11 @@ div.nboutput.container div.prompt > div {
     }
 }
 
-/* disable scrollbars on prompts */
+/* disable scrollbars and line breaks on prompts */
 div.nbinput.container div.prompt pre,
 div.nboutput.container div.prompt pre {
     overflow: hidden;
+    white-space: pre;
 }
 
 /* input/output area */
@@ -396,7 +397,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">Crack</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from statmechcrack import Crack
 </pre></div>
 </div>
 </div>
@@ -405,7 +406,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model = Crack()
 </pre></div>
 </div>
 </div>
@@ -414,7 +415,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">varepsilon</span><span class="o">=</span><span class="mi">88</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model = Crack(N=8, varepsilon=88)
 </pre></div>
 </div>
 </div>
@@ -426,7 +427,7 @@ div.rendered_html tbody tr:hover {
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">v</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.v
 </pre></div>
 </div>
 </div>
@@ -436,14 +437,14 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;bound method Crack.v of &lt;statmechcrack.core.Crack object at 0x7f1170982670&gt;&gt;
+&lt;bound method Crack.v of &lt;statmechcrack.core.Crack object at 0x7f7af43a3220&gt;&gt;
 </pre></div></div>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.v(1)
 </pre></div>
 </div>
 </div>
@@ -461,15 +462,15 @@ array([4.28297647])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">statmechcrack</span> <span class="kn">import</span> <span class="n">Crack</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">varepsilon</span><span class="o">=</span><span class="mi">88</span><span class="p">)</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import matplotlib.pyplot as plt
+from statmechcrack import Crack
+model = Crack(N=8, varepsilon=88)
+p = np.linspace(0, 1, 100)
+plt.plot(model.v(p) - 1, p)
+plt.xlabel(r&#39;$\Delta v$&#39;)
+plt.ylabel(r&#39;$p$&#39;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -489,7 +490,7 @@ ensemble:”</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.p(3, ensemble=&#39;isometric&#39;)
 </pre></div>
 </div>
 </div>
@@ -506,7 +507,7 @@ array([0.60998242])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="mf">0.60998242</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.v(0.60998242, ensemble=&#39;isotensional&#39;)
 </pre></div>
 </div>
 </div>
@@ -527,8 +528,8 @@ array([3.00010209])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">N</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">M</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">varepsilon</span><span class="o">=</span><span class="mi">88</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isometric&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model = Crack(N=25, M=25, varepsilon=88)
+model.p(3, ensemble=&#39;isometric&#39;)
 </pre></div>
 </div>
 </div>
@@ -545,7 +546,7 @@ array([0.03067685])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">v</span><span class="p">(</span><span class="mf">0.03067685</span><span class="p">,</span> <span class="n">ensemble</span><span class="o">=</span><span class="s1">&#39;isotensional&#39;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.v(0.03067685, ensemble=&#39;isotensional&#39;)
 </pre></div>
 </div>
 </div>
@@ -555,7 +556,7 @@ array([0.03067685])
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-array([2.9999997])
+array([2.99999971])
 </pre></div></div>
 </div>
 </section>
@@ -566,18 +567,18 @@ array([2.9999997])
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">33</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">varepsilon</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">800</span><span class="p">]:</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">Crack</span><span class="p">(</span><span class="n">varepsilon</span><span class="o">=</span><span class="n">varepsilon</span><span class="p">)</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">approach</span><span class="o">=</span><span class="s1">&#39;asymptotic&#39;</span><span class="p">)</span>
-    <span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;$\varepsilon=$&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">varepsilon</span><span class="p">))</span>
-<span class="n">p_0</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">p_0_isometric</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">v</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">p_0</span><span class="p">,</span> <span class="s1">&#39;k--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;limit&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\Delta v$&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$p$&#39;</span><span class="p">)</span>
-<span class="n">_</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>v = np.linspace(1, 11, 33)
+_ = plt.figure()
+for varepsilon in [10, 25, 100, 800]:
+    model = Crack(varepsilon=varepsilon)
+    p = model.p(v, approach=&#39;asymptotic&#39;)
+    _ = plt.plot(v - 1, p, label=r&#39;$\varepsilon=$&#39;+str(varepsilon))
+p_0 = model.p_0_isometric(v, [1, 1])
+_ = plt.plot(v - 1, p_0, &#39;k--&#39;, label=&#39;limit&#39;)
+_ = plt.xlabel(r&#39;$\Delta v$&#39;)
+_ = plt.ylabel(r&#39;$p$&#39;)
+_ = plt.legend()
+plt.show()
 </pre></div>
 </div>
 </div>
