@@ -43,10 +43,9 @@ setup(
                'jinja2>=3.0', 'nbsphinx', 'pycodestyle',
                'sphinx', 'sphinx-copybutton',
                'sphinx-rtd-theme', 'sphinxcontrib-bibtex'],
-      'testing': ['pycodestyle', 'pylint', 'pytest<=7.1.3', 'pytest-cov'],
+      'testing': ['pycodestyle', 'pylint', 'pytest', 'pytest-cov'],
       'all': ['docutils<0.18,>=0.14', 'ipykernel', 'ipython', 'jinja2>=3.0',
-              'nbsphinx',
-              'pycodestyle', 'pylint', 'pytest<=7.1.3', 'pytest-cov',
+              'nbsphinx', 'pycodestyle', 'pylint', 'pytest', 'pytest-cov',
               'sphinx', 'sphinx-copybutton',
               'sphinx-rtd-theme', 'sphinxcontrib-bibtex']
     },
