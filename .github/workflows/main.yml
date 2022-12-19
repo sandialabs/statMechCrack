@@ -5,6 +5,8 @@ on:
   pull_request:
     branches: [ main ]
   workflow_dispatch:
+env:
+  REPO_NAME: ${{ github.event.repository.name }}
 jobs:
   test:
     runs-on: ubuntu-20.04
@@ -18,13 +20,13 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-      - name: install statmechcrack
+      - name: install
         run: pip install .[testing]
       - name: pylint
         run: |
           python -m pylint --disable=C0103 --output-format=text statmechcrack | tee lint.log || pylint-exit $?
       - name: pytest
-        run: python -m pytest --verbose --cov=./statmechcrack/ --cov-report xml
+        run: python -m pytest --verbose --cov=./${REPO_NAME}/ --cov-report xml
       - name: coveralls
         run: |
           python -m pip install coveralls
