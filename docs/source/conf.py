@@ -38,6 +38,7 @@ extensions = [
     'sphinxcontrib.bibtex',
     'nbsphinx',
 ]
+html_show_sphinx = False
 latex_engine = 'xelatex'
 bibtex_bibfiles = ['main.bib']
 bibtex_default_style = 'plain'
