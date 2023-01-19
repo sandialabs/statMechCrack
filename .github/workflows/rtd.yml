@@ -41,7 +41,7 @@ jobs:
       - name: Clear existing docs
         run: rm -rf docs/
       - name: Download docs
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: docs
           path: docs/
@@ -52,7 +52,7 @@ jobs:
           mv docs/README.rst ./README.rst
           mv docs/.readthedocs.yaml ./.readthedocs.yaml
       - name: Download source
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: statmechcrack
           path: statmechcrack/
