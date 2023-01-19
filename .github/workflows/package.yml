@@ -91,34 +91,3 @@ jobs:
           PATH="/usr/share/miniconda/bin/:$PATH"
           python -c 'import statmechcrack'
           python -m statmechcrack.tests
-  docker:
-    needs: [get-version, pypi]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Translate README.rst to .md for description
-        run: |
-          sudo apt install -y pandoc
-          pandoc -s -o README.md README.rst
-      - name: Login to DockerHub
-        uses: docker/login-action@v1.12.0
-        with:
-          username: mrbuche
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Build Docker and push to Dockerhub
-        uses: docker/build-push-action@v3.3.0
-        with:
-          push: true
-          tags: |
-            mrbuche/statmechcrack:latest
-            mrbuche/statmechcrack:${{ needs.get-version.outputs.VERSION }}
-      - name: Give upload time before downloading
-        run: sleep 500s
-  test-docker:
-    needs: docker
-    runs-on: ubuntu-latest
-    container: mrbuche/statmechcrack
-    steps:
-      - name: Test the package
-        run: |
-          python -m statmechcrack.tests
