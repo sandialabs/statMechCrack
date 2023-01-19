@@ -1,12 +1,7 @@
 name: main
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
-  workflow_dispatch:
-env:
-  REPO_NAME: ${{ github.event.repository.name }}
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -23,7 +18,7 @@ jobs:
       - name: install
         run: pip install .[testing]
       - name: pytest
-        run: python -m pytest --verbose --cov=./${REPO_NAME}/ --cov-report xml
+        run: python -m pytest --verbose --cov=./statmechcrack/ --cov-report xml
       - name: codecov
         uses: codecov/codecov-action@v3
         with:
