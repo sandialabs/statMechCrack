@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|build| |docs| |codecov| |codefactor| |pylint|
+|build| |docs| |codefactor| |pylint|
 
 Statistical mechanical models for crack growth. 
 
@@ -10,7 +10,7 @@ Statistical mechanical models for crack growth.
 Installation
 ************
 
-|pypi| |conda| |docker|
+|pypi| |conda|
 
 The package can be installed using ``pip`` via the `Python Package Index <https://pypi.org/project/statmechcrack>`_ (PyPI),
 
@@ -30,24 +30,7 @@ Alternatively, a branch can be directly installed using
 
     pip install git+https://github.com/sandialabs/statmechcrack.git@<branch-name>
 
-or after cloning a branch and executing ``python setup.py install``.
-There are also `Docker images <https://hub.docker.com/r/mrbuche/statmechcrack>`_ available for use.
-In all of these cases, a valid installation can be tested by running
-
-::
-
-    python -m statmechcrack.tests
-
-***********
-Information
-***********
-
-- `Contributing <https://github.com/sandialabs/statMechCrack/blob/main/CONTRIBUTING.md>`__
-- `Documentation <https://sandialabs.github.io/statMechCrack>`__
-- `License <https://github.com/sandialabs/statmechcrack/blob/main/LICENSE>`__
-- `Releases <https://github.com/sandialabs/statmechcrack/releases>`__
-- `Repository <https://github.com/sandialabs/statmechcrack>`__
-- `Tutorial <https://sandialabs.github.io/statMechCrack/tutorial.html>`__
+or after cloning a branch and executing ``python setup.py install``. Any installation is tested by executing ``python -m statmechcrack.tests``.
 
 ********
 Citation
@@ -74,9 +57,6 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |docs| image:: https://img.shields.io/readthedocs/statmechcrack?logo=readthedocs&label=Read%20the%20Docs
     :target: https://statmechcrack.readthedocs.io/en/latest/
 
-.. |codecov| image:: https://img.shields.io/codecov/c/github/sandialabs/statmechcrack?label=Codecov&logo=codecov
-    :target: https://codecov.io/gh/sandialabs/statmechcrack
-
 .. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sandialabs/statmechcrack?label=Codefactor&logo=codefactor
    :target: https://www.codefactor.io/repository/github/sandialabs/statmechcrack
 
@@ -88,9 +68,6 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 
 .. |conda| image:: https://img.shields.io/conda/v/mrbuche/statmechcrack.svg?logo=anaconda&color=3EB049&label=Anaconda
     :target: https://anaconda.org/mrbuche/statmechcrack/
-
-.. |docker| image:: https://img.shields.io/docker/v/mrbuche/statmechcrack?color=0db7ed&label=Docker%20Hub&logo=docker&logoColor=0db7ed
-    :target: https://hub.docker.com/r/mrbuche/statmechcrack
 
 .. |license| image:: https://img.shields.io/github/license/sandialabs/statmechcrack?label=License
     :target: https://github.com/sandialabs/statmechcrack/blob/main/LICENSE
