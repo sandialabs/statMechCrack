@@ -14,7 +14,7 @@ from .utility import BasicUtility
 
 
 class CrackMechanical(BasicUtility):
-    """The crack model class for the isometric ensemble.
+    """The crack model class treated mechanically.
 
     Attributes:
         N (int): The number of broken bonds.
