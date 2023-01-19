@@ -7,6 +7,6 @@ authors:
 - family-names: Grutzik
   given-names: Scott J.
   orcid: https://orcid.org/0000-0002-6490-3941
-title: "statMechCrack: a Python package for a statistical mechanical model for crack growth."
+title: "statMechCrack: statistical mechanical models for crack growth."
 doi: 10.5281/zenodo.7008312
 url: https://github.com/sandialabs/statmechcrack

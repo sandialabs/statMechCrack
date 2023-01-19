@@ -9,11 +9,11 @@ env:
   REPO_NAME: ${{ github.event.repository.name }}
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ['3.5', '3.6', '3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
     steps:
       - uses: actions/checkout@v2
       - name: python ${{ matrix.python-version }}
@@ -24,12 +24,6 @@ jobs:
         run: pip install .[testing]
       - name: pytest
         run: python -m pytest --verbose --cov=./${REPO_NAME}/ --cov-report xml
-      - name: coveralls
-        run: |
-          python -m pip install coveralls
-          coveralls --service=github
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: codecov
         uses: codecov/codecov-action@v2
         with:
