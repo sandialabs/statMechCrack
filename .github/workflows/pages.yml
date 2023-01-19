@@ -2,7 +2,6 @@ name: pages
 on:
   push:
     branches: [ main ]
-  workflow_dispatch:
 jobs:
   gh-pages:
     runs-on: ubuntu-latest

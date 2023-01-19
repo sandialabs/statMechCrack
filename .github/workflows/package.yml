@@ -15,7 +15,7 @@ jobs:
     outputs:
       VERSION: ${{ steps.version.outputs.VERSION }}
   pypi:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
@@ -33,7 +33,7 @@ jobs:
         run: sleep 500s
   test-pypi:
     needs: [get-version, pypi]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install and test the package
         run: |
@@ -42,7 +42,7 @@ jobs:
           python -m statmechcrack.tests
   anaconda:
     needs: [get-version, pypi]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Prepare conda
@@ -80,7 +80,7 @@ jobs:
         run: sleep 500s
   test-anaconda:
     needs: [get-version, anaconda]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - name: Install the package
         run: conda install --channel mrbuche statmechcrack==${{ needs.get-version.outputs.VERSION }}
@@ -93,7 +93,7 @@ jobs:
           python -m statmechcrack.tests
   docker:
     needs: [get-version, pypi]
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Translate README.rst to .md for description
@@ -116,7 +116,7 @@ jobs:
         run: sleep 500s
   test-docker:
     needs: docker
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     container: mrbuche/statmechcrack
     steps:
       - name: Test the package
