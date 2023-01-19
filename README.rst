@@ -4,7 +4,7 @@ statMechCrack
 
 |build| |docs| |codecov| |coveralls| |codefactor| |pylint| |codeql| |pyversions| |pypi| |conda| |docker| |license| |zenodo|
 
-Statistical mechanical model for crack growth. 
+Statistical mechanical models for crack growth. 
 
 ************
 Installation
@@ -51,7 +51,7 @@ Information
 Citation
 ********
 
-\M. R. Buche and S. J. Grutzik, ``statMechCrack``: statistical mechanical model for crack growth, `Zenodo (2022) <https://doi.org/10.5281/zenodo.7008312>`_.
+\M. R. Buche and S. J. Grutzik, ``statMechCrack``: statistical mechanical models for crack growth, `Zenodo (2022) <https://doi.org/10.5281/zenodo.7008312>`_.
 
 *********
 Copyright
