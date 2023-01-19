@@ -27,8 +27,7 @@ setup(
     version=get_version(),
     package_dir={'statmechcrack': 'statmechcrack'},
     packages=find_packages(),
-    description='The Python package for \
-        a statistical mechanical model for crack growth.',
+    description='Statistical mechanical models for crack growth.',
     long_description=read("README.rst"),
     author='Michael R. Buche, Scott J. Grutzik',
     author_email='mrbuche@sandia.gov, sjgrutz@sandia.gov',
