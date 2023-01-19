@@ -25,7 +25,7 @@ jobs:
       - name: pytest
         run: python -m pytest --verbose --cov=./${REPO_NAME}/ --cov-report xml
       - name: codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           name: codecov-umbrella
           verbose: true
