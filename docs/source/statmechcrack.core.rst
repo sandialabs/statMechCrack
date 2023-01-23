@@ -12,5 +12,4 @@ statmechcrack.core
 
    <hr>
 
-.. bibliography::
-   :filter: docname in docnames
+.. footbibliography::
