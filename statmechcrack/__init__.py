@@ -13,4 +13,4 @@ from .q2d.isotensional import CrackQ2DIsotensional
 from .q2d.mechanical import CrackQ2DMechanical
 
 
-__version__ = "0.7.0"
+__version__ = "0.7.1"
