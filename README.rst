@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|stable| |latest| |codefactor|
+|stable| |latest|
 
 Statistical mechanical models for crack growth. 
 
@@ -50,9 +50,6 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 
 .. |latest| image:: https://img.shields.io/badge/Docs-latest-8CA1AF?logo=readthedocs
    :target: https://statmechcrack.readthedocs.io/en/latest
-
-.. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sandialabs/statmechcrack?label=Codefactor&logo=codefactor
-   :target: https://www.codefactor.io/repository/github/sandialabs/statmechcrack
 
 .. |pypi| image:: https://img.shields.io/pypi/v/statmechcrack?logo=pypi&logoColor=FBE072&label=PyPI&color=4B8BBE
     :target: https://pypi.org/project/statmechcrack/
