@@ -1,5 +1,5 @@
-statmechcrack.utility module
-============================
+statmechcrack.utility
+=====================
 
 .. automodule:: statmechcrack.utility
    :members:

@@ -1,5 +1,5 @@
-statmechcrack.tests.test\_many module
-=====================================
+statmechcrack.tests.test\_many
+==============================
 
 .. automodule:: statmechcrack.tests.test_many
    :members:

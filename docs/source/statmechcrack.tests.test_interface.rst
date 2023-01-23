@@ -1,5 +1,5 @@
-statmechcrack.tests.test\_interface module
-==========================================
+statmechcrack.tests.test\_interface
+===================================
 
 .. automodule:: statmechcrack.tests.test_interface
    :members:

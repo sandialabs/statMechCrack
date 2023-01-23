@@ -1,5 +1,5 @@
-statmechcrack.tests.test\_examples module
-=========================================
+statmechcrack.tests.test\_examples
+==================================
 
 .. automodule:: statmechcrack.tests.test_examples
    :members:

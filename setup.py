@@ -31,7 +31,7 @@ setup(
     long_description=read("README.rst"),
     author='Michael R. Buche, Scott J. Grutzik',
     author_email='mrbuche@sandia.gov, sjgrutz@sandia.gov',
-    url='https://sandialabs.github.io/statMechCrack',
+    url='https://github.com/sandialabs/statMechCrack',
     license='BSD-3-Clause',
     keywords=['fracture mechanics',
               'statistical mechanics',

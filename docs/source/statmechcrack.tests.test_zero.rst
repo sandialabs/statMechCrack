@@ -1,5 +1,5 @@
-statmechcrack.tests.test\_zero module
-=====================================
+statmechcrack.tests.test\_zero
+==============================
 
 .. automodule:: statmechcrack.tests.test_zero
    :members:

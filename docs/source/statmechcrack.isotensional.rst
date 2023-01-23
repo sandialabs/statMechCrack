@@ -1,5 +1,5 @@
-statmechcrack.isotensional module
-=================================
+statmechcrack.isotensional
+==========================
 
 .. automodule:: statmechcrack.isotensional
    :members:
