@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|build| |docs| |codefactor|
+|stable| |latest| |codefactor|
 
 Statistical mechanical models for crack growth. 
 
@@ -24,13 +24,7 @@ or using ``conda`` via the ``mrbuche`` channel on `Anaconda <https://anaconda.or
 
     conda install --channel mrbuche statmechcrack
     
-Alternatively, a branch can be directly installed using
-
-::
-
-    pip install git+https://github.com/sandialabs/statmechcrack.git@<branch-name>
-
-or after cloning a branch and executing ``python setup.py install``. Any installation is tested by executing ``python -m statmechcrack.tests``.
+Any installation is tested by executing ``python -m statmechcrack.tests``.
 
 ********
 Citation
@@ -51,11 +45,11 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 ..
     Badges ========================================================================
 
-.. |build| image:: https://img.shields.io/github/actions/workflow/status/sandialabs/statmechcrack/main.yml?branch=main&label=GitHub&logo=github
-    :target: https://github.com/sandialabs/statmechcrack
+.. |stable| image:: https://img.shields.io/badge/Docs-stable-8CA1AF?logo=readthedocs
+   :target: https://statmechcrack.readthedocs.io/en/stable
 
-.. |docs| image:: https://img.shields.io/readthedocs/statmechcrack?logo=readthedocs&label=Read%20the%20Docs
-    :target: https://statmechcrack.readthedocs.io/en/latest/
+.. |latest| image:: https://img.shields.io/badge/Docs-latest-8CA1AF?logo=readthedocs
+   :target: https://statmechcrack.readthedocs.io/en/latest
 
 .. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sandialabs/statmechcrack?label=Codefactor&logo=codefactor
    :target: https://www.codefactor.io/repository/github/sandialabs/statmechcrack

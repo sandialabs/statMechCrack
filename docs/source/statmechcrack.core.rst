@@ -1,5 +1,5 @@
-statmechcrack.core module
-=========================
+statmechcrack.core
+==================
 
 .. automodule:: statmechcrack.core
    :members:
@@ -11,8 +11,6 @@ statmechcrack.core module
  html
 
    <hr>
-
-**References**
 
 .. bibliography::
    :filter: docname in docnames

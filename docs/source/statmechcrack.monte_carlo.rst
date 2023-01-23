@@ -1,5 +1,5 @@
-statmechcrack.monte\_carlo module
-=================================
+statmechcrack.monte\_carlo
+==========================
 
 .. automodule:: statmechcrack.monte_carlo
    :members:
@@ -11,8 +11,6 @@ statmechcrack.monte\_carlo module
  html
 
    <hr>
-
-**References**
 
 .. bibliography::
    :filter: docname in docnames

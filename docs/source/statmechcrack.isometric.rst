@@ -1,5 +1,5 @@
-statmechcrack.isometric module
-==============================
+statmechcrack.isometric
+=======================
 
 .. automodule:: statmechcrack.isometric
    :members:

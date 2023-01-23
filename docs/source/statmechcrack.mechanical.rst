@@ -1,5 +1,5 @@
-statmechcrack.mechanical module
-===============================
+statmechcrack.mechanical
+========================
 
 .. automodule:: statmechcrack.mechanical
    :members:
@@ -11,8 +11,6 @@ statmechcrack.mechanical module
  html
 
    <hr>
-
-**References**
 
 .. bibliography::
    :filter: docname in docnames

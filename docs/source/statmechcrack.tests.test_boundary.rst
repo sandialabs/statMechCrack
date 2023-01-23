@@ -1,5 +1,5 @@
-statmechcrack.tests.test\_boundary module
-=========================================
+statmechcrack.tests.test\_boundary
+==================================
 
 .. automodule:: statmechcrack.tests.test_boundary
    :members:
