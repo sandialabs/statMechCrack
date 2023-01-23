@@ -12,5 +12,4 @@ statmechcrack.monte\_carlo
 
    <hr>
 
-.. bibliography::
-   :filter: docname in docnames
+.. footbibliography::

@@ -132,7 +132,7 @@ class CrackMechanical(BasicUtility):
     def beta_u(self, lambda_):
         r"""The nondimensional potential energy of a single bond
         as a function of the bond stretch, given by the
-        Morse potential :cite:`morse1929diatomic`,
+        Morse potential :footcite:`morse1929diatomic`,
 
         .. math::
             \beta u(\lambda) =
