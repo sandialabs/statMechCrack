@@ -2,7 +2,7 @@
 statMechCrack
 #############
 
-|build| |docs| |codefactor| |pylint|
+|build| |docs| |codefactor|
 
 Statistical mechanical models for crack growth. 
 
@@ -60,16 +60,13 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |codefactor| image:: https://img.shields.io/codefactor/grade/github/sandialabs/statmechcrack?label=Codefactor&logo=codefactor
    :target: https://www.codefactor.io/repository/github/sandialabs/statmechcrack
 
-.. |pylint| image:: https://raw.githubusercontent.com/sandialabs/statmechcrack/gh-pages/pylint.svg
-    :target: https://github.com/sandialabs/statmechcrack
-
 .. |pypi| image:: https://img.shields.io/pypi/v/statmechcrack?logo=pypi&logoColor=FBE072&label=PyPI&color=4B8BBE
     :target: https://pypi.org/project/statmechcrack/
 
 .. |conda| image:: https://img.shields.io/conda/v/mrbuche/statmechcrack.svg?logo=anaconda&color=3EB049&label=Anaconda
     :target: https://anaconda.org/mrbuche/statmechcrack/
 
-.. |license| image:: https://img.shields.io/github/license/sandialabs/statmechcrack?label=License
+.. |license| image:: https://img.shields.io/github/license/sandialabs/statmechcrack?label=License&color=yellowgreen
     :target: https://github.com/sandialabs/statmechcrack/blob/main/LICENSE
 
 .. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
