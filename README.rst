@@ -57,7 +57,7 @@ Copyright 2022 National Technology & Engineering Solutions of Sandia, LLC (NTESS
 .. |conda| image:: https://img.shields.io/conda/v/mrbuche/statmechcrack.svg?logo=anaconda&color=3EB049&label=Anaconda
     :target: https://anaconda.org/mrbuche/statmechcrack/
 
-.. |license| image:: https://img.shields.io/github/license/sandialabs/statmechcrack?label=License&color=yellowgreen
+.. |license| image:: https://img.shields.io/badge/License-BSD--3--Clause-yellowgreen
     :target: https://github.com/sandialabs/statmechcrack/blob/main/LICENSE
 
 .. |zenodo| image:: https://zenodo.org/badge/DOI/10.5281/zenodo.7008312.svg
