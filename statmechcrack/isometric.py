@@ -308,6 +308,28 @@ class CrackIsometric(CrackMonteCarlo):
             k_isometric = self.k_isometric_monte_carlo(v, **kwargs)
         return k_isometric
 
+    def k_rev_isometric(self, v):
+        r"""The nondimensional reverse reaction rate coefficient
+        as a function of the nondimensional end separation
+        in the isometric ensemble.
+
+        Args:
+            v (array_like): The nondimensional end separation.
+
+        Returns:
+            numpy.ndarray: The nondimensional reverse reaction rate.
+
+        """
+        model_2 = CrackIsometric(
+            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
+            alpha=self.alpha, varepsilon=self.varepsilon
+        )
+        return (
+            self.Q_isometric(v, transition_state=True)/model_2.Q_isometric(v)
+        ) / (
+            self.Q_isometric(1, transition_state=True)/model_2.Q_isometric(1)
+        )
+
     def k_net_isometric(self, v):
         r"""The nondimensional net reaction rate coefficient
         as a function of the nondimensional end separation
@@ -345,17 +367,8 @@ class CrackIsometric(CrackMonteCarlo):
                 >>> plt.show()
 
         """
-        k_isometric = self.k_isometric(v, approach='asymptotic')
-        model_2 = CrackIsometric(
-            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
-            alpha=self.alpha, varepsilon=self.varepsilon
-        )
-        k_rev_isometric = (
-            self.Q_isometric(v, transition_state=True)/model_2.Q_isometric(v)
-        ) / (
-            self.Q_isometric(1, transition_state=True)/model_2.Q_isometric(1)
-        )
-        return k_isometric - k_rev_isometric
+        return self.k_isometric(v, approach='asymptotic') \
+            - self.k_rev_isometric(v)
 
     def Q_0_isometric(self, v, lambda_):
         r"""The nondimensional isometric partition function

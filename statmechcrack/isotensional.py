@@ -304,6 +304,30 @@ class CrackIsotensional(CrackIsometric):
             k_isotensional = self.k_isotensional_monte_carlo(p, **kwargs)
         return k_isotensional
 
+    def k_rev_isotensional(self, p):
+        r"""The nondimensional reverse reaction rate coefficient
+        as a function of the nondimensional end force
+        in the isotensional ensemble.
+
+        Args:
+            p (array_like): The nondimensional end force.
+
+        Returns:
+            numpy.ndarray: The nondimensional reverse reaction rate.
+
+        """
+        model_2 = CrackIsotensional(
+            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
+            alpha=self.alpha, varepsilon=self.varepsilon
+        )
+        return (
+            self.Z_isotensional(p, transition_state=True) /
+            model_2.Z_isotensional(p)
+        ) / (
+            self.Z_isotensional(0, transition_state=True) /
+            model_2.Z_isotensional(0)
+        )
+
     def k_net_isotensional(self, p):
         r"""The nondimensional net reaction rate coefficient
         as a function of the nondimensional end force
@@ -339,19 +363,8 @@ class CrackIsotensional(CrackIsometric):
                 >>> plt.show()
 
         """
-        k_isotensional = self.k_isotensional(p, approach='asymptotic')
-        model_2 = CrackIsotensional(
-            N=self.N + 1, M=self.M - 1, kappa=self.kappa,
-            alpha=self.alpha, varepsilon=self.varepsilon
-        )
-        k_rev_isotensional = (
-            self.Z_isotensional(p, transition_state=True) /
-            model_2.Z_isotensional(p)
-        ) / (
-            self.Z_isotensional(0, transition_state=True) /
-            model_2.Z_isotensional(0)
-        )
-        return k_isotensional - k_rev_isotensional
+        return self.k_isotensional(p, approach='asymptotic') \
+            - self.k_rev_isotensional(p)
 
     def Z_0_isotensional(self, p, lambda_):
         r"""The nondimensional isotensional partition function
