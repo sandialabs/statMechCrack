@@ -7,7 +7,7 @@ jobs:
   get-version:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - id: version
         run: |
           export VERSION=$(grep __version__ statmechcrack/__init__.py | cut -f2 -d '"')
@@ -17,7 +17,7 @@ jobs:
   pypi:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
@@ -44,7 +44,7 @@ jobs:
     needs: [get-version, pypi]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Prepare conda
         run: |
           rm -rf statmechcrack
