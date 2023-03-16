@@ -112,8 +112,8 @@ class CrackMechanical(BasicUtility):
 
         .. math::
             \beta U_0(v, \mathbf{s}) =
-            \sum_{i=1}^{L-1} \frac{\kappa}{2} \left(
-                s_{i-1} - 2s_i + s_{i+1}
+            \sum_{i=2}^{L} \frac{\kappa}{2} \left(
+                s_{i-2} - 2s_{i-1} + s_i
             \right)^2,
 
         where :math:`s_0\equiv v`.
@@ -746,7 +746,7 @@ class CrackMechanical(BasicUtility):
                 - (*numpy.ndarray*) -
                   The minimized nondimensional potential energy.
                 - (*numpy.ndarray*) -
-                  The corresponding nondimensional end separation.
+                  The corresponding nondimensional end force.
                 - (*numpy.ndarray*) -
                   The corresponding nondimensional positions.
 
@@ -807,6 +807,8 @@ class CrackMechanical(BasicUtility):
 
                 - (*numpy.ndarray*) -
                   The minimized nondimensional potential energy.
+                - (*numpy.ndarray*) -
+                  The corresponding nondimensional force.
                 - (*numpy.ndarray*) -
                   The corresponding nondimensional positions.
 
