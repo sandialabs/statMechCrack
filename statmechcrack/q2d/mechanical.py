@@ -13,7 +13,7 @@ class CrackQ2DMechanical(BasicUtility):
     """The quasi-two-dimensional crack model class treated mechanically.
 
     """
-    def __init__(self, N=8, M=8, W=8, kappa=100, alpha=1, varepsilon=100):
+    def __init__(self, N=8, M=8, W=9, kappa=100, alpha=1, varepsilon=100):
         """Initializes the :class:`CrackQ2DMechanical` class.
 
         Initialize and inherit all attributes and methods
@@ -24,6 +24,8 @@ class CrackQ2DMechanical(BasicUtility):
 # N and M need to be W-length vectors
 
 # assert N/M consistent with W here, other assertions
+
+# shouldnt you force W to be odd? like maybe k=0 at center and +/- 1 either side? and then W on either side of the zero?
 
         BasicUtility.__init__(self)
         self.N = N
