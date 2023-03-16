@@ -3,6 +3,6 @@
 **.pyc
 *dist/
 *build/
-*statmechcrack.egg-info/
+**.egg-info/
 **.coverage
 *.vscode/
