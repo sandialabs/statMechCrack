@@ -59,7 +59,7 @@ class Zero(unittest.TestCase):
         self.assertEqual(
             model.beta_U(
                 np.ones(model.W),
-                np.ones((model.L, model.W))
+                np.ones((model.L*model.W))
             ), 0
         )
         self.assertEqual(

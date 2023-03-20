@@ -14,7 +14,8 @@ class CrackQ2DMechanical(BasicUtility):
 
     """
     def __init__(
-        self, L=16, N=8*np.ones(9), W=9, kappa=100, alpha=1, varepsilon=100
+        self, L=16, N=8*np.ones(9, dtype=int), W=9,
+        kappa=100, alpha=1, varepsilon=100
     ):
         """Initializes the :class:`CrackQ2DMechanical` class.
 
@@ -162,7 +163,7 @@ class CrackQ2DMechanical(BasicUtility):
         """
         return np.sum(self.beta_u(lambda_))
 
-    def beta_U(self, v, s):
+    def beta_U(self, v, s_vec, transition_state=None):
         r"""The nondimensional potential energy of the system,
 
         .. math::
@@ -173,15 +174,27 @@ class CrackQ2DMechanical(BasicUtility):
 
         Args:
             v (array_like): The nondimensional end separations.
-            s (array_like): The nondimensional configuration.
+            s_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
 
         Returns:
             numpy.ndarray: The nondimensional potential energy.
 
         """
+        if transition_state is not None:
+            s_vec = np.insert(
+                s_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state], transition_state),
+                    (self.L, self.W)
+                ),
+                self.lambda_TS
+            )
+        s = np.reshape(s_vec, (self.L, self.W))
         beta_U = self.beta_U_0(v, s)
-        for j in range(self.W):
-            beta_U += self.beta_U_1(s[-self.M[j]:, j])
+        for k in range(self.W):
+            beta_U += self.beta_U_1(s[-self.M[k]:, k])
         return beta_U
 
     def j_U_0(self, v, s_vec):
@@ -217,24 +230,44 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         lambda_ = np.reshape(s_vec, (self.L, self.W))
-        for j in range(self.W):
-            lambda_[:-self.M[j], j] = 1
+        for k in range(self.W):
+            lambda_[:self.N[k], k] = 1
         lambda_vec = np.reshape(lambda_, self.L*self.W)
         return self.beta_u_p(lambda_vec)
 
-    def j_U(self, v, s_vec):
+    def j_U(self, v, s_vec, transition_state=None):
         r"""The nondimensional Jacobian
         of the potential energy of the system.
 
         Args:
             v (array_like): The nondimensional end separations.
             s_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
 
         Returns:
             numpy.ndarray: The nondimensional Jacobian.
 
         """
-        return self.j_U_0(v, s_vec) + self.j_U_1(s_vec)
+        if transition_state is not None:
+            s_vec = np.insert(
+                s_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state], transition_state),
+                    (self.L, self.W)
+                ),
+                self.lambda_TS
+            )
+        j_U = self.j_U_0(v, s_vec) + self.j_U_1(s_vec)
+        if transition_state is not None:
+            j_U = np.delete(
+                j_U,
+                np.ravel_multi_index(
+                    (self.N[transition_state], transition_state),
+                    (self.L, self.W)
+                )
+            )
+        return j_U
 
     def H_U_0(self):
         r"""The nondimensional Hessian
@@ -260,24 +293,41 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         lambda_ = np.reshape(s_vec, (self.L, self.W))
-        H_U_1 = self.beta_u_pp(lambda_)
-        for j in range(self.W):
-            H_U_1[:-self.M[j], j] = 0
-        H_U_1 = np.reshape(H_U_1, self.L*self.W)
-        return H_U_1
+        beta_u_pp = self.beta_u_pp(lambda_)
+        for k in range(self.W):
+            beta_u_pp[:self.N[k], k] = 0
+        return np.diag(np.reshape(beta_u_pp, self.L*self.W))
 
-    def H_U(self, s_vec):
+    def H_U(self, s_vec, transition_state=None):
         r"""The nondimensional Hessian
         of the potential energy of the system.
 
         Args:
             s_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
 
         Returns:
             numpy.ndarray: The nondimensional Hessian.
 
         """
-        return self.H_U_0() + self.H_U_1(s_vec)
+        if transition_state is not None:
+            s_vec = np.insert(
+                s_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state], transition_state),
+                    (self.L, self.W)
+                ),
+                self.lambda_TS
+            )
+        H_U = self.H_U_0() + self.H_U_1(s_vec)
+        if transition_state is not None:
+            index = np.ravel_multi_index(
+                (self.N[transition_state], transition_state),
+                (self.L, self.W)
+            )
+            H_U = np.delete(np.delete(H_U, index, axis=0), index, axis=1)
+        return H_U
 
     def beta_Pi_0(self, p, v, s):
         r"""The nondimensional total potential energy
@@ -313,11 +363,13 @@ class CrackQ2DMechanical(BasicUtility):
         """
         return self.beta_U(v, s) - p.dot(v)
 
-    def minimize_beta_U(self, v):
+    def minimize_beta_U(self, v, transition_state=None):
         r"""Function to minimize the potential energy of the system.
 
         Args:
             v (array_like): The nondimensional end separations.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
 
         Returns:
             tuple:
@@ -330,18 +382,34 @@ class CrackQ2DMechanical(BasicUtility):
                   The corresponding nondimensional configuration.
 
         """
-        s_guess = np.resize(np.ones((self.L, self.W)), self.L*self.W)
+        s_vec_guess = np.ones(self.L*self.W - (transition_state is not None))
         res = minimize(
-            lambda s: self.beta_U(v, np.resize(s, (self.L, self.W))),
-            s_guess,
+            lambda s_vec: self.beta_U(
+                v, s_vec, transition_state=transition_state
+            ),
+            s_vec_guess,
             method='Newton-CG',
-            jac=lambda s: self.j_U(v, s),
-            hess=self.H_U
+            jac=lambda s_vec: self.j_U(
+                v, s_vec, transition_state=transition_state
+            ),
+            hess=lambda s_vec: self.H_U(
+                s_vec, transition_state=transition_state
+            )
         )
-        s = np.resize(res.x, (self.L, self.W))
+        s_vec = res.x
+        if transition_state is not None:
+            s_vec = np.insert(
+                s_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state], transition_state),
+                    (self.L, self.W)
+                ),
+                self.lambda_TS
+            )
+        s = np.resize(s_vec, (self.L, self.W))
         p = self.kappa*(v - 2*s[0, :] + s[1, :] + self.__p_mech_helper.dot(v))
         beta_U = res.fun
-        return beta_U, p, s
+        return beta_U, p, s, self.H_U(res.x, transition_state=transition_state)
 
     def p_mechanical(self, v):
         r"""The nondimensional end forces
