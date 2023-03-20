@@ -22,15 +22,9 @@ class CrackQ2DMechanical(BasicUtility):
         from a :class:`BasicUtility` class instance.
 
         """
-
-# N and M need to be W-length vectors
-
-# assert N/M consistent with W here, other assertions
-
-# shouldnt you force W to be odd? like maybe k=0 at center and +/- 1 either side? and then W on either side of the zero?
-
-        BasicUtility.__init__(self)
+        assert(W % 2)
         assert(len(N) == W)
+        BasicUtility.__init__(self)
         self.N = N
         self.L = L
         self.M = L - N

@@ -10,7 +10,7 @@ from ..core import CrackQ2D
 
 def random_crack_model(
     L=np.random.randint(13, high=18),
-    W=np.random.randint(5, high=8),
+    W=1 + 2*np.random.randint(2, high=4),
     N=None,
     kappa=88*(1 - np.random.rand()/2),
     alpha=2*(1 - np.random.rand()/2),
