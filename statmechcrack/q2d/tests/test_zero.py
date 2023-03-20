@@ -9,9 +9,9 @@ from ..core import CrackQ2D
 
 
 def random_crack_model(
-    N=np.random.randint(5, high=8),
-    M=np.random.randint(5, high=8),
+    L=np.random.randint(13, high=18),
     W=np.random.randint(5, high=8),
+    N=None,
     kappa=88*(1 - np.random.rand()/2),
     alpha=2*(1 - np.random.rand()/2),
     varepsilon=88*(1 - np.random.rand()/2)
@@ -19,8 +19,10 @@ def random_crack_model(
     """Function to produce a random crack model.
 
     """
+    if N is None:
+        N = np.random.randint(6, high=9, size=W)
     return CrackQ2D(
-        N=N, M=M, W=W, kappa=kappa, alpha=alpha, varepsilon=varepsilon
+        L=L, N=N, W=W, kappa=kappa, alpha=alpha, varepsilon=varepsilon
     )
 
 
@@ -51,7 +53,7 @@ class Zero(unittest.TestCase):
         )
         self.assertEqual(
             model.beta_U_1(
-                np.ones((model.M, model.W))
+                np.ones((model.L, model.W))
             ), 0
         )
         self.assertEqual(
@@ -87,7 +89,8 @@ class Zero(unittest.TestCase):
         for j_U_0_ik in j_U_0:
             self.assertAlmostEqual(j_U_0_ik, 0)
         s = np.random.rand(model.L, model.W)
-        s[-model.M:, :] = 1
+        for j in range(model.W):
+            s[-model.M[j]:, j] = 1
         j_U_1 = model.j_U_1(np.reshape(s, (model.L, model.W)))
         for j_U_1_ik in j_U_1:
             self.assertAlmostEqual(j_U_1_ik, 0)

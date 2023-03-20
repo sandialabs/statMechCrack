@@ -13,7 +13,9 @@ class CrackQ2DMechanical(BasicUtility):
     """The quasi-two-dimensional crack model class treated mechanically.
 
     """
-    def __init__(self, N=8, M=8, W=9, kappa=100, alpha=1, varepsilon=100):
+    def __init__(
+        self, L=16, N=8*np.ones(9), W=9, kappa=100, alpha=1, varepsilon=100
+    ):
         """Initializes the :class:`CrackQ2DMechanical` class.
 
         Initialize and inherit all attributes and methods
@@ -28,9 +30,10 @@ class CrackQ2DMechanical(BasicUtility):
 # shouldnt you force W to be odd? like maybe k=0 at center and +/- 1 either side? and then W on either side of the zero?
 
         BasicUtility.__init__(self)
+        assert(len(N) == W)
         self.N = N
-        self.M = M
-        self.L = N + M
+        self.L = L
+        self.M = L - N
         self.W = W
         self.kappa = kappa
         self.alpha = alpha
@@ -172,7 +175,7 @@ class CrackQ2DMechanical(BasicUtility):
             \beta U(\mathbf{v},\mathbf{s}) =
             \beta U_0(\mathbf{v},\mathbf{s}) + \beta U_1(\boldsymbol{\lambda}),
 
-        where :math:`\lambda_j^k\equiv s_{N+j}^k` and :math:`j=1,\ldots,M`.
+        where :math:`\lambda_j^k\equiv s_{N_j+j}^k` and :math:`j=1,\ldots,M`.
 
         Args:
             v (array_like): The nondimensional end separations.
@@ -182,8 +185,10 @@ class CrackQ2DMechanical(BasicUtility):
             numpy.ndarray: The nondimensional potential energy.
 
         """
-        lambda_ = s[-self.M:, :]
-        return self.beta_U_0(v, s) + self.beta_U_1(lambda_)
+        beta_U = self.beta_U_0(v, s)
+        for j in range(self.W):
+            beta_U += self.beta_U_1(s[-self.M[j]:, j])
+        return beta_U
 
     def j_U_0(self, v, s_vec):
         r"""The nondimensional Jacobian
@@ -218,7 +223,8 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         lambda_ = np.reshape(s_vec, (self.L, self.W))
-        lambda_[:-self.M, :] = 1
+        for j in range(self.W):
+            lambda_[:-self.M[j], j] = 1
         lambda_vec = np.reshape(lambda_, self.L*self.W)
         return self.beta_u_p(lambda_vec)
 
@@ -260,9 +266,11 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         lambda_ = np.reshape(s_vec, (self.L, self.W))
-        lambda_[:-self.M, :] = 0
-        lambda_vec = np.reshape(lambda_, self.L*self.W)
-        return np.diag(self.beta_u_pp(lambda_vec))
+        H_U_1 = self.beta_u_pp(lambda_)
+        for j in range(self.W):
+            H_U_1[:-self.M[j], j] = 0
+        H_U_1 = np.reshape(H_U_1, self.L*self.W)
+        return H_U_1
 
     def H_U(self, s_vec):
         r"""The nondimensional Hessian
