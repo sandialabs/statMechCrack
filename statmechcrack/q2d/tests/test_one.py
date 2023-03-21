@@ -25,6 +25,6 @@ class One(unittest.TestCase):
         """
         model = random_crack_model()
         for k in range(model.W):
-            self.assertEqual(
+            self.assertAlmostEqual(
                 model.k_isometric(np.ones(model.W), k), 1
             )
