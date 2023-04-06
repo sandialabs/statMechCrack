@@ -14,8 +14,9 @@ class CrackQ2DMechanical(BasicUtility):
 
     """
     def __init__(
-        self, L=16, N=8*np.ones(9, dtype=int), W=9,
-        kappa=100, alpha=1, varepsilon=100
+        self, L=16, N=8*np.ones(8, dtype=int), W=8,
+        kappa=100, alpha=1, varepsilon=100,
+        periodic_boundary_conditions=False
     ):
         """Initializes the :class:`CrackQ2DMechanical` class.
 
@@ -23,7 +24,6 @@ class CrackQ2DMechanical(BasicUtility):
         from a :class:`BasicUtility` class instance.
 
         """
-        assert(W % 2)
         assert(len(N) == W)
         BasicUtility.__init__(self)
         self.N = N
@@ -34,21 +34,27 @@ class CrackQ2DMechanical(BasicUtility):
         self.alpha = alpha
         self.varepsilon = varepsilon
         self.lambda_TS = 1 + np.log(2)/alpha
-        self.__p_mech_helper = (
-            np.diag(6*np.ones(self.W)) +
-            np.diag(-4*np.ones(self.W - 1), 1) +
-            np.diag(-4*np.ones(self.W - 1), -1) +
-            np.diag(np.ones(self.W - 2), 2) +
-            np.diag(np.ones(self.W - 2), -2)
-        )
-        self.__p_mech_helper[0, 0] = 1
-        self.__p_mech_helper[-1, -1] = 1
-        self.__p_mech_helper[1, 1] = 5
-        self.__p_mech_helper[-2, -2] = 5
-        self.__p_mech_helper[0, 1] = -2
-        self.__p_mech_helper[1, 0] = -2
-        self.__p_mech_helper[-1, -2] = -2
-        self.__p_mech_helper[-2, -1] = -2
+        self.periodic_boundary_conditions = periodic_boundary_conditions
+        if periodic_boundary_conditions is True:
+            self.__p_mech_helper = (
+                np.diag(0.00000000000000000*np.ones(self.W))
+            )
+        else:
+            self.__p_mech_helper = (
+                np.diag(6*np.ones(self.W)) +
+                np.diag(-4*np.ones(self.W - 1), 1) +
+                np.diag(-4*np.ones(self.W - 1), -1) +
+                np.diag(np.ones(self.W - 2), 2) +
+                np.diag(np.ones(self.W - 2), -2)
+            )
+            self.__p_mech_helper[0, 0] = 1
+            self.__p_mech_helper[-1, -1] = 1
+            self.__p_mech_helper[1, 1] = 5
+            self.__p_mech_helper[-2, -2] = 5
+            self.__p_mech_helper[0, 1] = -2
+            self.__p_mech_helper[1, 0] = -2
+            self.__p_mech_helper[-1, -2] = -2
+            self.__p_mech_helper[-2, -1] = -2
         v = symarray('v', self.W)
         s = symarray('s', (self.L, self.W))
         s_vec = Matrix(np.resize(s, self.L*self.W))
@@ -66,9 +72,27 @@ class CrackQ2DMechanical(BasicUtility):
             \right)^2 +
             \sum_{i=0}^{L} \sum_{k=3}^{W} \frac{\kappa}{2} \left(
                 s_i^{k-2} - 2s_i^{k-1} + s_i^k
-            \right)^2
+            \right)^2,
 
         where :math:`s_0^k\equiv v_k`.
+        For periodic boundary conditions,
+
+        .. math::
+            \beta U_0(\mathbf{v}, \mathbf{s}) =
+            \sum_{i=2}^{L} \sum_{k=1}^{W} \frac{\kappa}{2} \left(
+                s_{i-2}^k - 2s_{i-1}^k + s_i^k
+            \right)^2 +
+            \sum_{i=0}^{L} \sum_{k=3}^{W} \frac{\kappa}{2} \left(
+                s_i^{k-2} - 2s_i^{k-1} + s_i^k
+            \right)^2 +
+            \sum_{i=0}^{L} \frac{\kappa}{2} \left[
+                \left(
+                    s_i^{W-1} - 2s_i^W + s_i^1
+                \right)^2 +
+                \left(
+                    s_i^{W} - 2s_i^1 + s_i^2
+                \right)^2
+            \right].
 
         Args:
             v (array_like): The nondimensional end separations.
@@ -79,10 +103,16 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         vs = np.concatenate(([v], s))
-        return self.kappa/2*(
+        beta_U_0 = self.kappa/2*(
             np.sum(np.diff(vs, 2, axis=0)**2) +
             np.sum(np.diff(vs, 2, axis=1)**2)
         )
+        if self.periodic_boundary_conditions is True:
+            beta_U_0 += self.kappa/2*(
+                np.sum((vs[:, -2] - 2*vs[:, -1] + vs[:, 0])**2) +
+                np.sum((vs[:, -1] - 2*vs[:, 0] + vs[:, 1])**2)
+            )
+        return beta_U_0
 
     def beta_u(self, lambda_):
         r"""The nondimensional potential energy of a single bond
