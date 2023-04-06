@@ -39,8 +39,8 @@ class Zero(unittest.TestCase):
         """
         self.test_zero_minimized_nondimensional_energy()
         self.test_zero_nondimensional_energy()
-        self.test_zero_nondimensional_jacobian()
         self.test_zero_nondimensional_end_force()
+        self.test_zero_nondimensional_jacobian()
 
     def test_zero_nondimensional_energy(self):
         """Function to test for zero nondimensional energy.
@@ -79,8 +79,7 @@ class Zero(unittest.TestCase):
             self.assertEqual(
                 model.beta_Pi(
                     np.zeros(model.W),
-                    np.ones(model.W),
-                    np.ones((model.L, model.W))
+                    np.ones(((model.L + 1)*model.W))
                 ), 0
             )
 
@@ -102,7 +101,7 @@ class Zero(unittest.TestCase):
             s = np.random.rand(model.L, model.W)
             for j in range(model.W):
                 s[-model.M[j]:, j] = 1
-            j_U_1 = model.j_U_1(np.reshape(s, (model.L, model.W)))
+            j_U_1 = model.j_U_1(np.reshape(s, model.L*model.W))
             for j_U_1_ik in j_U_1:
                 self.assertAlmostEqual(j_U_1_ik, 0)
             v = np.ones(model.W)
@@ -110,6 +109,21 @@ class Zero(unittest.TestCase):
             j_U = model.j_U(v, s_vec)
             for j_U_ik in j_U:
                 self.assertAlmostEqual(j_U_ik, 0)
+            p = np.zeros(model.W)
+            vs_vec = rgn*np.ones((model.L + 1)*model.W)
+            j_Pi_0 = model.j_Pi_0(p, vs_vec)
+            for j_Pi_0_ik in j_Pi_0:
+                self.assertAlmostEqual(j_Pi_0_ik, 0)
+            vs = np.random.rand(model.L + 1, model.W)
+            for j in range(model.W):
+                vs[-model.M[j]:, j] = 1
+            j_Pi_1 = model.j_Pi_1(np.reshape(vs, (model.L + 1)*model.W))
+            for j_Pi_1_ik in j_Pi_1:
+                self.assertAlmostEqual(j_Pi_1_ik, 0)
+            vs_vec = np.ones((model.L + 1)*model.W)
+            j_Pi = model.j_Pi(p, vs_vec)
+            for j_Pi_ik in j_Pi:
+                self.assertAlmostEqual(j_Pi_ik, 0)
 
     def test_zero_minimized_nondimensional_energy(self):
         """Function to test for zero minimized nondimensional energy.
@@ -122,6 +136,9 @@ class Zero(unittest.TestCase):
         for model in models:
             self.assertAlmostEqual(
                 model.minimize_beta_U(np.ones(model.W))[0], 0
+            )
+            self.assertAlmostEqual(
+                model.minimize_beta_Pi(np.zeros(model.W))[0], 0
             )
 
     def test_zero_nondimensional_end_force(self):

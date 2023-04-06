@@ -47,10 +47,19 @@ class Many(unittest.TestCase):
             ),
             periodic_boundary_conditions=True
         )
-        v = np.random.rand()*np.ones(model.W)
-        rate_ref = model.k_isometric(v, 0)
+        p = np.random.rand()*np.ones(model.W)
+        v = 1 + p
+        rate_ref_isometric = model.k_isometric(v, 0)
+        rate_ref_isotensional = model.k_isotensional(p, 0)
         for k in range(1, model.W):
-            self.assertAlmostEqual(rate_ref, model.k_isometric(v, k), places=6)
+            self.assertAlmostEqual(
+                rate_ref_isometric/model.k_isometric(v, k), 1.0,
+                delta=1e-3
+            )
+            self.assertAlmostEqual(
+                rate_ref_isotensional/model.k_isotensional(p, k), 1.0,
+                delta=1e-3
+            )
 
     def test_nondimensional_bending_energy_calculation(self):
         """Function to test the nondimensional bending energy calculation.
@@ -88,7 +97,8 @@ class Many(unittest.TestCase):
             self.assertAlmostEqual(beta_U_0_model, beta_U_0_check)
 
     def test_nondimensional_mechanical_forces(self):
-        """Function to test the nondimensional bending energy calculation.
+        """Function to test the
+        nondimensional mechanical forces calculation.
 
         """
         models = (
@@ -107,6 +117,19 @@ class Many(unittest.TestCase):
                 v_h_m[k] = v_h_m[k] - h/2
                 p_check_k = (model.beta_U(v_h_p, s) - model.beta_U(v_h_m, s))/h
                 self.assertAlmostEqual(p_k, p_check_k, delta=h)
+
+    def test_nondimensional_mechanical_separations(self):
+        """Function to test the
+        nondimensional mechanical separations calculation.
+
+        """
+        self.assertAlmostEqual(0.0, 1.0)
+
+    def test_that_v_of_p_matches_p_of_v_for_mechanical(self):
+        self.assertAlmostEqual(0.0, 1.0)
+
+    def test_do_the_below_with_beta_Pi_as_well(self):
+        self.assertAlmostEqual(0.0, 1.0)
 
     def test_nondimensional_energy_minimization_no_hessian(self):
         """Function to test the nondimensional energy minimization

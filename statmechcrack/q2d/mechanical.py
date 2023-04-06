@@ -35,31 +35,35 @@ class CrackQ2DMechanical(BasicUtility):
         self.varepsilon = varepsilon
         self.lambda_TS = 1 + np.log(2)/alpha
         self.periodic_boundary_conditions = periodic_boundary_conditions
-        if periodic_boundary_conditions is True:
-            self.__p_mech_helper = (
-                np.diag(0.00000000000000000*np.ones(self.W))
-            )
-        else:
-            self.__p_mech_helper = (
-                np.diag(6*np.ones(self.W)) +
-                np.diag(-4*np.ones(self.W - 1), 1) +
-                np.diag(-4*np.ones(self.W - 1), -1) +
-                np.diag(np.ones(self.W - 2), 2) +
-                np.diag(np.ones(self.W - 2), -2)
-            )
-            self.__p_mech_helper[0, 0] = 1
-            self.__p_mech_helper[-1, -1] = 1
-            self.__p_mech_helper[1, 1] = 5
-            self.__p_mech_helper[-2, -2] = 5
-            self.__p_mech_helper[0, 1] = -2
-            self.__p_mech_helper[1, 0] = -2
-            self.__p_mech_helper[-1, -2] = -2
-            self.__p_mech_helper[-2, -1] = -2
+        self.__p_mech_helper = (
+            np.diag(6*np.ones(self.W)) +
+            np.diag(-4*np.ones(self.W - 1), 1) +
+            np.diag(-4*np.ones(self.W - 1), -1) +
+            np.diag(np.ones(self.W - 2), 2) +
+            np.diag(np.ones(self.W - 2), -2)
+        )
+        self.__p_mech_helper[0, 0] = 1
+        self.__p_mech_helper[-1, -1] = 1
+        self.__p_mech_helper[1, 1] = 5
+        self.__p_mech_helper[-2, -2] = 5
+        self.__p_mech_helper[0, 1] = -2
+        self.__p_mech_helper[1, 0] = -2
+        self.__p_mech_helper[-1, -2] = -2
+        self.__p_mech_helper[-2, -1] = -2
         v = symarray('v', self.W)
         s = symarray('s', (self.L, self.W))
         s_vec = Matrix(np.resize(s, self.L*self.W))
         beta_U_0 = self.beta_U_0(v, s)
-        self.__H_U_0 = np.squeeze(beta_U_0.diff(s_vec, 2)).astype(np.float64)
+        self.__H_U_0 = np.squeeze(
+            beta_U_0.diff(s_vec, 2)
+        ).astype(np.float64)
+        p = symarray('p', self.W)
+        beta_Pi_0 = self.beta_Pi_0(p, v, s)
+        vs = np.concatenate(([v], s))
+        vs_vec = Matrix(np.resize(vs, (self.L + 1)*self.W))
+        self.__H_Pi_0 = np.squeeze(
+            beta_Pi_0.diff(vs_vec, 2)
+        ).astype(np.float64)
 
     def beta_U_0(self, v, s):
         r"""The nondimensional potential energy of the system
@@ -375,7 +379,7 @@ class CrackQ2DMechanical(BasicUtility):
         """
         return self.beta_U_0(v, s) - p.dot(v)
 
-    def beta_Pi(self, p, v, s):
+    def beta_Pi(self, p, vs_vec, transition_state=None):
         r"""The nondimensional total potential energy of the system,
 
         .. math::
@@ -384,14 +388,162 @@ class CrackQ2DMechanical(BasicUtility):
 
         Args:
             p (array_like): The nondimensional end forces.
-            v (array_like): The nondimensional end separations.
-            s (array_like): The nondimensional configuration.
+            vs_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
 
         Returns:
             numpy.ndarray: The nondimensional total potential energy.
 
         """
-        return self.beta_U(v, s) - p.dot(v)
+        if transition_state is not None:
+            vs_vec = np.insert(
+                vs_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state] + 1, transition_state),
+                    (self.L + 1, self.W)
+                ),
+                self.lambda_TS
+            )
+        vs = np.reshape(vs_vec, (self.L + 1, self.W))
+        v = vs[0, :]
+        s = vs[1:, :]
+        beta_U = self.beta_U_0(v, s)
+        for k in range(self.W):
+            beta_U += self.beta_U_1(s[-self.M[k]:, k])
+        return beta_U - p.dot(v)
+
+    def j_Pi_0(self, p, vs_vec):
+        r"""The nondimensional Jacobian
+        of the total potential energy of the system
+        for the reference system.
+
+        Args:
+            p (array_like): The nondimensional end forces.
+            vs_vec (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Jacobian.
+
+        """
+        return self.H_Pi_0().dot(vs_vec) - np.reshape(
+            np.concatenate(
+                ([p], np.zeros((self.L, self.W)))
+            ), (self.L + 1)*self.W
+        )
+
+    def j_Pi_1(self, vs_vec):
+        r"""The nondimensional Jacobian
+        of the total potential energy of the system
+        due to stretching intact bonds.
+
+        Args:
+            vs_vec (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Jacobian.
+
+        """
+        lambda_ = np.reshape(vs_vec, (self.L + 1, self.W))
+        for k in range(self.W):
+            lambda_[:self.N[k] + 1, k] = 1
+        lambda_vec = np.reshape(lambda_, (self.L + 1)*self.W)
+        return self.beta_u_p(lambda_vec)
+
+    def j_Pi(self, p, vs_vec, transition_state=None):
+        r"""The nondimensional Jacobian
+        of the total potential energy of the system.
+
+        Args:
+            p (array_like): The nondimensional end forces.
+            vs_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
+
+        Returns:
+            numpy.ndarray: The nondimensional Jacobian.
+
+        """
+        if transition_state is not None:
+            vs_vec = np.insert(
+                vs_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state] + 1, transition_state),
+                    (self.L + 1, self.W)
+                ),
+                self.lambda_TS
+            )
+        j_Pi = self.j_Pi_0(p, vs_vec) + self.j_Pi_1(vs_vec)
+        if transition_state is not None:
+            j_Pi = np.delete(
+                j_Pi,
+                np.ravel_multi_index(
+                    (self.N[transition_state] + 1, transition_state),
+                    (self.L + 1, self.W)
+                )
+            )
+        return j_Pi
+
+    def H_Pi_0(self):
+        r"""The nondimensional Hessian
+        of the total potential energy of the system
+        due to bending.
+
+        Returns:
+            numpy.ndarray: The nondimensional Hessian.
+
+        """
+        return self.__H_Pi_0
+
+    def H_Pi_1(self, vs_vec):
+        r"""The nondimensional Hessian
+        of the total potential energy of the system
+        due to stretching intact bonds.
+
+        Args:
+            vs_vec (array_like): The nondimensional configuration.
+
+        Returns:
+            numpy.ndarray: The nondimensional Hessian.
+
+        """
+        lambda_ = np.reshape(vs_vec, (self.L + 1, self.W))
+        beta_u_pp = self.beta_u_pp(lambda_)
+        for k in range(self.W):
+            beta_u_pp[:self.N[k] + 1, k] = 0
+        return np.diag(np.reshape(beta_u_pp, (self.L + 1)*self.W))
+
+    def H_Pi(self, vs_vec, transition_state=None):
+        r"""The nondimensional Hessian
+        of the total potential energy of the system.
+
+        Args:
+            p (array_like): The nondimensional end forces.
+            vs_vec (array_like): The nondimensional configuration.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
+
+        Returns:
+            numpy.ndarray: The nondimensional Hessian.
+
+        """
+        if transition_state is not None:
+            vs_vec = np.insert(
+                vs_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state] + 1, transition_state),
+                    (self.L + 1, self.W)
+                ),
+                self.lambda_TS
+            )
+        H_Pi = self.H_Pi_0() + self.H_Pi_1(vs_vec)
+        if transition_state is not None:
+            index = np.ravel_multi_index(
+                (self.N[transition_state] + 1, transition_state),
+                (self.L + 1, self.W)
+            )
+            H_Pi = np.delete(np.delete(H_Pi, index, axis=0), index, axis=1)
+        return H_Pi
 
     def minimize_beta_U(self, v, transition_state=None):
         r"""Function to minimize the potential energy of the system.
@@ -410,9 +562,13 @@ class CrackQ2DMechanical(BasicUtility):
                   The corresponding nondimensional forces.
                 - (*numpy.ndarray*) -
                   The corresponding nondimensional configuration.
+                - (*numpy.ndarray*) -
+                  The corresponding nondimensional Hessian.
 
         """
-        s_vec_guess = np.ones(self.L*self.W - (transition_state is not None))
+        s_vec_guess = np.ones(
+            self.L*self.W - (transition_state is not None)
+        )
         res = minimize(
             lambda s_vec: self.beta_U(
                 v, s_vec, transition_state=transition_state
@@ -439,7 +595,62 @@ class CrackQ2DMechanical(BasicUtility):
         s = np.resize(s_vec, (self.L, self.W))
         p = self.kappa*(v - 2*s[0, :] + s[1, :] + self.__p_mech_helper.dot(v))
         beta_U = res.fun
-        return beta_U, p, s, self.H_U(res.x, transition_state=transition_state)
+        H_U = self.H_U(res.x, transition_state=transition_state)
+        return beta_U, p, s, H_U
+
+    def minimize_beta_Pi(self, p, transition_state=None):
+        r"""Function to minimize the total potential energy of the system.
+
+        Args:
+            p (array_like): The nondimensional end forces.
+            transition_state (int, optional, default=None):
+                Whether or not the system is in the kth transition state.
+
+        Returns:
+            tuple:
+
+                - (*numpy.ndarray*) -
+                  The minimized nondimensional potential energy.
+                - (*numpy.ndarray*) -
+                  The corresponding nondimensional separations.
+                - (*numpy.ndarray*) -
+                  The corresponding nondimensional configuration.
+                - (*numpy.ndarray*) -
+                  The corresponding nondimensional Hessian.
+
+        """
+        vs_vec_guess = np.ones(
+            (self.L + 1)*self.W - (transition_state is not None)
+        )
+        res = minimize(
+            lambda vs_vec: self.beta_Pi(
+                p, vs_vec, transition_state=transition_state
+            ),
+            vs_vec_guess,
+            method='Newton-CG',
+            jac=lambda vs_vec: self.j_Pi(
+                p, vs_vec, transition_state=transition_state
+            ),
+            hess=lambda vs_vec: self.H_Pi(
+                vs_vec, transition_state=transition_state
+            )
+        )
+        vs_vec = res.x
+        if transition_state is not None:
+            vs_vec = np.insert(
+                vs_vec,
+                np.ravel_multi_index(
+                    (self.N[transition_state] + 1, transition_state),
+                    (self.L + 1, self.W)
+                ),
+                self.lambda_TS
+            )
+        vs = np.resize(vs_vec, (self.L + 1, self.W))
+        v = vs[0, :]
+        s = vs[1:, :]
+        beta_U = res.fun
+        H_Pi = self.H_Pi(res.x, transition_state=transition_state)
+        return beta_U, v, s, H_Pi
 
     def p_mechanical(self, v):
         r"""The nondimensional end forces
@@ -455,3 +666,18 @@ class CrackQ2DMechanical(BasicUtility):
 
         """
         return self.minimize_beta_U(v)[1]
+
+    def v_mechanical(self, p):
+        r"""The nondimensional end separations
+        as a function of the nondimensional end forces
+        for the mechnically-treated system,
+        calculated by minimizing the potential energy.
+
+        Args:
+            p (array_like): The nondimensional end forces.
+
+        Returns:
+            numpy.ndarray: The nondimensional end separations.
+
+        """
+        return self.minimize_beta_Pi(p)[1]
