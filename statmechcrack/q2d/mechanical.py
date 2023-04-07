@@ -42,14 +42,22 @@ class CrackQ2DMechanical(BasicUtility):
             np.diag(np.ones(self.W - 2), 2) +
             np.diag(np.ones(self.W - 2), -2)
         )
-        self.__p_mech_helper[0, 0] = 1
-        self.__p_mech_helper[-1, -1] = 1
-        self.__p_mech_helper[1, 1] = 5
-        self.__p_mech_helper[-2, -2] = 5
-        self.__p_mech_helper[0, 1] = -2
-        self.__p_mech_helper[1, 0] = -2
-        self.__p_mech_helper[-1, -2] = -2
-        self.__p_mech_helper[-2, -1] = -2
+        if self.periodic_boundary_conditions is True:
+            self.__p_mech_helper[-1, 0] = -4
+            self.__p_mech_helper[0, -1] = -4
+            self.__p_mech_helper[-2, 0] = 1
+            self.__p_mech_helper[0, -2] = 1
+            self.__p_mech_helper[-1, 1] = 1
+            self.__p_mech_helper[1, -1] = 1
+        else:
+            self.__p_mech_helper[0, 0] = 1
+            self.__p_mech_helper[-1, -1] = 1
+            self.__p_mech_helper[1, 1] = 5
+            self.__p_mech_helper[-2, -2] = 5
+            self.__p_mech_helper[0, 1] = -2
+            self.__p_mech_helper[1, 0] = -2
+            self.__p_mech_helper[-1, -2] = -2
+            self.__p_mech_helper[-2, -1] = -2
         v = symarray('v', self.W)
         s = symarray('s', (self.L, self.W))
         s_vec = Matrix(np.resize(s, self.L*self.W))

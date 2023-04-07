@@ -27,7 +27,9 @@ class Many(unittest.TestCase):
         self.test_nondimensional_energy_minimization_no_hessian_ts()
         self.test_nondimensional_energy_minimization_no_jacobian_hessian()
         self.test_nondimensional_energy_minimization_no_jacobian_hessian_ts()
+        self.test_nondimensional_mechanical_equivalence()
         self.test_nondimensional_mechanical_forces()
+        self.test_nondimensional_mechanical_separations()
         self.test_nondimensional_relative_reaction_rate_coefficients_symmetry()
 
     def test_nondimensional_relative_reaction_rate_coefficients_symmetry(self):
@@ -70,7 +72,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             self.assertEqual(v.shape, (model.W,))
             s = np.random.rand(model.L, model.W)
             self.assertEqual(s.shape, (model.L, model.W))
@@ -96,6 +98,29 @@ class Many(unittest.TestCase):
                     )**2
             self.assertAlmostEqual(beta_U_0_model, beta_U_0_check)
 
+    def test_nondimensional_mechanical_equivalence(self):
+        """Function to test the equivalence of the
+        nondimensional mechanical calculations.
+
+        """
+        models = (
+            random_crack_model(),
+            random_crack_model(periodic_boundary_conditions=True)
+        )
+        for model in models:
+            v = 1 + np.random.rand(model.W)
+            p = model.p_mechanical(v)
+            v_check = model.v_mechanical(p)
+            for k, v_check_k in enumerate(v_check):
+                self.assertAlmostEqual(
+                    v[k]/v_check_k, 1.0, delta=5e-2
+                )
+            p_check = model.p_mechanical(v_check)
+            for k, p_check_k in enumerate(p_check):
+                self.assertAlmostEqual(
+                    p[k]/p_check_k, 1.0, delta=5e-2
+                )
+
     def test_nondimensional_mechanical_forces(self):
         """Function to test the
         nondimensional mechanical forces calculation.
@@ -106,7 +131,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             p = model.p_mechanical(v)
             _, p_same, s, _ = model.minimize_beta_U(v)
             for k, p_k in enumerate(p):
@@ -115,7 +140,9 @@ class Many(unittest.TestCase):
                 v_h_m = deepcopy(v)
                 v_h_p[k] = v_h_p[k] + h/2
                 v_h_m[k] = v_h_m[k] - h/2
-                p_check_k = (model.beta_U(v_h_p, s) - model.beta_U(v_h_m, s))/h
+                p_check_k = (
+                    model.beta_U(v_h_p, s) - model.beta_U(v_h_m, s)
+                )/h
                 self.assertAlmostEqual(p_k, p_check_k, delta=h)
 
     def test_nondimensional_mechanical_separations(self):
@@ -123,13 +150,25 @@ class Many(unittest.TestCase):
         nondimensional mechanical separations calculation.
 
         """
-        self.assertAlmostEqual(0.0, 1.0)
-
-    def test_that_v_of_p_matches_p_of_v_for_mechanical(self):
-        self.assertAlmostEqual(0.0, 1.0)
-
-    def test_do_the_below_with_beta_Pi_as_well(self):
-        self.assertAlmostEqual(0.0, 1.0)
+        models = (
+            random_crack_model(),
+            random_crack_model(periodic_boundary_conditions=True)
+        )
+        for model in models:
+            p = np.random.rand(model.W)
+            v = model.v_mechanical(p)
+            _, v_same, s, _ = model.minimize_beta_Pi(p)
+            vs = np.concatenate(([v], s))
+            for k, v_k in enumerate(v):
+                self.assertAlmostEqual(v_k, v_same[k])
+                p_h_p = deepcopy(p)
+                p_h_m = deepcopy(p)
+                p_h_p[k] = p_h_p[k] + h/2
+                p_h_m[k] = p_h_m[k] - h/2
+                v_check_k = -(
+                    model.beta_Pi(p_h_p, vs) - model.beta_Pi(p_h_m, vs)
+                )/h
+                self.assertAlmostEqual(v_k, v_check_k, delta=h)
 
     def test_nondimensional_energy_minimization_no_hessian(self):
         """Function to test the nondimensional energy minimization
@@ -141,7 +180,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             time_0 = time()
             beta_U, _, s, _ = model.minimize_beta_U(v)
             time_1 = time()
@@ -162,6 +201,28 @@ class Many(unittest.TestCase):
             self.assertTrue(
                 (np.abs((s - s_check)/s_check) < 5e-2).all()
             )
+            p = np.random.rand(model.W)
+            time_3 = time()
+            beta_Pi, _, s, _ = model.minimize_beta_Pi(p)
+            time_4 = time()
+            vs_vec_guess = np.ones((model.L + 1)*model.W)
+            res = minimize(
+                lambda vs_vec: model.beta_Pi(p, vs_vec),
+                vs_vec_guess,
+                method='Newton-CG',
+                jac=lambda vs_vec: model.j_Pi(p, vs_vec)
+            )
+            beta_Pi_check = res.fun
+            vs_check = np.resize(res.x, (model.L + 1, model.W))
+            s_check = vs_check[1:, :]
+            time_5 = time()
+            self.assertGreater(time_5 - time_4, time_4 - time_3)
+            self.assertTrue(
+                np.abs((beta_Pi - beta_Pi_check)/beta_Pi_check) < 1e-3
+            )
+            self.assertTrue(
+                (np.abs((s - s_check)/s_check) < 5e-2).all()
+            )
 
     def test_nondimensional_energy_minimization_no_hessian_ts(self):
         """Function to test the nondimensional energy minimization
@@ -173,7 +234,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             transition_state = np.random.randint(0, high=model.W)
             time_0 = time()
             beta_U, _, s, _ = model.minimize_beta_U(
@@ -217,6 +278,52 @@ class Many(unittest.TestCase):
             self.assertTrue(
                 (np.abs((s - s_check)/s_check) < 5e-2).all()
             )
+            p = np.random.rand(model.W)
+            transition_state = np.random.randint(0, high=model.W)
+            time_3 = time()
+            beta_Pi, _, s, _ = model.minimize_beta_Pi(
+                p,
+                transition_state=transition_state
+            )
+            self.assertEqual(
+                s[model.N[transition_state], transition_state],
+                model.lambda_TS
+            )
+            time_4 = time()
+            vs_vec_guess = np.ones(
+                (model.L + 1)*model.W - (transition_state is not None)
+            )
+            res = minimize(
+                lambda vs_vec: model.beta_Pi(
+                    p, vs_vec, transition_state=transition_state
+                ),
+                vs_vec_guess,
+                method='Newton-CG',
+                jac=lambda vs_vec: model.j_Pi(
+                    p, vs_vec, transition_state=transition_state
+                )
+            )
+            beta_Pi_check = res.fun
+            vs_check = np.resize(res.x, (model.L + 1, model.W))
+            s_check = vs_check[1:, :]
+            s_vec_check = np.resize(s_check, model.L*model.W)
+            s_vec_check = np.insert(
+                s_vec_check,
+                np.ravel_multi_index(
+                    (model.N[transition_state], transition_state),
+                    (model.L, model.W)
+                ),
+                model.lambda_TS
+            )
+            s_check = np.resize(s_vec_check, (model.L, model.W))
+            time_5 = time()
+            self.assertGreater(time_5 - time_4, time_4 - time_3)
+            self.assertTrue(
+                np.abs((beta_Pi - beta_Pi_check)/beta_Pi_check) < 1e-3
+            )
+            self.assertTrue(
+                (np.abs((s - s_check)/s_check) < 5e-2).all()
+            )
 
     def test_nondimensional_energy_minimization_no_jacobian_hessian(self):
         """Function to test the nondimensional energy minimization
@@ -228,7 +335,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             time_0 = time()
             beta_U, _, s, _ = model.minimize_beta_U(v)
             time_1 = time()
@@ -247,6 +354,26 @@ class Many(unittest.TestCase):
             self.assertTrue(
                 (np.abs((s - s_check)/s_check) < 5e-2).all()
             )
+            p = np.random.rand(model.W)
+            time_3 = time()
+            beta_Pi, _, s, _ = model.minimize_beta_Pi(p)
+            time_4 = time()
+            vs_vec_guess = np.ones((model.L + 1)*model.W)
+            res = minimize(
+                lambda vs_vec: model.beta_Pi(p, vs_vec),
+                vs_vec_guess
+            )
+            beta_Pi_check = res.fun
+            vs_check = np.resize(res.x, (model.L + 1, model.W))
+            s_check = vs_check[1:, :]
+            time_5 = time()
+            self.assertGreater(time_5 - time_4, time_4 - time_3)
+            self.assertTrue(
+                np.abs((beta_Pi - beta_Pi_check)/beta_Pi_check) < 1e-3
+            )
+            self.assertTrue(
+                (np.abs((s - s_check)/s_check) < 5e-2).all()
+            )
 
     def test_nondimensional_energy_minimization_no_jacobian_hessian_ts(self):
         """Function to test the nondimensional energy minimization
@@ -258,7 +385,7 @@ class Many(unittest.TestCase):
             random_crack_model(periodic_boundary_conditions=True)
         )
         for model in models:
-            v = np.random.rand(model.W)
+            v = 1 + np.random.rand(model.W)
             transition_state = np.random.randint(0, high=model.W)
             time_0 = time()
             beta_U, _, s, _ = model.minimize_beta_U(
@@ -294,6 +421,48 @@ class Many(unittest.TestCase):
             self.assertGreater(time_2 - time_1, time_1 - time_0)
             self.assertTrue(
                 np.abs((beta_U - beta_U_check)/beta_U_check) < 1e-3
+            )
+            self.assertTrue(
+                (np.abs((s - s_check)/s_check) < 5e-2).all()
+            )
+            p = np.random.rand(model.W)
+            transition_state = np.random.randint(0, high=model.W)
+            time_3 = time()
+            beta_Pi, _, s, _ = model.minimize_beta_Pi(
+                p,
+                transition_state=transition_state
+            )
+            self.assertEqual(
+                s[model.N[transition_state], transition_state],
+                model.lambda_TS
+            )
+            time_4 = time()
+            vs_vec_guess = np.ones(
+                (model.L + 1)*model.W - (transition_state is not None)
+            )
+            res = minimize(
+                lambda vs_vec: model.beta_Pi(
+                    p, vs_vec, transition_state=transition_state
+                ),
+                vs_vec_guess
+            )
+            beta_Pi_check = res.fun
+            vs_check = np.resize(res.x, (model.L + 1, model.W))
+            s_check = vs_check[1:, :]
+            s_vec_check = np.resize(s_check, model.L*model.W)
+            s_vec_check = np.insert(
+                s_vec_check,
+                np.ravel_multi_index(
+                    (model.N[transition_state], transition_state),
+                    (model.L, model.W)
+                ),
+                model.lambda_TS
+            )
+            s_check = np.resize(s_vec_check, (model.L, model.W))
+            time_5 = time()
+            self.assertGreater(time_5 - time_4, time_4 - time_3)
+            self.assertTrue(
+                np.abs((beta_Pi - beta_Pi_check)/beta_Pi_check) < 1e-3
             )
             self.assertTrue(
                 (np.abs((s - s_check)/s_check) < 5e-2).all()
