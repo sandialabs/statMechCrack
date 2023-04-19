@@ -45,9 +45,12 @@ class CrackQ2DIsometric(CrackQ2DMechanical):
         beta_U_TS_ref, _, _, hess_TS_ref = self.minimize_beta_U(
             v_ref, transition_state=transition_state
         )
+        scale = self.varepsilon*(self.W*self.L)**(1/3)
         return np.exp(
             beta_U - beta_U_ref - beta_U_TS + beta_U_TS_ref
         )*np.sqrt(
-            det(hess.dot(inv(hess_ref))) /
-            det(hess_TS.dot(inv(hess_TS_ref)))
+            det(hess/scale) /
+            det(hess_ref/scale) *
+            det(hess_TS_ref/scale) /
+            det(hess_TS/scale)
         )

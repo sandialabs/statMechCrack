@@ -45,9 +45,12 @@ class CrackQ2DIsotensional(CrackQ2DIsometric):
         beta_Pi_TS_ref, _, _, hess_TS_ref = self.minimize_beta_Pi(
             p_ref, transition_state=transition_state
         )
+        scale = self.varepsilon*(self.W*self.L)**(1/3)
         return np.exp(
             beta_Pi - beta_Pi_ref - beta_Pi_TS + beta_Pi_TS_ref
         )*np.sqrt(
-            det(hess.dot(inv(hess_ref))) /
-            det(hess_TS.dot(inv(hess_TS_ref)))
+            det(hess/scale) /
+            det(hess_ref/scale) *
+            det(hess_TS_ref/scale) /
+            det(hess_TS/scale)
         )
