@@ -20,7 +20,7 @@ jobs:
       - name: pytest
         run: python -m pytest --verbose --cov=./statmechcrack/ --cov-report xml
       - name: codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           name: codecov-umbrella
           verbose: true
