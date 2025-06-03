@@ -36,7 +36,7 @@ setup(
     keywords=['fracture mechanics',
               'statistical mechanics',
               'thermodynamics'],
-    install_requires=['matplotlib', 'numpy', 'scipy'],
+    install_requires=['matplotlib', 'numpy', 'scipy', 'sympy'],
     extras_require={
       'docs': ['docutils>=0.14,<0.20', 'ipykernel', 'ipython',
                'jinja2>=3.0', 'nbsphinx', 'pycodestyle',
